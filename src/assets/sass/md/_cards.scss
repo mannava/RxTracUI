@@ -201,7 +201,7 @@
     }
 
     [data-background-color="purple"]{
-        background: linear-gradient(60deg, $purple-400, $purple-600);
+        background: linear-gradient(60deg, $purple-300, $purple-400);
         @include shadow-big-color($brand-primary);
     }
 
@@ -211,17 +211,22 @@
     }
 
     [data-background-color="green"]{
-        background: linear-gradient(60deg, $green-400, $green-600);
+        background: linear-gradient(60deg, $green-300, $green-300);
         @include shadow-big-color($brand-success);
     }
 
     [data-background-color="orange"]{
-        background: linear-gradient(60deg, $orange-400, $orange-600);
+        background: linear-gradient(60deg, $orange-300, $orange-400);
         @include shadow-big-color($brand-warning);
     }
 
     [data-background-color="red"]{
         background: linear-gradient(60deg, $red-400, $red-600);
+        @include shadow-big-color($brand-danger);
+    }
+
+    [data-background-color="brown"]{
+        background: linear-gradient(60deg, $brown-400, $brown-600);
         @include shadow-big-color($brand-danger);
     }
 
