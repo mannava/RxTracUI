@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {SelectItem} from "primeng/api";
+import {DashboardService} from "../dashboard/dashboard.service";
 
 @Component({
   selector: 'app-user-profile',
@@ -7,9 +9,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor() { }
+    public results: any;
+    public cols: any[];
 
-  ngOnInit() {
-  }
+    constructor(private dashboardService: DashboardService) {
+        this.getDashboardData();
+    }
+
+    ngOnInit() {
+        this.cols = [
+            {field: 'Txn Type', header: 'TRANSACTION TYPE'},
+            {field: 'EI TimeStamp', header: 'TIMESTAMP'},
+            {field: 'Txn Id', header: 'TRANSACTION ID'},
+            {field: 'Order ID', header: 'ORDER ID'},
+            {field: 'SAP Document Number', header: 'SAP'},
+            {field: 'DCNUMBER', header: 'DCNUMBER'}
+        ];
+    }
+
+    getDashboardData() {
+        this.dashboardService.getDashboardData().subscribe(data => {
+            this.results = data;
+            console.log(this.results);
+        });
+    }
+
+
 
 }

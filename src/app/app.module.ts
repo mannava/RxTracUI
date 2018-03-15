@@ -20,6 +20,7 @@ import {UpgradeComponent} from './upgrade/upgrade.component';
 import {HttpClientModule} from '@angular/common/http';
 import {DashboardService} from './dashboard/dashboard.service';
 import {TableModule} from 'primeng/table';
+import {DataTable, DataTableModule, PaginatorModule} from "primeng/primeng";
 
 @NgModule({
     declarations: [
@@ -32,7 +33,6 @@ import {TableModule} from 'primeng/table';
         MapsComponent,
         NotificationsComponent,
         UpgradeComponent
-
     ],
     imports: [
         BrowserModule,
@@ -41,7 +41,8 @@ import {TableModule} from 'primeng/table';
         ComponentsModule,
         RouterModule,
         AppRoutingModule,
-        TableModule
+        TableModule, DataTableModule, // Added DataTableModule
+        PaginatorModule
 
     ],
     providers: [DashboardService],
