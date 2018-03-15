@@ -107,33 +107,33 @@
         </div>
     </div>
 
-    <p-table [value]="results" [paginator]="true" [rows]="10">
+    <p-table [columns]="cols" [value]="results" [paginator]="true" [rows]="10" selectionMode="single"
+             [responsive]="true" [resizableColumns]="true" columnResizeMode="expand" [reorderableColumns]="true">
 
         <ng-template pTemplate="caption">
             <div style="text-align: right">
                 <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                <input type="text" pInputText size="30" placeholder="Global Filter"
+                       (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
             </div>
         </ng-template>
 
-        <ng-template pTemplate="header">
+        <ng-template pTemplate="header" let-columns>
             <tr>
-                <th>EI_TRXN_TYPE</th>
-                <th>EI_TIMESTAMP</th>
-                <th>TRXN_ID</th>
-                <th>ORD_ID</th>
-                <th>SALESDOCNUM</th>
-                <th>DELIVERYDOCNUM</th>
+                <th *ngFor="let col of columns">
+                    {{col.header}}
+                </th>
             </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-result>
             <tr>
-                <td>{{result["Txn Type"]}}|</td>
-                <td>{{result["EI TimeStamp"]}}|</td>
-                <td>{{result["Txn Id"]}}|</td>
-                <td>{{result["Order ID"]}}|</td>
-                <td>{{result["SAP Document Number"]}}|</td>
-                <td>{{result["DCNUMBER"]}}|</td>
+                <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                    <input *ngSwitchCase="'vin'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                </th></tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-result let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns">
+                    {{result[col.field]}}
+                </td>
             </tr>
         </ng-template>
     </p-table>
