@@ -103,22 +103,34 @@
                 </div>
             </div>
 
+            <div class="col-lg-12 col-md-6 col-sm-6">
+                <div class="pull-right" style="margin-top: 5px; padding:4px 0px;border-bottom: 0 none">
+                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                    <input #gb type="text" pInputText size="50" placeholder="Global Filter">
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-6 col-sm-6">
+
+                <p-dataTable [value]="results" [rows]="10" [paginator]="true" [globalFilter]="gb" #dt class="tabledata"
+                             [responsive]="true" reorderableColumns="true" selectionMode="single">
+                    <p-column field="Txn Type" header="TRANSACTION TYPE" [filter]="true" class="tabledata"
+                              filterPlaceholder="Search"></p-column>
+                    <p-column field="EI TimeStamp" header="TIMESTAMP" [filter]="true" class="tabledata"
+                              filterPlaceholder="Search"></p-column>
+                    <p-column field="Txn Id" header="TRANSACTION ID" [filter]="true" class="tabledata"
+                              filterPlaceholder="Search"></p-column>
+                    <p-column field="Order ID" header="ORDER ID" [filter]="true" class="tabledata"
+                              filterPlaceholder="Search"></p-column>
+                    <p-column field="SAP Document Number" header="SAP" [filter]="true" class="tabledata"
+                              filterPlaceholder="Search"></p-column>
+                    <p-column field="DCNUMBER" header="DCNUMBER" [filter]="true" class="tabledata"
+                              filterPlaceholder="Search"></p-column>
+                </p-dataTable>
+            </div>
 
         </div>
-        <div class="ui-widget-header pull-right" style="padding:4px 10px;border-bottom: 0 none" >
-            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-            <input #gb type="text" pInputText size="50" placeholder="Global Filter">
-        </div>
-        <p-dataTable [value]="results" [rows]="10" [paginator]="true" [globalFilter]="gb" #dt  class="tabledata" [responsive]="true" reorderableColumns="true"  selectionMode="single" >
-            <p-column field="Txn Type" header="TRANSACTION TYPE" [filter]="true"  class="tabledata" filterPlaceholder="Search"></p-column>
-            <p-column field="EI TimeStamp" header="TIMESTAMP" [filter]="true"  class="tabledata" filterPlaceholder="Search"></p-column>
-            <p-column field="Txn Id" header="TRANSACTION ID" [filter]="true"  class="tabledata" filterPlaceholder="Search"></p-column>
-            <p-column field="Order ID" header="ORDER ID" [filter]="true"  class="tabledata" filterPlaceholder="Search"></p-column>
-            <p-column field="SAP Document Number" header="SAP" [filter]="true"  class="tabledata" filterPlaceholder="Search"></p-column>
-            <p-column field="DCNUMBER" header="DCNUMBER" [filter]="true"  class="tabledata" filterPlaceholder="Search"></p-column>
-        </p-dataTable>
+
     </div>
-
 
 
 </div>
