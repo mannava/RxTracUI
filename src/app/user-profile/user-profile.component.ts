@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SelectItem} from "primeng/api";
-import {DashboardService} from "../dashboard/dashboard.service";
+import {DashboardService} from '../dashboard/dashboard.service';
 
 @Component({
   selector: 'app-user-profile',
