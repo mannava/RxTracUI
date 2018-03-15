@@ -124,10 +124,12 @@
                     {{col.header}}
                 </th>
             </tr>
-            <tr>
+           <!-- <tr>
                 <th *ngFor="let col of columns" [ngSwitch]="col.field">
-                    <input *ngSwitchCase="'vin'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                </th></tr>
+                    <input *ngSwitchCase="'Txn Type'" pInputText type="text"
+                           (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                </th>
+            </tr>-->
         </ng-template>
         <ng-template pTemplate="body" let-result let-columns="columns">
             <tr>

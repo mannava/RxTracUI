@@ -1,18 +1,6 @@
-import {Component, NgModule, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DashboardService} from './dashboard.service';
-import {CommonModule} from '@angular/common';
-import {PaginatorModule} from 'primeng/primeng';
-import {
-    CellEditor,
-    EditableColumn, ReorderableColumn, ReorderableRow, ReorderableRowHandle, ResizableColumn, RowToggler,
-    ScrollableView, SelectableRow,
-    SelectableRowDblClick,
-    SortableColumn,
-    SortIcon,
-    Table, TableBody, TableCheckbox, TableHeaderCheckbox, TableModule, TableRadioButton
-} from 'primeng/table';
-import {SharedModule} from 'primeng/shared';
-import {Dashboard} from "./dashboard.interface";
+import {Dashboard} from './dashboard.interface';
 
 @Component({
     selector: 'app-dashboard',
@@ -60,18 +48,4 @@ export class DashboardComponent implements OnInit {
             console.log(this.results);
         });
     }
-}
-
-
-@NgModule({
-    imports: [CommonModule, PaginatorModule, TableModule],
-    exports: [Table, SharedModule, SortableColumn, SelectableRow, RowToggler,
-        ResizableColumn, ReorderableColumn, EditableColumn, CellEditor, SortIcon,
-        TableRadioButton, TableCheckbox, TableHeaderCheckbox, ReorderableRowHandle, ReorderableRow, SelectableRowDblClick],
-    declarations: [Table, SortableColumn, SelectableRow, RowToggler, ResizableColumn, ReorderableColumn, EditableColumn,
-        CellEditor, TableBody, ScrollableView, SortIcon, TableRadioButton, TableCheckbox, TableHeaderCheckbox,
-        ReorderableRowHandle, ReorderableRow, SelectableRowDblClick]
-})
-export class DashboardModule {
-
 }

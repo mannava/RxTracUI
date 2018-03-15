@@ -19,7 +19,7 @@ import {NotificationsComponent} from './notifications/notifications.component';
 import {UpgradeComponent} from './upgrade/upgrade.component';
 import {HttpClientModule} from '@angular/common/http';
 import {DashboardService} from './dashboard/dashboard.service';
-import {TableModule} from "primeng/table";
+import {TableModule} from 'primeng/table';
 
 @NgModule({
     declarations: [
