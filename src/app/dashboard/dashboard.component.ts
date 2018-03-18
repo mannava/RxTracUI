@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DashboardService} from './dashboard.service';
 import {Dashboard} from './dashboard.interface';
+import {ifTrue} from "codelyzer/util/function";
 
 @Component({
     selector: 'app-dashboard',
@@ -14,6 +15,15 @@ export class DashboardComponent implements OnInit {
     public results: any;
     public cols: any[];
     dashboard: Dashboard[];
+
+    focus: Object = {
+        connectOrdersFlag: true,
+        ediFlag: false,
+        entFlag: false,
+        sapFlag: false,
+        acumaxFlag: false,
+        dropshipFlag: false
+    };
 
     constructor(private dashboardService: DashboardService) {
         this.getDashboardData();
@@ -40,6 +50,14 @@ export class DashboardComponent implements OnInit {
     }
 
     getData(event, type) {
+        for (let key in this.focus) {
+            if (key === type) {
+                this.focus[key] = true;
+            } else {
+                this.focus[key] = false;
+            }
+        }
+
     }
 
     getDashboardData() {
