@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DashboardService} from './dashboard.service';
 import {Dashboard} from './dashboard.interface';
-import {ifTrue} from "codelyzer/util/function";
 
 @Component({
     selector: 'app-dashboard',
