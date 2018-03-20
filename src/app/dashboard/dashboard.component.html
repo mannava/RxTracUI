@@ -1,5 +1,5 @@
 <div class="main-content">
-    <div class="container-fluid" (click)="removeFocus()">
+    <div class="container-fluid " (click)="removeFocus()">
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="connectOrders">
                 <div class="card card-stats" [class.cardStatsBorder]="focus['Connect Orders']" #connectOrders
@@ -139,16 +139,18 @@
             </div>
 
         </div>-->
-
+    </div>
+    <div class="container-fluid">
         <div class="card">
             <div class="card-header" data-background-color="red">
                 <h4 class="title">{{currentTab}}</h4>
                 <p class="category">Respective message suppose to show here...chk with Vishnu</p>
             </div>
             <div class="card-content">
-                <div class="ui-widget-header pull-right" style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
+                <div class="ui-widget-header pull-right"
+                     style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
                     <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                    <input #gb type="text" pInputText size="50" placeholder="Global Filter">
+                    <input #gb type="text" pInputText size="35" placeholder="Global Filter">
                 </div>
                 <div class="main-content">
                     <div class="container-fluid">
@@ -177,6 +179,6 @@
 
             </div>
         </div>
-    </div>
 
+    </div>
 </div>
