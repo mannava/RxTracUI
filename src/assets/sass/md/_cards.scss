@@ -285,15 +285,18 @@
     padding-top: 10px;
   }
 
-  border-color: #3d5afe;
+  border-color: #0d47a1;
   border-style: solid;
   border-width: thin;
 
-  box-shadow: 0px 0px 4px 4px rgba(68, 68, 68, .9);
+  box-shadow: 0px 0px 2px 2px rgba(68, 68, 68, .9);
   -webkit-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-  transition: all 0.3s cubic-bezier(0.1, 0.7, 1.0, 0.1);
-  transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1);
+  transition: all 0.2s cubic-bezier(0.1, 0.7, 1.0, 0.1);
+  /*transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1);*/
 
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .card-nav-tabs {

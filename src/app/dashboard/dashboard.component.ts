@@ -65,14 +65,14 @@ export class DashboardComponent implements OnInit {
             {
                 timeOut: 3000,
                 showProgressBar: true,
-                pauseOnHover: false,
+                pauseOnHover: true,
                 clickToClose: false,
                 maxLength: 0,
                 maxStack: 1
             }
         );
         for (let key in this.focus) {
-            this.focus[key] = true;
+            this.focus[key] = false;
         }
         this.currentTab = 'Global';
 
