@@ -1,40 +1,31 @@
 import {Component, OnInit} from '@angular/core';
 import {DashboardService} from './dashboard.service';
 import {Dashboard} from './dashboard.interface';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.css',
-
-    ]
+    styleUrls: ['./dashboard.component.css']
 })
 
 export class DashboardComponent implements OnInit {
     public results: any;
     public cols: any[];
     dashboard: Dashboard[];
-
+    currentTab: String = 'Connect Orders';
     focus: Object = {
-        connectOrdersFlag: true,
-        ediFlag: false,
-        entFlag: false,
-        sapFlag: false,
-        acumaxFlag: false,
-        dropshipFlag: false
+        'Connect Orders': true,
+        'EDI': false,
+        'ENT Integration': false,
+        'SAP': false,
+        'ACUMAX': false,
+        'DropShip': false,
+        'Global': false
     };
 
-    constructor(private dashboardService: DashboardService) {
+    constructor(private dashboardService: DashboardService, private notificationsService: NotificationsService) {
         this.getDashboardData();
-        /*
-        * <td>{{result["Txn Type"]}}|</td>
-                <td>{{result["EI TimeStamp"]}}|</td>
-                <td>{{result["Txn Id"]}}|</td>
-                <td>{{result["Order ID"]}}|</td>
-                <td>{{result["SAP Document Number"]}}|</td>
-                <td>{{result["DCNUMBER"]}}|</td>
-        * */
-
     }
 
     ngOnInit() {
@@ -56,7 +47,8 @@ export class DashboardComponent implements OnInit {
                 this.focus[key] = false;
             }
         }
-
+        this.currentTab = type;
+        event.stopPropagation();
     }
 
     getDashboardData() {
@@ -65,4 +57,50 @@ export class DashboardComponent implements OnInit {
             console.log(this.results);
         });
     }
+
+    removeFocus() {
+        this.notificationsService.success(
+            'All cards are selected.',
+            'Switched to Global.',
+            {
+                timeOut: 3000,
+                showProgressBar: true,
+                pauseOnHover: false,
+                clickToClose: false,
+                maxLength: 0,
+                maxStack: 1
+            }
+        );
+        for (let key in this.focus) {
+            this.focus[key] = true;
+        }
+        this.currentTab = 'Global';
+
+
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

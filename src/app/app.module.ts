@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 
@@ -20,6 +20,9 @@ import {UpgradeComponent} from './upgrade/upgrade.component';
 import {HttpClientModule} from '@angular/common/http';
 import {DashboardService} from './dashboard/dashboard.service';
 import {DataTableModule, PaginatorModule} from 'primeng/primeng';
+import {QueryBuilderModule} from 'angular2-query-builder';
+import {SimpleNotificationsModule} from 'angular2-notifications';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -41,9 +44,14 @@ import {DataTableModule, PaginatorModule} from 'primeng/primeng';
         RouterModule,
         AppRoutingModule,
         DataTableModule,
-        PaginatorModule
+        QueryBuilderModule,
+        PaginatorModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        SimpleNotificationsModule.forRoot(),
 
     ],
+
     providers: [DashboardService],
     bootstrap: [AppComponent]
 })
