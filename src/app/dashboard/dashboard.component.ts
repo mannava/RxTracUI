@@ -12,6 +12,8 @@ import {NotificationsService} from 'angular2-notifications';
 export class DashboardComponent implements OnInit {
     public results: any;
     public cols: any[];
+    animate: Boolean = false;
+
     dashboard: Dashboard[];
     currentTab: String = 'Connect Orders';
     focus: Object = {
@@ -40,6 +42,7 @@ export class DashboardComponent implements OnInit {
     }
 
     getData(event, type) {
+        this.animate = true;
         for (let key in this.focus) {
             if (key === type) {
                 this.focus[key] = true;
@@ -51,6 +54,7 @@ export class DashboardComponent implements OnInit {
         event.stopPropagation();
     }
 
+
     getDashboardData() {
         this.dashboardService.getDashboardData().subscribe(data => {
             this.results = data;
@@ -59,12 +63,12 @@ export class DashboardComponent implements OnInit {
     }
 
     removeFocus() {
+        this.animate = false;
         this.notificationsService.success(
             'All cards are selected.',
             'Switched to Global.',
             {
-                timeOut: 3000,
-                showProgressBar: true,
+                timeOut: 500,
                 pauseOnHover: true,
                 clickToClose: false,
                 maxLength: 0,
@@ -75,8 +79,6 @@ export class DashboardComponent implements OnInit {
             this.focus[key] = false;
         }
         this.currentTab = 'Global';
-
-
     }
 }
 

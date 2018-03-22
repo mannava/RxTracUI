@@ -23,6 +23,7 @@ import {DataTableModule, PaginatorModule} from 'primeng/primeng';
 import {QueryBuilderModule} from 'angular2-query-builder';
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BlockUIModule} from 'ng-block-ui';
 
 @NgModule({
     declarations: [
@@ -48,6 +49,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
         PaginatorModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
+        BlockUIModule,
         SimpleNotificationsModule.forRoot(),
 
     ],

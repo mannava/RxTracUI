@@ -5,7 +5,7 @@
                 <div class="card card-stats" [class.cardStatsBorder]="focus['Connect Orders']" #connectOrders
                      (click)="getData($event, 'Connect Orders')">
                     <div class="card-header" data-background-color="purple">
-                        <i class="fa fas fa-sitemap fa-2x"></i>
+                        <i class="fa fas fa-globe fa-2x"></i>
                     </div>
                     <div class="card-content">
                         <p class="category">50 Orders</p>
@@ -39,7 +39,8 @@
                 <div class="card card-stats" [class.cardStatsBorder]="focus['ENT Integration']" #ent
                      (click)="getData($event, 'ENT Integration')">
                     <div class="card-header" data-background-color="blue">
-                        <i class="fa fas fa-random fa-2x"></i>
+                        <i class="fa fas fa-sitemap fa-2x"></i>
+                        <!--<i class="fa fas fa-random fa-2x"></i>-->
                     </div>
                     <div class="card-content">
                         <p class="category">55 Deliveries</p>
@@ -57,7 +58,7 @@
             <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="sap">
                 <div class="card card-stats" [class.cardStatsBorder]="focus['SAP']" #sap
                      (click)="getData($event, 'SAP')">
-                    <div class="card-header" data-background-color="green">
+                    <div class="card-header" data-background-color="lightblue">
                         <i class="material-icons" style="line-height:20px"><img src="/assets/img/sap.svg"></i>
                     </div>
                     <div class="card-content">
@@ -143,7 +144,8 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header" data-background-color="red">
-                <h4 class="title">{{currentTab}}</h4>
+                <h4  [class.gridtitle]="animate"
+                    [attr.tab-title]="currentTab">{{currentTab}}</h4>
                 <p class="category">Respective message suppose to show here...chk with Vishnu</p>
             </div>
             <div class="card-content">
