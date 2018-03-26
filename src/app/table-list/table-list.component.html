@@ -15,7 +15,7 @@
                             <div class="row">
                                 <query-builder [(ngModel)]='query' [config]='config'>
                                     <ng-container *queryInput="let rule; type: 'date'">
-                                        <input type="" [(ngModel)]="rule.value">
+                                        <input type='date' [(ngModel)]="rule.value">
                                     </ng-container>
                                 </query-builder>
                             </div>

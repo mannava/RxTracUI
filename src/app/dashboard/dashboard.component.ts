@@ -59,7 +59,6 @@ export class DashboardComponent implements OnInit {
     getDashboardData(card) {
         this.dashboardService.getDashboardData(card).subscribe(data => {
             this.results = data;
-            console.log(this.results);
         });
     }
 
