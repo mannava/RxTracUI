@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
     };
 
     constructor(private dashboardService: DashboardService, private notificationsService: NotificationsService) {
-        this.getDashboardData('all');
+        this.getDashboardData('connect');
     }
 
     ngOnInit() {
