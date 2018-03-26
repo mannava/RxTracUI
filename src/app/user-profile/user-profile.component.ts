@@ -12,7 +12,7 @@ export class UserProfileComponent implements OnInit {
     public cols: any[];
 
     constructor(private dashboardService: DashboardService) {
-        this.getDashboardData();
+        this.getDashboardData('all');
     }
 
     ngOnInit() {
@@ -26,8 +26,8 @@ export class UserProfileComponent implements OnInit {
         ];
     }
 
-    getDashboardData() {
-        this.dashboardService.getDashboardData().subscribe(data => {
+    getDashboardData(card) {
+        this.dashboardService.getDashboardData(card).subscribe(data => {
             this.results = data;
             console.log(this.results);
         });

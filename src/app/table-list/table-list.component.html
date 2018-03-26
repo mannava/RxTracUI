@@ -1,25 +1,25 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <query-builder [(ngModel)]='query' [config]='config'>
-                <ng-container *queryInput="let rule; type: 'date'">
-                    <input type="" [(ngModel)]="rule.value">
-                </ng-container>
-            </query-builder>
-        </div>
-    </div>
-</div>
-
-<div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
 
 
             <div class="col-md-12">
                 <div class="card card-plain">
                     <div class="card-header" data-background-color="red">
-                        <h4 class="title">Table on Plain Background</h4>
-                        <p class="category">Here is a subtitle for this table</p>
+                        <h4 class="title">Search</h4>
+                        <p class="category">Run custom query using AND, OR operator, Select fields by using Rule. For nested query use
+                            Ruleset. </p>
+                    </div>
+                    <div class="main-content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <query-builder [(ngModel)]='query' [config]='config'>
+                                    <ng-container *queryInput="let rule; type: 'date'">
+                                        <input type="" [(ngModel)]="rule.value">
+                                    </ng-container>
+                                </query-builder>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-content table-responsive">
                         <table class="table table-hover">
@@ -83,3 +83,22 @@
         </div>
     </div>
 </div>
+<!--
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+
+
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Table on Plain Background</h4>
+                        <p class="category">Here is a subtitle for this table</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+-->

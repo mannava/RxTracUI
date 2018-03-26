@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
     };
 
     constructor(private dashboardService: DashboardService, private notificationsService: NotificationsService) {
-        this.getDashboardData();
+        this.getDashboardData('all');
     }
 
     ngOnInit() {
@@ -41,7 +41,8 @@ export class DashboardComponent implements OnInit {
         ];
     }
 
-    getData(event, type) {
+    getData(event, type, card) {
+        this.getDashboardData(card);
         this.animate = true;
         for (let key in this.focus) {
             if (key === type) {
@@ -55,14 +56,15 @@ export class DashboardComponent implements OnInit {
     }
 
 
-    getDashboardData() {
-        this.dashboardService.getDashboardData().subscribe(data => {
+    getDashboardData(card) {
+        this.dashboardService.getDashboardData(card).subscribe(data => {
             this.results = data;
             console.log(this.results);
         });
     }
 
     removeFocus() {
+        this.getDashboardData('all');
         this.animate = false;
         this.notificationsService.success(
             'All cards are selected.',

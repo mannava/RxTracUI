@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="connectOrders">
                 <div class="card card-stats" [class.cardStatsBorder]="focus['Connect Orders']" #connectOrders
-                     (click)="getData($event, 'Connect Orders')">
+                     (click)="getData($event, 'Connect Orders','connect')">
                     <div class="card-header" data-background-color="purple">
                         <i class="fa fas fa-globe fa-2x"></i>
                     </div>
@@ -20,7 +20,7 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="edi">
                 <div class="card card-stats" [class.cardStatsBorder]="focus['EDI']" #edi
-                     (click)="getData($event, 'EDI')">
+                     (click)="getData($event, 'EDI','ent')">
                     <div class="card-header" data-background-color="brown">
                         <i class="material-icons">reorder</i>
                     </div>
@@ -37,7 +37,7 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="ent">
                 <div class="card card-stats" [class.cardStatsBorder]="focus['ENT Integration']" #ent
-                     (click)="getData($event, 'ENT Integration')">
+                     (click)="getData($event, 'ENT Integration', 'ent')">
                     <div class="card-header" data-background-color="blue">
                         <i class="fa fas fa-sitemap fa-2x"></i>
                         <!--<i class="fa fas fa-random fa-2x"></i>-->
@@ -57,7 +57,7 @@
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="sap">
                 <div class="card card-stats" [class.cardStatsBorder]="focus['SAP']" #sap
-                     (click)="getData($event, 'SAP')">
+                     (click)="getData($event, 'SAP' , 'sap')">
                     <div class="card-header" data-background-color="lightblue">
                         <i class="material-icons" style="line-height:20px"><img src="/assets/img/sap.svg"></i>
                     </div>
@@ -75,7 +75,7 @@
 
             <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="acumax">
                 <div class="card card-stats" [class.cardStatsBorder]="focus['ACUMAX']" #acumax
-                     (click)="getData($event, 'ACUMAX')">
+                     (click)="getData($event, 'ACUMAX', 'acx')">
                     <div class="card-header" data-background-color="orange">
                         <i class="fa fas fa-truck fa-2x"></i>
                     </div>
@@ -93,7 +93,7 @@
 
             <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="dropship">
                 <div class="card card-stats" [class.cardStatsBorder]="focus['DropShip']" #dropship
-                     (click)="getData($event, 'DropShip')">
+                     (click)="getData($event, 'DropShip' ,'dropship')">
                     <div class="card-header" data-background-color="teal">
                         <i class="fa fas fa-ship fa-2x"></i>
                     </div>

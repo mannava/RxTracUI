@@ -13,8 +13,8 @@ export class DashboardService {
     constructor(private http: HttpClient) {
     }
 
-    public getDashboardData(): Observable<Object> {
-        return this.http.get(AppService.API_ENDPOINT + 'dashboard')
+    public getDashboardData(card): Observable<Object> {
+        return this.http.get(AppService.API_ENDPOINT + card)
             .map((res: Response) => res)
             .catch
             ((error: any) => {
