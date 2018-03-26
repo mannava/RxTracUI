@@ -63,5 +63,9 @@ export class TableListComponent implements OnInit {
     ngOnInit() {
     }
 
+    executeQuery() {
+        console.log(this.query);
+    }
+
 
 }

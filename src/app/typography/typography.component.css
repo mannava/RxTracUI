@@ -1,5 +1,6 @@
-.inputBorder{
-    border:solid;
+.inputBorder {
+    border: solid;
     border-style: groove;
     padding: 5px;
+    border-width: thin;
 }
