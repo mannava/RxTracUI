@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit {
             'All cards are selected.',
             'Switched to Global.',
             {
-                timeOut: 500,
+                timeOut: 1500,
                 pauseOnHover: true,
                 clickToClose: false,
                 maxLength: 0,
