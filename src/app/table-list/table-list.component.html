@@ -1,14 +1,15 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
+
+
             <div class="col-md-12">
-                <div class="card card-plain">
+                <div class="card">
                     <div class="card-header" data-background-color="red">
                         <h4 class="title">Search</h4>
-                        <p class="category">Run custom query using AND, OR operator, Select fields by using Rule. For
-                            nested query use
-                            Ruleset. </p>
+                        <p class="category">Run custom query using AND, OR operator, Select fields by using Rule. For nested query use Ruleset. </p>
                     </div>
+                    <div class="container">
                     <br>
                     <query-builder [(ngModel)]='query' [config]='config'>
                         <ng-container *queryInput="let rule; type: 'date'">
@@ -17,7 +18,7 @@
                     </query-builder>
 
                     <div class="pull-right">
-                        <button type="button" class="btn btn-success" (click)="executeQuery()">
+                        <button type="button" class="btn btn-info" (click)="executeQuery()">
                             <span class="fa fa-fw fa-search"></span> Execute Query
                         </button>
                     </div>
@@ -26,7 +27,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
+    <!--<div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card-content table-responsive">
@@ -88,7 +89,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 </div>
 <!--
 <div class="main-content">

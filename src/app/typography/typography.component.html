@@ -1,34 +1,38 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-
-
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header" data-background-color="red">
                         <h4 class="title">Reviews/Feedback</h4>
-                        <p class="category">Please fill your comments / suggestions below</p>
+                        <p class="category">Please fill Your comments / suggestions below</p>
                     </div>
                     <div class="container">
                         <form role="form">
 
                             <div class="form-group input-group">
                                 <!-- <span class="input-group-addon">@</span> -->
-                                <input type="text" class="form-control inputBorder" placeholder="Username" size="100" (ngModel)="username">
+                                <input type="text" class="form-control inputBorder" placeholder="Username" size="100"
+                                       #username>
 
                             </div>
 
                             <div class="form-group input-group">
-                                <input type="text" class="form-control inputBorder" placeholder="Comments" size="100" (ngModel)="comments">
+                                <input type="text" class="form-control inputBorder" placeholder="Comments" size="100"
+                                       #comments>
 
                             </div>
 
                             <div class="form-group input-group">
-                                <textarea class="form-control inputBorder" placeholder="Description" rows="5" cols="98" (ngModel)="description"></textarea>
+                                <textarea class="form-control inputBorder" placeholder="Description" rows="5" cols="98"
+                                          #description></textarea>
                             </div>
 
                             <div class="pull-right">
-                                <button type="submit" class="btn btn-lg btn-success">Submit FeedBack</button>
+                                <button type="submit" class="btn btn-lg btn-info"
+                                        (click)="saveReview(username.value, comments.value, description.value)">Submit
+                                    FeedBack
+                                </button>
                             </div>
 
                         </form>

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DashboardService} from './dashboard.service';
 import {Dashboard} from './dashboard.interface';
 import {NotificationsService} from 'angular2-notifications';
+import * as _ from 'underscore';
 
 @Component({
     selector: 'app-dashboard',
@@ -11,6 +12,7 @@ import {NotificationsService} from 'angular2-notifications';
 
 export class DashboardComponent implements OnInit {
     public results: any;
+    public allCardsResults: any;
     public cols: any[];
     animate: Boolean = false;
 
@@ -27,7 +29,7 @@ export class DashboardComponent implements OnInit {
     };
 
     constructor(private dashboardService: DashboardService, private notificationsService: NotificationsService) {
-        this.getDashboardData('connect');
+        this.getDashboardData('all');
     }
 
     ngOnInit() {
@@ -42,7 +44,10 @@ export class DashboardComponent implements OnInit {
     }
 
     getData(event, type, card) {
-        this.getDashboardData(card);
+        //this.getDashboardData(card);
+
+        this.results = _.where(this.allCardsResults, {'Txn Type': card});
+        console.log(this.results);
         this.animate = true;
         for (let key in this.focus) {
             if (key === type) {
@@ -58,14 +63,15 @@ export class DashboardComponent implements OnInit {
 
     getDashboardData(card) {
         this.dashboardService.getDashboardData(card).subscribe(data => {
+            this.allCardsResults = data;
             this.results = data;
         });
     }
 
     removeFocus() {
-        this.getDashboardData('all');
+        this.results = this.allCardsResults;
         this.animate = false;
-        this.notificationsService.success(
+        this.notificationsService.info(
             'All cards are selected.',
             'Switched to Global.',
             {

@@ -1,7 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 
 import {AppRoutingModule} from './app.routing';
@@ -24,6 +23,7 @@ import {QueryBuilderModule} from 'angular2-query-builder';
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BlockUIModule} from 'ng-block-ui';
+import {ReviewService} from './typography/typography.service';
 
 @NgModule({
     declarations: [
@@ -54,7 +54,7 @@ import {BlockUIModule} from 'ng-block-ui';
 
     ],
 
-    providers: [DashboardService],
+    providers: [DashboardService, ReviewService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

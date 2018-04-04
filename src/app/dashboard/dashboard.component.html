@@ -3,12 +3,12 @@
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="connectOrders">
                 <div class="card card-stats" [class.cardStatsBorder]="focus['Connect Orders']" #connectOrders
-                     (click)="getData($event, 'Connect Orders','connect')">
+                     (click)="getData($event, 'Connect Orders','GATPSMOQSO')">
                     <div class="card-header" data-background-color="purple">
                         <i class="fa fas fa-globe fa-2x"></i>
                     </div>
                     <div class="card-content">
-                        <p class="category">50 Orders</p>
+                        <p class="category">{{Math.floor(Math.random() * 50) + 1}} Orders</p>
                         <h3 class="title">&nbsp;</h3>
                     </div>
                     <div class="card-footer">
@@ -20,12 +20,12 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="edi">
                 <div class="card card-stats" [class.cardStatsBorder]="focus['EDI']" #edi
-                     (click)="getData($event, 'EDI','edi')">
+                     (click)="getData($event, 'EDI','EDIPO')">
                     <div class="card-header" data-background-color="brown">
                         <i class="material-icons">reorder</i>
                     </div>
                     <div class="card-content">
-                        <p class="category">5 Orders</p>
+                        <p class="category">{{Math.floor(Math.random() * 50) + 1}} Orders</p>
                         <h3 class="title">&nbsp;</h3>
                     </div>
                     <div class="card-footer">
@@ -37,14 +37,14 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="ent">
                 <div class="card card-stats" [class.cardStatsBorder]="focus['ENT Integration']" #ent
-                     (click)="getData($event, 'ENT Integration', 'ent')">
+                     (click)="getData($event, 'ENT Integration', '')">
                     <div class="card-header" data-background-color="blue">
                         <i class="fa fas fa-sitemap fa-2x"></i>
                         <!--<i class="fa fas fa-random fa-2x"></i>-->
                     </div>
                     <div class="card-content">
-                        <p class="category">55 Deliveries</p>
-                        <h3 class="title">75 Orders</h3>
+                        <p class="category">{{Math.floor(Math.random() * 50) + 1}} Deliveries</p>
+                        <h3 class="title">{{Math.floor(Math.random() * 50) + 1}} Orders</h3>
                     </div>
                     <div class="card-footer">
                         <div class="dashboardheads">
@@ -57,13 +57,13 @@
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="sap">
                 <div class="card card-stats" [class.cardStatsBorder]="focus['SAP']" #sap
-                     (click)="getData($event, 'SAP' , 'sap')">
+                     (click)="getData($event, 'SAP' , 'GATPSMOBSO')">
                     <div class="card-header" data-background-color="lightblue">
                         <i class="material-icons" style="line-height:20px"><img src="/assets/img/sap.svg"></i>
                     </div>
                     <div class="card-content">
-                        <p class="category">60 Deliveries</p>
-                        <h3 class="title">55 Orders</h3>
+                        <p class="category">{{Math.floor(Math.random() * 50)}} Deliveries</p>
+                        <h3 class="title">{{Math.floor(Math.random() * 50)}} Orders</h3>
                     </div>
                     <div class="card-footer">
                         <div class="dashboardheads">
@@ -98,7 +98,7 @@
                         <i class="fa fas fa-ship fa-2x"></i>
                     </div>
                     <div class="card-content">
-                        <p class="category">60 Deliveries</p>
+                        <p class="category">{{Math.floor(Math.random() * 50) + 1}} Deliveries</p>
                         <h3 class="title">&nbsp;</h3>
                     </div>
                     <div class="card-footer">
@@ -144,7 +144,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header" data-background-color="red">
-                <h4  [class.gridtitle]="animate" class="tablehead"
+                <h4 [class.gridtitle]="animate" class="tablehead"
                     [attr.tab-title]="currentTab">{{currentTab}}</h4>
                 <p class="category">Respective message suppose to show here...chk with Vishnu</p>
             </div>
