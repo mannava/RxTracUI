@@ -3,12 +3,12 @@
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="connectOrders">
                 <div class="card card-stats" [class.cardStatsBorder]="focus['Connect Orders']" #connectOrders
-                     (click)="getData($event, 'Connect Orders','GATPSMOQSO')">
+                     (click)="getData($event, 'Connect Orders','connect')">
                     <div class="card-header" data-background-color="purple">
                         <i class="fa fas fa-globe fa-2x"></i>
                     </div>
                     <div class="card-content">
-                        <p class="category">50 Orders</p>
+                        <p class="category">{{result_set['connect_orders']['cnt']}} Orders</p>
                         <h3 class="title">&nbsp;</h3>
                     </div>
                     <div class="card-footer">
@@ -20,12 +20,12 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="edi">
                 <div class="card card-stats" [class.cardStatsBorder]="focus['EDI']" #edi
-                     (click)="getData($event, 'EDI','EDIPO')">
+                     (click)="getData($event, 'EDI','edi')">
                     <div class="card-header" data-background-color="brown">
                         <i class="material-icons">reorder</i>
                     </div>
                     <div class="card-content">
-                        <p class="category">5 Orders</p>
+                        <p class="category">{{result_set['edi_orders']['cnt']}} Orders</p>
                         <h3 class="title">&nbsp;</h3>
                     </div>
                     <div class="card-footer">
@@ -37,14 +37,14 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="ent">
                 <div class="card card-stats" [class.cardStatsBorder]="focus['ENT Integration']" #ent
-                     (click)="getData($event, 'ENT Integration', '')">
+                     (click)="getData($event, 'ENT Integration', 'ent')">
                     <div class="card-header" data-background-color="blue">
                         <i class="fa fas fa-sitemap fa-2x"></i>
                         <!--<i class="fa fas fa-random fa-2x"></i>-->
                     </div>
                     <div class="card-content">
-                        <p class="category">55 Deliveries</p>
-                        <h3 class="title">75 Orders</h3>
+                        <p class="category">{{result_set['ent_orders']['cnt']}} Orders</p>
+                        <h3 class="title">{{result_set['ent_deliveries']['cnt']}} Deliveries</h3>
                     </div>
                     <div class="card-footer">
                         <div class="dashboardheads">
@@ -55,15 +55,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="sap">
-                <div class="card card-stats" [class.cardStatsBorder]="focus['SAP']" #sap
-                     (click)="getData($event, 'SAP' , 'GATPSMOBSO')">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="card card-stats" [class.cardStatsBorder]="focus['SAP']"
+                     (click)="getData($event, 'SAP' , 'sap')">
                     <div class="card-header" data-background-color="lightblue">
                         <i class="material-icons" style="line-height:20px"><img src="/assets/img/sap.svg"></i>
                     </div>
                     <div class="card-content">
-                        <p class="category">60 Deliveries</p>
-                        <h3 class="title">55 Orders</h3>
+                        <p class="category">{{result_set['sap_orders']['cnt']}} Orders</p>
+                        <h3 class="title">{{result_set['sap_deliveries']['cnt']}} Deliveries</h3>
                     </div>
                     <div class="card-footer">
                         <div class="dashboardheads">
@@ -80,8 +80,8 @@
                         <i class="fa fas fa-truck fa-2x"></i>
                     </div>
                     <div class="card-content">
-                        <p class="category">60 Deliveries</p>
-                        <h3 class="title">&nbsp;</h3>
+                        <p class="category">&nbsp;</p>
+                        <h3 class="title">{{result_set['acx_deliveries']['cnt']}}  Deliveries</h3>
                     </div>
                     <div class="card-footer">
                         <div class="dashboardheads">
@@ -98,8 +98,8 @@
                         <i class="fa fas fa-ship fa-2x"></i>
                     </div>
                     <div class="card-content">
-                        <p class="category">60 Deliveries</p>
-                        <h3 class="title">&nbsp;</h3>
+                        <p class="category">&nbsp;</p>
+                        <h3 class="title">{{result_set['dropship_deliveries']['cnt']}}  Deliveries</h3>
                     </div>
                     <div class="card-footer">
                         <div class="dashboardheads">
@@ -144,7 +144,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header" data-background-color="red">
-                <h4  [class.gridtitle]="animate" class="tablehead"
+                <h4 [class.gridtitle]="animate" class="tablehead"
                     [attr.tab-title]="currentTab">{{currentTab}}</h4>
                 <p class="category">Respective message suppose to show here...chk with Vishnu</p>
             </div>
