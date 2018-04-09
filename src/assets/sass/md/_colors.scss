@@ -1,10 +1,27 @@
+$mckesson-50:#275589 !default;
+$mckesson-100:#275589 !default;
+$mckesson-200:#275589 !default;
+$mckesson-300:#275589 !default;
+$mckesson-400:#0b587d !default;
+$mckesson-500:#255a73 !default;
+$mckesson-600:#0f5b80 !default;
+$mckesson-700:#0b587d !default;
+$mckesson-800:#0b5679 !default;
+$mckesson-900:#033d58 !default;
+$mckesson-A100:#0f4a67 !default;
+$mckesson-A200:#18536f !default;
+$mckesson-A400:#275589 !default;
+$mckesson-A700:#275589 !default;
+$mckesson: $mckesson-400 !default;
+
+
 $red-50: #ffebee !default;
 $red-100: #ffcdd2 !default;
 $red-200: #ef9a9a !default;
 $red-300: #e57373 !default;
-$red-400: #0d41aa !default;
-$red-500: #0d47a1 !default;
-$red-600: #0d47ff !default;
+$red-400: #ef5350 !default;
+$red-500: #0f5b80 !default;
+$red-600: #e53935 !default;
 $red-700: #d32f2f !default;
 $red-800: #c62828 !default;
 $red-900: #b71c1c !default;
@@ -323,3 +340,4 @@ $blue-grey: $blue-grey-500 !default;
 
 $black: #000000; $rgb-black: "0,0,0" !default;
 $white: #ffffff; $rgb-white: "255,255,255" !default;
+

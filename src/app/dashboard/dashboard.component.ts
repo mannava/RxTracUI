@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
         'acx_deliveries': {'cnt': 0},
 
         'dropship': [],
-        //'dropship_orders': {'cnt': 0},
+        // 'dropship_orders': {'cnt': 0},
         'dropship_deliveries': {'cnt': 0}
 
     };
@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
 
     dashboard: Dashboard[];
     currentTab: String = 'Connect Orders';
-    focus: Object = {
+    focus: any = {
         'Connect Orders': true,
         'EDI': false,
         'ENT Integration': false,
@@ -68,13 +68,13 @@ export class DashboardComponent implements OnInit {
     }
 
     getData(event, type, card) {
-        //this.getDashboardData(card);
+        // this.getDashboardData(card);
 
         this.results = this.result_set[card];
 
         console.log(this.results);
         this.animate = true;
-        for (let key in this.focus) {
+        for (const key in this.focus) {
             if (key === type) {
                 this.focus[key] = true;
             } else {
@@ -150,34 +150,9 @@ export class DashboardComponent implements OnInit {
                 maxStack: 1
             }
         );
-        for (let key in this.focus) {
+        for (const key of this.focus) {
             this.focus[key] = false;
         }
         this.currentTab = 'Global';
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

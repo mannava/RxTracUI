@@ -18,12 +18,15 @@ import {NotificationsComponent} from './notifications/notifications.component';
 import {UpgradeComponent} from './upgrade/upgrade.component';
 import {HttpClientModule} from '@angular/common/http';
 import {DashboardService} from './dashboard/dashboard.service';
-import {DataTableModule, PaginatorModule} from 'primeng/primeng';
+import {
+    AutoCompleteModule, DataTableModule, MultiSelectModule, PaginatorModule
+} from 'primeng/primeng';
 import {QueryBuilderModule} from 'angular2-query-builder';
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {BlockUIModule} from 'ng-block-ui';
 import {ReviewService} from './typography/typography.service';
+import {ProfileService} from './maps/profile.servce';
+import {TableModule} from 'primeng/table';
 
 @NgModule({
     declarations: [
@@ -47,14 +50,15 @@ import {ReviewService} from './typography/typography.service';
         DataTableModule,
         QueryBuilderModule,
         PaginatorModule,
-        ReactiveFormsModule,
+        AutoCompleteModule,
+        TableModule,
+        MultiSelectModule,
         BrowserAnimationsModule,
-        BlockUIModule,
         SimpleNotificationsModule.forRoot(),
 
     ],
 
-    providers: [DashboardService, ReviewService],
+    providers: [DashboardService, ReviewService, ProfileService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

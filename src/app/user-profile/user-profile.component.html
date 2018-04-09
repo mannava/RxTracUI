@@ -10,39 +10,38 @@
                         <p class="category">Where order get failed in pipeline</p>
                     </div>
                     <div class="card-content">
-                        <div class="ui-widget-header pull-right" style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
-                            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                            <input #gb type="text" pInputText size="35" placeholder="Global Filter">
-                        </div>
                         <div class="main-content">
                             <div class="container-fluid">
 
                                 <div class="row">
-
-
-                                    <p-dataTable [value]="results" [rows]="10" [paginator]="true" [globalFilter]="gb"
+                                    <p-table [value]="results" [rows]="10" [paginator]="true"
                                                  #dt class="tabledata"
-                                                 [responsive]="true" reorderableColumns="true" selectionMode="single">
-                                        <p-column field="Txn Type" header="TRANSACTION TYPE" class="tabledata"
-                                                  filterPlaceholder="Search">
-                                            <p-column field="newValue" header="User new value" >
-                                               <!-- <ng-template let-col let-list="rowData" pTemplate="body">
-                                                     dropdown here
-                                                </ng-template>-->
-                                                <!--<p-column field="vin" header="Vin"  [style]="{'backgroundColor':cellColour(vin)}"> </p-column>-->
-                                            </p-column>
-                                        </p-column>
-                                        <p-column field="EI TimeStamp" header="TIMESTAMP" class="tabledata"
-                                                  filterPlaceholder="Search"></p-column>
-                                        <p-column field="Txn Id" header="TRANSACTION ID" class="tabledata"
-                                                  filterPlaceholder="Search"></p-column>
-                                        <p-column field="Order ID" header="ORDER ID" class="tabledata"
-                                                  filterPlaceholder="Search"></p-column>
-                                        <p-column field="SAP Document Number" header="SAP" class="tabledata"
-                                                  filterPlaceholder="Search"></p-column>
-                                        <p-column field="DCNUMBER" header="DCNUMBER" class="tabledata"
-                                                  filterPlaceholder="Search"></p-column>
-                                    </p-dataTable>
+                                                 [responsive]="true" [resizableColumns]="true"[reorderableColumns]="true" [globalFilterFields]="['Txn Type','EI TimeStamp','Txn Id', 'Order ID', 'SAP Document Number', 'DCNUMBER']">
+
+                                        <ng-template pTemplate="caption">
+                                            <div style="text-align: right">
+                                                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                                <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                                            </div>
+                                        </ng-template>
+
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th *ngFor="let col of cols" [pSortableColumn]="col.field">
+                                                    {{col.header}}
+                                                </th>
+                                            </tr>
+                                        </ng-template>
+
+
+                                        <ng-template pTemplate="body" let-result>
+                                            <tr>
+                                                <td *ngFor="let col of cols">
+                                                    {{result[col.field]}}
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
                                 </div>
                             </div>
                         </div>
