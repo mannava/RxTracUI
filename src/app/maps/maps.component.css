@@ -20,3 +20,18 @@
     display: flex; /* or inline-flex */
     flex-direction: row;
 }
+
+.delFontClr {
+    color: #fb6999;
+}
+
+.addFontClr {
+    color: #53f998;
+}
+
+.ctr-col {
+    display: flex; /* or inline-flex */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

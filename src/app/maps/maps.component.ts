@@ -19,6 +19,7 @@ interface Marker {
 export class MapsComponent implements OnInit {
     public allCardsResults: any;
     public results: any;
+    public cols:any;
     country: any;
     filteredCountriesSingle: any[];
     countries: any = {
