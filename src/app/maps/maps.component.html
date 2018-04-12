@@ -10,9 +10,9 @@
             <div class="main-content">
                 <div class="ctr-col">
 
-                    <p-autoComplete [(ngModel)]="country"
-                                    [suggestions]="filteredCountriesSingle"
-                                    (completeMethod)="filterCountrySingle($event)"
+                    <p-autoComplete [(ngModel)]="customer"
+                                    [suggestions]="filteredCustomersSingle"
+                                    (completeMethod)="filterCustomerSingle($event, 'customer')"
                                     field="name"
                                     placeholder="Customer"
                                     [size]="100"
@@ -20,9 +20,9 @@
                                     [minLength]="1"></p-autoComplete>
                     <br>
 
-                    <p-autoComplete [(ngModel)]="country"
+                    <p-autoComplete [(ngModel)]="chain"
                                     [suggestions]="filteredCountriesSingle"
-                                    (completeMethod)="filterCountrySingle($event)"
+                                    (completeMethod)="filterChainSingle($event, 'chain')"
                                     field="name"
                                     placeholder="Chain"
                                     [size]="100"
@@ -32,7 +32,7 @@
 
                     <p-autoComplete [(ngModel)]="country"
                                     [suggestions]="filteredCountriesSingle"
-                                    (completeMethod)="filterCountrySingle($event)"
+                                    (completeMethod)="filterGroupSingle($event ,'group')"
                                     field="name"
                                     placeholder="Group"
                                     [size]="100"
@@ -57,7 +57,8 @@
                     <div class="ctr">
                         <h4 [class.gridtitle]="animate" class="tablehead" style="width: 50%">Customer</h4>
                         <span style="width: 50%">
-                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="addNew()">
+                            <button type="button" class="btn btn-sm btn-info pull-right"
+                                    (click)="showDialog('Customer')">
                                 <i class="fa fas fa-plus addFontClr"></i>
                             </button>
                             <button type="button" class="btn btn-sm btn-info pull-right" (click)="addNew()">
@@ -82,9 +83,8 @@
                                              [globalFilter]="gb"
                                              #dt class="tabledata"
                                              [responsive]="true" reorderableColumns="true" [editable]="true">
-                                    <p-header>Multiple Selection with pagination</p-header>
                                     <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                                    <p-column field="Country" header="Country" class="tabledata"
+                                    <p-column field="Country" header="Customer" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true">
 
                                         <ng-template pTemplate="editor">
@@ -98,9 +98,7 @@
                                         </ng-template>
                                     </p-column>
 
-                                    <p-column field="Txn Type" header="TRANSACTION TYPE" class="tabledata"
-                                              filterPlaceholder="Search" [editable]="true"></p-column>
-                                    <p-column field="EI TimeStamp" header="TIMESTAMP" class="tabledata"
+                                    <p-column field="Txn Type" header="Profile" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true"></p-column>
                                 </p-dataTable>
                             </div>
@@ -117,7 +115,7 @@
                     <div class="ctr">
                         <h4 [class.gridtitle]="animate" class="tablehead" style="width: 50%">Chain</h4>
                         <span style="width: 50%">
-                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="addNew()">
+                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="showDialog('Chain')">
                                 <i class="fa fas fa-plus addFontClr"></i>
                             </button>
                             <button type="button" class="btn btn-sm btn-info pull-right" (click)="addNew()">
@@ -142,9 +140,8 @@
                                              [globalFilter]="gb"
                                              #dt class="tabledata"
                                              [responsive]="true" reorderableColumns="true" [editable]="true">
-                                    <p-header>Multiple Selection with pagination</p-header>
                                     <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                                    <p-column field="Country" header="Country" class="tabledata"
+                                    <p-column field="Country" header="Chain" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true">
 
                                         <ng-template pTemplate="editor">
@@ -158,9 +155,7 @@
                                         </ng-template>
                                     </p-column>
 
-                                    <p-column field="Txn Type" header="TRANSACTION TYPE" class="tabledata"
-                                              filterPlaceholder="Search" [editable]="true"></p-column>
-                                    <p-column field="EI TimeStamp" header="TIMESTAMP" class="tabledata"
+                                    <p-column field="Txn Type" header="Profile" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true"></p-column>
                                 </p-dataTable>
                             </div>
@@ -176,7 +171,7 @@
                 <div class="ctr">
                     <h4 [class.gridtitle]="animate" class="tablehead" style="width: 50%">Group</h4>
                     <span style="width: 50%">
-                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="addNew()">
+                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="showDialog('Group')">
                                 <i class="fa fas fa-plus addFontClr"></i>
                             </button>
                             <button type="button" class="btn btn-sm btn-info pull-right" (click)="addNew()">
@@ -200,9 +195,9 @@
                             <p-dataTable [value]="results" [rows]="10" [paginator]="true" [globalFilter]="gb"
                                          #dt class="tabledata"
                                          [responsive]="true" reorderableColumns="true" [editable]="true">
-                                <p-header>Multiple Selection with pagination</p-header>
+
                                 <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                                <p-column field="Country" header="Country" class="tabledata"
+                                <p-column field="Country" header="Group" class="tabledata"
                                           filterPlaceholder="Search" [editable]="true">
 
                                     <ng-template pTemplate="editor">
@@ -216,17 +211,13 @@
                                     </ng-template>
                                 </p-column>
 
-                                <p-column field="Txn Type" header="TRANSACTION TYPE" class="tabledata"
+                                <p-column field="Txn Type" header="Subgroup" class="tabledata"
                                           filterPlaceholder="Search" [editable]="true"></p-column>
-                                <p-column field="EI TimeStamp" header="TIMESTAMP" class="tabledata"
+                                <p-column field="Txn Id" header="Region" class="tabledata"
                                           filterPlaceholder="Search" [editable]="true"></p-column>
-                                <p-column field="Txn Id" header="TRANSACTION ID" class="tabledata"
+                                <p-column field="Order ID" header="District" class="tabledata"
                                           filterPlaceholder="Search" [editable]="true"></p-column>
-                                <p-column field="Order ID" header="ORDER ID" class="tabledata"
-                                          filterPlaceholder="Search" [editable]="true"></p-column>
-                                <p-column field="SAP Document Number" header="SAP" class="tabledata"
-                                          filterPlaceholder="Search" [editable]="true"></p-column>
-                                <p-column field="DCNUMBER" header="DCNUMBER" class="tabledata"
+                                <p-column field="SAP Document Number" header="Profile" class="tabledata"
                                           filterPlaceholder="Search" [editable]="true"></p-column>
                             </p-dataTable>
 
@@ -279,3 +270,33 @@
 
     </div>
 </div>
+
+<p-dialog header="{{currentWidget}}" [(visible)]="display" modal="modal" [responsive]="true" [width]="350"
+          [minWidth]="200"
+          [minY]="70"><br>
+    <div style="min-height: 230px">
+        <div class="ctr-col">
+            <p-autoComplete [(ngModel)]="country"
+                            [suggestions]="filteredCountriesSingle"
+                            (completeMethod)="filterCountrySingle($event)"
+                            field="name"
+                            [size]="30"
+                            placeholder="Countries"
+                            [minLength]="1"></p-autoComplete>
+            <br><br>
+            <input type="text" placeholder="Profile" class="txtentry">
+        </div>
+        <br><br><br>
+        <div class="ctr pull-right">
+            <button type="button" (click)="display=false"
+                    class="btn btn-danger btn-sm CancelClr"><span class="fa fas fa-times"></span> CANCEL
+            </button>&nbsp; &nbsp;
+            <button type="button" pButton icon="fa-check" (click)="display=false" label="Yes"
+                    class="btn btn-sm btn-info "><span class="fa fa-fw fa-save"></span> &nbsp;SAVE &nbsp;
+            </button>
+        </div>
+
+    </div>
+
+
+</p-dialog>

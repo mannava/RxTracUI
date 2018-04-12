@@ -27,6 +27,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ReviewService} from './typography/typography.service';
 import {ProfileService} from './maps/profile.servce';
 import {TableModule} from 'primeng/table';
+import {DialogModule} from "primeng/dialog";
 
 @NgModule({
     declarations: [
@@ -52,6 +53,7 @@ import {TableModule} from 'primeng/table';
         PaginatorModule,
         AutoCompleteModule,
         TableModule,
+        DialogModule,
         MultiSelectModule,
         BrowserAnimationsModule,
         SimpleNotificationsModule.forRoot(),

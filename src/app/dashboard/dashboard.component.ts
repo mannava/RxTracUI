@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
 
     dashboard: Dashboard[];
     currentTab: String = 'Connect Orders';
-    focus: any = {
+    focus: Object = {
         'Connect Orders': true,
         'EDI': false,
         'ENT Integration': false,
@@ -150,7 +150,7 @@ export class DashboardComponent implements OnInit {
                 maxStack: 1
             }
         );
-        for (const key of this.focus) {
+        for (const key in this.focus) {
             this.focus[key] = false;
         }
         this.currentTab = 'Global';
