@@ -1,53 +1,92 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ProfileService} from './profile.servce';
+import {NotificationsService} from 'angular2-notifications';
 
 declare const google: any;
+
 interface Marker {
-lat: number;
-lng: number;
-label?: string;
-draggable?: boolean;
+    lat: number;
+    lng: number;
+    label?: string;
+    draggable?: boolean;
 }
+
 @Component({
-  selector: 'app-maps',
-  templateUrl: './maps.component.html',
-  styleUrls: ['./maps.component.css']
+    selector: 'app-maps',
+    templateUrl: './maps.component.html',
+    styleUrls: ['./maps.component.css']
 })
 export class MapsComponent implements OnInit {
+    public allCardsResults: any;
+    public results: any;
 
-  constructor() { }
+    public display: boolean = false;
+    public currentWidget: string = '';
 
-  ngOnInit() {
-      const myLatlng = new google.maps.LatLng(40.748817, -73.985428);
-      const mapOptions = {
-          zoom: 13,
-          center: myLatlng,
-          scrollwheel: false, // we disable de scroll over the map, it is a really annoing when you scroll through page
-          styles: [
-              {'featureType': 'water', 'stylers': [{'saturation': 43}, {'lightness': -11}, {'hue': '#0088ff'}]},
-              {'featureType': 'road', 'elementType': 'geometry.fill', 'stylers': [{'hue': '#ff0000'},
-              {'saturation': -100}, {'lightness': 99}]},
-              {'featureType': 'road', 'elementType': 'geometry.stroke', 'stylers': [{'color': '#808080'},
-              {'lightness': 54}]},
-              {'featureType': 'landscape.man_made', 'elementType': 'geometry.fill', 'stylers': [{'color': '#ece2d9'}]},
-              {'featureType': 'poi.park', 'elementType': 'geometry.fill', 'stylers': [{'color': '#ccdca1'}]},
-              {'featureType': 'road', 'elementType': 'labels.text.fill', 'stylers': [{'color': '#767676'}]},
-              {'featureType': 'road', 'elementType': 'labels.text.stroke', 'stylers': [{'color': '#ffffff'}]},
-              {'featureType': 'poi', 'stylers': [{'visibility': 'off'}]},
-              {'featureType': 'landscape.natural', 'elementType': 'geometry.fill', 'stylers': [{'visibility': 'on'},
-              {'color': '#b8cb93'}]},
-              {'featureType': 'poi.park', 'stylers': [{'visibility': 'on'}]},
-              {'featureType': 'poi.sports_complex', 'stylers': [{'visibility': 'on'}]},
-              {'featureType': 'poi.medical', 'stylers': [{'visibility': 'on'}]},
-              {'featureType': 'poi.business', 'stylers': [{'visibility': 'simplified'}]}
-          ]
-      };
-      const map = new google.maps.Map(document.getElementById('map'), mapOptions);
-      const Marker = new google.maps.Marker({
-          position: myLatlng,
-          title: 'Hello World!'
-      });
-  // To add the marker to the map, call setMap();
-  Marker.setMap(map);
-  }
+    showDialog(widget) {
+        this.display = true;
+        this.currentWidget = widget;
+    }
+
+    country: any;
+    filteredChainsSingle: any[];
+    filteredCustomersSingle: any[];
+    filteredGroupsSingle: any[];
+
+
+    constructor(private profileService: ProfileService, private notificationsService: NotificationsService) {
+        this.getDashboardData('all');
+    }
+
+
+    filterResult(query, results: any[]): any[] {
+        const filtered: any[] = [];
+        for (let i = 0; i < results.length; i++) {
+            const result = results[i];
+            if (result.desc.toLowerCase().indexOf(query.toLowerCase()) === 0) {
+                filtered.push(result.desc);
+            }
+        }
+        return filtered;
+    }
+
+    filterChainSingle(event, type) {
+        const query = event.query;
+        if (query && query.length > 2) {
+            this.profileService.getCustData(query, type).subscribe(data => {
+                this.filteredChainsSingle = this.filterResult(query, data.results);
+            });
+        }
+    }
+
+    filterGroupSingle(event, type) {
+        const query = event.query;
+        if (query && query.length > 2) {
+            this.profileService.getCustData(query, type).subscribe(data => {
+                this.filteredGroupsSingle = this.filterResult(query, data.results);
+            });
+        }
+    }
+
+    filterCustomerSingle(event, type) {
+        const query = event.query;
+        if (query && query.length > 2) {
+            this.profileService.getCustData(query, type).subscribe(data => {
+                this.filteredCustomersSingle = this.filterResult(query, data.results);
+            });
+        }
+    }
+
+
+    ngOnInit() {
+
+    }
+
+    getDashboardData(card) {
+        this.profileService.getDashboardData(card).subscribe(data => {
+            this.allCardsResults = data;
+            this.results = data;
+        });
+    }
 
 }

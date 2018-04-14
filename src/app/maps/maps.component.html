@@ -1,1 +1,302 @@
-<div id="map"></div>
+<div class="main-content">
+    <div class="container-fluid">
+
+
+        <div class="card">
+            <div class="card-header" data-background-color="red">
+                <h4 class="title">Customer Profile Assignments</h4>
+                <p class="category">Can perform search based following category feilds</p>
+            </div>
+            <div class="main-content">
+                <div class="ctr-col">
+
+                    <p-autoComplete [(ngModel)]="customer"
+                                    [suggestions]="filteredCustomersSingle"
+                                    (completeMethod)="filterCustomerSingle($event, 'customer')"
+                                    field="name"
+                                    placeholder="Customer"
+                                    [size]="100"
+                                    styleClass="autoCmHeight"
+                                    [minLength]="1"></p-autoComplete>
+                    <br>
+
+                    <p-autoComplete [(ngModel)]="chain"
+                                    [suggestions]="filteredCountriesSingle"
+                                    (completeMethod)="filterChainSingle($event, 'chain')"
+                                    field="name"
+                                    placeholder="Chain"
+                                    [size]="100"
+                                    styleClass="autoCmHeight"
+                                    [minLength]="1"></p-autoComplete>
+                    <br>
+
+                    <p-autoComplete [(ngModel)]="country"
+                                    [suggestions]="filteredCountriesSingle"
+                                    (completeMethod)="filterGroupSingle($event ,'group')"
+                                    field="name"
+                                    placeholder="Group"
+                                    [size]="100"
+                                    styleClass="autoCmHeight"
+                                    [minLength]="1"></p-autoComplete>
+
+
+                </div>
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-lg btn-info"
+                            (click)="saveReview(username.value, comments.value, description.value)"><span
+                            class="fa fa-fw fa-search"></span> Search
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="ctr">
+
+            <div class="card">
+                <div class="card-header" data-background-color="red">
+                    <div class="ctr">
+                        <h4 [class.gridtitle]="animate" class="tablehead" style="width: 50%">Customer</h4>
+                        <span style="width: 50%">
+                            <button type="button" class="btn btn-sm btn-info pull-right"
+                                    (click)="showDialog('Customer')">
+                                <i class="fa fas fa-plus addFontClr"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="addNew()">
+                                <i class="fa fas fa-minus delFontClr"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <p class="category">respective message</p>
+                </div>
+                <div class="card-content">
+                    <div class="ui-widget-header pull-right"
+                         style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
+                        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                        <input #gb type="text" pInputText size="35" placeholder="Global Filter">
+                    </div>
+                    <div class="main-content">
+                        <div class="container-fluid">
+
+                            <div class="row">
+
+                                <p-dataTable [value]="results" [rows]="10" [paginator]="true"
+                                             [globalFilter]="gb"
+                                             #dt class="tabledata"
+                                             [responsive]="true" reorderableColumns="true" [editable]="true">
+                                    <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+                                    <p-column field="Country" header="Customer" class="tabledata"
+                                              filterPlaceholder="Search" [editable]="true">
+
+                                        <ng-template pTemplate="editor">
+                                            <p-autoComplete [(ngModel)]="country"
+                                                            [suggestions]="filteredCountriesSingle"
+                                                            (completeMethod)="filterCountrySingle($event)"
+                                                            field="name"
+                                                            [size]="30"
+                                                            placeholder="Countries"
+                                                            [minLength]="1"></p-autoComplete>
+                                        </ng-template>
+                                    </p-column>
+
+                                    <p-column field="Txn Type" header="Profile" class="tabledata"
+                                              filterPlaceholder="Search" [editable]="true"></p-column>
+                                </p-dataTable>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <span style="margin: 5px"></span>
+
+            <div class="card">
+                <div class="card-header" data-background-color="red">
+                    <div class="ctr">
+                        <h4 [class.gridtitle]="animate" class="tablehead" style="width: 50%">Chain</h4>
+                        <span style="width: 50%">
+                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="showDialog('Chain')">
+                                <i class="fa fas fa-plus addFontClr"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="addNew()">
+                                <i class="fa fas fa-minus delFontClr"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <p class="category">respective message</p>
+                </div>
+                <div class="card-content">
+                    <div class="ui-widget-header pull-right"
+                         style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
+                        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                        <input #gb type="text" pInputText size="35" placeholder="Global Filter">
+                    </div>
+                    <div class="main-content">
+                        <div class="container-fluid">
+
+                            <div class="row">
+
+                                <p-dataTable [value]="results" [rows]="10" [paginator]="true"
+                                             [globalFilter]="gb"
+                                             #dt class="tabledata"
+                                             [responsive]="true" reorderableColumns="true" [editable]="true">
+                                    <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+                                    <p-column field="Country" header="Chain" class="tabledata"
+                                              filterPlaceholder="Search" [editable]="true">
+
+                                        <ng-template pTemplate="editor">
+                                            <p-autoComplete [(ngModel)]="country"
+                                                            [suggestions]="filteredCountriesSingle"
+                                                            (completeMethod)="filterCountrySingle($event)"
+                                                            field="name"
+                                                            [size]="30"
+                                                            placeholder="Countries"
+                                                            [minLength]="1"></p-autoComplete>
+                                        </ng-template>
+                                    </p-column>
+
+                                    <p-column field="Txn Type" header="Profile" class="tabledata"
+                                              filterPlaceholder="Search" [editable]="true"></p-column>
+                                </p-dataTable>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="card">
+            <div class="card-header" data-background-color="red">
+                <div class="ctr">
+                    <h4 [class.gridtitle]="animate" class="tablehead" style="width: 50%">Group</h4>
+                    <span style="width: 50%">
+                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="showDialog('Group')">
+                                <i class="fa fas fa-plus addFontClr"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="addNew()">
+                                <i class="fa fas fa-minus delFontClr"></i>
+                            </button>
+                        </span>
+                </div>
+                <p class="category">respective message</p>
+            </div>
+            <div class="card-content">
+                <div class="ui-widget-header pull-right"
+                     style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
+                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                    <input #gb type="text" pInputText size="35" placeholder="Global Filter">
+                </div>
+                <div class="main-content">
+                    <div class="container-fluid">
+
+                        <div class="row">
+
+                            <p-dataTable [value]="results" [rows]="10" [paginator]="true" [globalFilter]="gb"
+                                         #dt class="tabledata"
+                                         [responsive]="true" reorderableColumns="true" [editable]="true">
+
+                                <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+                                <p-column field="Country" header="Group" class="tabledata"
+                                          filterPlaceholder="Search" [editable]="true">
+
+                                    <ng-template pTemplate="editor">
+                                        <p-autoComplete [(ngModel)]="country"
+                                                        [suggestions]="filteredCountriesSingle"
+                                                        (completeMethod)="filterCountrySingle($event)"
+                                                        field="name"
+                                                        [size]="30"
+                                                        placeholder="Countries"
+                                                        [minLength]="1"></p-autoComplete>
+                                    </ng-template>
+                                </p-column>
+
+                                <p-column field="Txn Type" header="Subgroup" class="tabledata"
+                                          filterPlaceholder="Search" [editable]="true"></p-column>
+                                <p-column field="Txn Id" header="Region" class="tabledata"
+                                          filterPlaceholder="Search" [editable]="true"></p-column>
+                                <p-column field="Order ID" header="District" class="tabledata"
+                                          filterPlaceholder="Search" [editable]="true"></p-column>
+                                <p-column field="SAP Document Number" header="Profile" class="tabledata"
+                                          filterPlaceholder="Search" [editable]="true"></p-column>
+                            </p-dataTable>
+
+
+                            <!--<p-table [value]="results" [rows]="10" [paginator]="true"
+                                     #dt class="tabledata"
+                                     [responsive]="true" [resizableColumns]="true" [reorderableColumns]="true"
+                                     [globalFilterFields]="['Txn Type','EI TimeStamp','Txn Id', 'Order ID', 'SAP Document Number', 'DCNUMBER']">
+
+                                <ng-template pTemplate="caption">
+                                    <div style="text-align: right">
+                                        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                        <input type="text" pInputText size="50" placeholder="Global Filter"
+                                               (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                               style="width:auto">
+                                    </div>
+                                </ng-template>
+
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th *ngFor="let col of cols" [pSortableColumn]="col.field">
+                                            {{col.header}}
+                                            <p-sortIcon [field]="col.field"></p-sortIcon>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+
+
+                                <ng-template pTemplate="body" let-result>
+                                    <tr>
+                                        <td *ngFor="let col of cols" pEditableColumn>
+                                            <p-cellEditor>
+                                                <ng-template pTemplate="input">
+                                                    <input type="text" [(ngModel)]="result[col.field]">
+                                                </ng-template>
+                                                <ng-template pTemplate="output">
+                                                    {{result[col.field]}}
+                                                </ng-template>
+                                            </p-cellEditor>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>-->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<p-dialog header="{{currentWidget}}" [(visible)]="display" modal="modal" [responsive]="true" [width]="350"
+          [minWidth]="200"
+          [minY]="70"><br>
+    <div style="min-height: 230px">
+        <div class="ctr-col">
+            <p-autoComplete [(ngModel)]="country"
+                            [suggestions]="filteredCountriesSingle"
+                            (completeMethod)="filterCountrySingle($event)"
+                            field="name"
+                            [size]="30"
+                            placeholder="Countries"
+                            [minLength]="1"></p-autoComplete>
+            <br><br>
+            <input type="text" placeholder="Profile" class="txtentry">
+        </div>
+        <br><br><br>
+        <div class="ctr pull-right">
+            <button type="button" (click)="display=false"
+                    class="btn btn-danger btn-sm CancelClr"><span class="fa fas fa-times"></span> CANCEL
+            </button>&nbsp; &nbsp;
+            <button type="button" pButton icon="fa-check" (click)="display=false" label="Yes"
+                    class="btn btn-sm btn-info "><span class="fa fa-fw fa-save"></span> &nbsp;SAVE &nbsp;
+            </button>
+        </div>
+
+    </div>
+
+
+</p-dialog>

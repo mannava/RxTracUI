@@ -3,12 +3,12 @@
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="connectOrders">
                 <div class="card card-stats" [class.cardStatsBorder]="focus['Connect Orders']" #connectOrders
-                     (click)="getData($event, 'Connect Orders','GATPSMOQSO')">
+                     (click)="getData($event, 'Connect Orders','connect')">
                     <div class="card-header" data-background-color="purple">
                         <i class="fa fas fa-globe fa-2x"></i>
                     </div>
                     <div class="card-content">
-                        <p class="category">50 Orders</p>
+                        <p class="category">{{result_set['connect_orders']['cnt']}} Orders</p>
                         <h3 class="title">&nbsp;</h3>
                     </div>
                     <div class="card-footer">
@@ -20,12 +20,12 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="edi">
                 <div class="card card-stats" [class.cardStatsBorder]="focus['EDI']" #edi
-                     (click)="getData($event, 'EDI','EDIPO')">
+                     (click)="getData($event, 'EDI','edi')">
                     <div class="card-header" data-background-color="brown">
                         <i class="material-icons">reorder</i>
                     </div>
                     <div class="card-content">
-                        <p class="category">5 Orders</p>
+                        <p class="category">{{result_set['edi_orders']['cnt']}} Orders</p>
                         <h3 class="title">&nbsp;</h3>
                     </div>
                     <div class="card-footer">
@@ -37,14 +37,14 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="ent">
                 <div class="card card-stats" [class.cardStatsBorder]="focus['ENT Integration']" #ent
-                     (click)="getData($event, 'ENT Integration', '')">
+                     (click)="getData($event, 'ENT Integration', 'ent')">
                     <div class="card-header" data-background-color="blue">
                         <i class="fa fas fa-sitemap fa-2x"></i>
                         <!--<i class="fa fas fa-random fa-2x"></i>-->
                     </div>
                     <div class="card-content">
-                        <p class="category">55 Deliveries</p>
-                        <h3 class="title">75 Orders</h3>
+                        <p class="category">{{result_set['ent_orders']['cnt']}} Orders</p>
+                        <h3 class="title">{{result_set['ent_deliveries']['cnt']}} Deliveries</h3>
                     </div>
                     <div class="card-footer">
                         <div class="dashboardheads">
@@ -55,15 +55,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-4" (ngModel)="sap">
-                <div class="card card-stats" [class.cardStatsBorder]="focus['SAP']" #sap
-                     (click)="getData($event, 'SAP' , 'GATPSMOBSO')">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="card card-stats" [class.cardStatsBorder]="focus['SAP']"
+                     (click)="getData($event, 'SAP' , 'sap')">
                     <div class="card-header" data-background-color="lightblue">
                         <i class="material-icons" style="line-height:20px"><img src="/assets/img/sap.svg"></i>
                     </div>
                     <div class="card-content">
-                        <p class="category">60 Deliveries</p>
-                        <h3 class="title">55 Orders</h3>
+                        <p class="category">{{result_set['sap_orders']['cnt']}} Orders</p>
+                        <h3 class="title">{{result_set['sap_deliveries']['cnt']}} Deliveries</h3>
                     </div>
                     <div class="card-footer">
                         <div class="dashboardheads">
@@ -80,8 +80,8 @@
                         <i class="fa fas fa-truck fa-2x"></i>
                     </div>
                     <div class="card-content">
-                        <p class="category">60 Deliveries</p>
-                        <h3 class="title">&nbsp;</h3>
+                        <p class="category">&nbsp;</p>
+                        <h3 class="title">{{result_set['acx_deliveries']['cnt']}} Deliveries</h3>
                     </div>
                     <div class="card-footer">
                         <div class="dashboardheads">
@@ -98,8 +98,8 @@
                         <i class="fa fas fa-ship fa-2x"></i>
                     </div>
                     <div class="card-content">
-                        <p class="category">60 Deliveries</p>
-                        <h3 class="title">&nbsp;</h3>
+                        <p class="category">&nbsp;</p>
+                        <h3 class="title">{{result_set['dropship_deliveries']['cnt']}} Deliveries</h3>
                     </div>
                     <div class="card-footer">
                         <div class="dashboardheads">
@@ -125,17 +125,17 @@
                 <p-dataTable [value]="results" [rows]="10" [paginator]="true" [globalFilter]="gb" #dt class="tabledata"
                              [responsive]="true" reorderableColumns="true" selectionMode="single">
                     <p-column field="Txn Type" header="TRANSACTION TYPE" [filter]="true" class="tabledata"
-                              filterPlaceholder="Search"></p-column>
+                              filterPlaceholder="Search"[editable]="true" ></p-column>
                     <p-column field="EI TimeStamp" header="TIMESTAMP" [filter]="true" class="tabledata"
-                              filterPlaceholder="Search"></p-column>
+                              filterPlaceholder="Search"[editable]="true" ></p-column>
                     <p-column field="Txn Id" header="TRANSACTION ID" [filter]="true" class="tabledata"
-                              filterPlaceholder="Search"></p-column>
+                              filterPlaceholder="Search"[editable]="true" ></p-column>
                     <p-column field="Order ID" header="ORDER ID" [filter]="true" class="tabledata"
-                              filterPlaceholder="Search"></p-column>
+                              filterPlaceholder="Search"[editable]="true" ></p-column>
                     <p-column field="SAP Document Number" header="SAP" [filter]="true" class="tabledata"
-                              filterPlaceholder="Search"></p-column>
+                              filterPlaceholder="Search"[editable]="true" ></p-column>
                     <p-column field="DCNUMBER" header="DCNUMBER" [filter]="true" class="tabledata"
-                              filterPlaceholder="Search"></p-column>
+                              filterPlaceholder="Search"[editable]="true" ></p-column>
                 </p-dataTable>
             </div>
 
@@ -144,37 +144,45 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header" data-background-color="red">
-                <h4  [class.gridtitle]="animate" class="tablehead"
+                <h4 [class.gridtitle]="animate" class="tablehead"
                     [attr.tab-title]="currentTab">{{currentTab}}</h4>
-                <p class="category">Respective message suppose to show here...chk with Vishnu</p>
+                <p class="category"></p>
             </div>
             <div class="card-content">
-                <div class="ui-widget-header pull-right"
-                     style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
-                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                    <input #gb type="text" pInputText size="35" placeholder="Global Filter">
-                </div>
+
                 <div class="main-content">
                     <div class="container-fluid">
 
                         <div class="row">
 
-                            <p-dataTable [value]="results" [rows]="10" [paginator]="true" [globalFilter]="gb"
-                                         #dt class="tabledata"
-                                         [responsive]="true" reorderableColumns="true" selectionMode="single">
-                                <p-column field="Txn Type" header="TRANSACTION TYPE" class="tabledata"
-                                          filterPlaceholder="Search"></p-column>
-                                <p-column field="EI TimeStamp" header="TIMESTAMP" class="tabledata"
-                                          filterPlaceholder="Search"></p-column>
-                                <p-column field="Txn Id" header="TRANSACTION ID" class="tabledata"
-                                          filterPlaceholder="Search"></p-column>
-                                <p-column field="Order ID" header="ORDER ID" class="tabledata"
-                                          filterPlaceholder="Search"></p-column>
-                                <p-column field="SAP Document Number" header="SAP" class="tabledata"
-                                          filterPlaceholder="Search"></p-column>
-                                <p-column field="DCNUMBER" header="DCNUMBER" class="tabledata"
-                                          filterPlaceholder="Search"></p-column>
-                            </p-dataTable>
+                            <p-table [value]="results" [rows]="10" [paginator]="true"
+                                     #dt class="tabledata"
+                                     [responsive]="true" [resizableColumns]="true"[reorderableColumns]="true" [globalFilterFields]="['Txn Type','EI TimeStamp','Txn Id', 'Order ID', 'SAP Document Number', 'DCNUMBER']">
+
+                                <ng-template pTemplate="caption">
+                                    <div style="text-align: right">
+                                        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                        <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                                    </div>
+                                </ng-template>
+
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th *ngFor="let col of cols" [pSortableColumn]="col.field">
+                                            {{col.header}}
+                                        </th>
+                                    </tr>
+                                </ng-template>
+
+
+                                <ng-template pTemplate="body" let-result>
+                                    <tr>
+                                        <td *ngFor="let col of cols">
+                                            {{result[col.field]}}
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
                         </div>
                     </div>
                 </div>

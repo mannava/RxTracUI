@@ -6,3 +6,28 @@
     color: #3B5957 !important;
     text-shadow: 0px 1px 0px rgba(255,255,255,.6), 0px -1px 0px rgba(0,0,0,.1);
 }
+
+.redClr{
+    background-color: red !important;
+}
+
+/*
+
+<p:dataTable styleClass="myTable">
+with
+
+.myTable td:nth-child(1) {
+    width: 20px;
+}
+
+https://stackoverflow.com/questions/7434203/how-to-set-width-of-a-pcolumn-in-a-pdatatable-in-primefaces-3-0/47077717
+
+
+<p-column field="year" header="Year">
+            <template let-col let-car="rowData">
+                <span [ngStyle]="{'background-color': car[col.field] > 2000 ? 'red' : 'blue'}">{{car[col.field]}}</span>
+            </template>
+        </p-column>
+
+
+*/

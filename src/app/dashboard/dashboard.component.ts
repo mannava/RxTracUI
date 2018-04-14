@@ -14,6 +14,30 @@ export class DashboardComponent implements OnInit {
     public results: any;
     public allCardsResults: any;
     public cols: any[];
+    public result_set: Object = {
+        'connect': [],
+        'connect_orders': {'cnt': 0},
+
+        'edi': [],
+        'edi_orders': {'cnt': 0},
+
+        'ent': [],
+        'ent_orders': {'cnt': 0},
+        'ent_deliveries': {'cnt': 0},
+
+        'sap': [],
+        'sap_orders': {'cnt': 0},
+        'sap_deliveries': {'cnt': 0},
+
+        'acx': [],
+        'acx_orders': {'cnt': 0},
+        'acx_deliveries': {'cnt': 0},
+
+        'dropship': [],
+        // 'dropship_orders': {'cnt': 0},
+        'dropship_deliveries': {'cnt': 0}
+
+    };
     animate: Boolean = false;
 
     dashboard: Dashboard[];
@@ -44,12 +68,13 @@ export class DashboardComponent implements OnInit {
     }
 
     getData(event, type, card) {
-        //this.getDashboardData(card);
+        // this.getDashboardData(card);
 
-        this.results = _.where(this.allCardsResults, {'Txn Type': card});
+        this.results = this.result_set[card];
+
         console.log(this.results);
         this.animate = true;
-        for (let key in this.focus) {
+        for (const key in this.focus) {
             if (key === type) {
                 this.focus[key] = true;
             } else {
@@ -60,11 +85,54 @@ export class DashboardComponent implements OnInit {
         event.stopPropagation();
     }
 
+    getOrderCnt() {
+
+        this.result_set['connect'] = _.where(this.allCardsResults, {'Txn Type': 'GATPSMOQSO'});
+
+        this.result_set['connect_orders'] = _.countBy(this.result_set['connect'], function (item) {
+            return (item['Order ID'] != null) ? 'cnt' : 'cnt';
+        });
+
+        this.result_set['edi'] = _.where(this.allCardsResults, {'Txn Type': 'EDIPO'});
+        this.result_set['edi_orders'] = _.countBy(this.result_set['edi'], function (item) {
+            return (item['Order ID'] != null) ? 'cnt' : 'cnt';
+        });
+
+        this.result_set['ent'] = _.where(this.allCardsResults, {'Txn Type': 'GATPSMOBSO'});
+        this.result_set['ent_orders'] = _.countBy(this.result_set['ent'], function (item) {
+            return (item['Order ID'] != null) ? 'cnt' : 'cnt';
+        });
+        this.result_set['ent_deliveries'] = _.countBy(this.result_set['edi'], function (item) {
+            return (item['Delivery Number'] != null) ? 'cnt' : 'cnt';
+        });
+
+        this.result_set['sap'] = _.where(this.allCardsResults, {'Txn Type': 'EDIPO'});
+        this.result_set['sap_orders'] = _.countBy(this.result_set['sap'], function (item) {
+            return (item['Order ID'] != null) ? 'cnt' : 'cnt';
+        });
+        this.result_set['sap_deliveries'] = _.countBy(this.result_set['sap'], function (item) {
+            return (item['Delivery Number'] != null) ? 'cnt' : 'cnt';
+        });
+
+        this.result_set['acx'] = _.where(this.allCardsResults, {'Txn Type': 'EDIPO'});
+        this.result_set['acx_deliveries'] = _.countBy(this.result_set['acx'], function (item) {
+            return (item['Delivery Number'] != null) ? 'cnt' : 'cnt';
+        });
+
+        this.result_set['dropship'] = _.where(this.allCardsResults, {'Txn Type': 'EDIPO'});
+        this.result_set['dropship_deliveries'] = _.countBy(this.result_set['dropship'], function (item) {
+            return (item['Delivery Number'] != null) ? 'cnt' : 'cnt';
+        });
+        /*let connect =
+        let orders = _.without(edi['Order ID'], null);*/
+    }
+
 
     getDashboardData(card) {
         this.dashboardService.getDashboardData(card).subscribe(data => {
             this.allCardsResults = data;
             this.results = data;
+            this.getOrderCnt();
         });
     }
 
@@ -82,34 +150,9 @@ export class DashboardComponent implements OnInit {
                 maxStack: 1
             }
         );
-        for (let key in this.focus) {
+        for (const key in this.focus) {
             this.focus[key] = false;
         }
         this.currentTab = 'Global';
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

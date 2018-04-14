@@ -7,106 +7,141 @@
                 <div class="card">
                     <div class="card-header" data-background-color="red">
                         <h4 class="title">Search</h4>
-                        <p class="category">Run custom query using AND, OR operator, Select fields by using Rule. For nested query use Ruleset. </p>
+                        <p class="category">Run custom query using AND, OR operator, Select fields by using Rule. For
+                            nested query use Ruleset. </p>
                     </div>
                     <div class="container">
-                    <br>
-                    <query-builder [(ngModel)]='query' [config]='config'>
-                        <ng-container *queryInput="let rule; type: 'date'">
-                            <input type='date' [(ngModel)]="rule.value">
-                        </ng-container>
-                    </query-builder>
+                        <br>
+                        <query-builder [(ngModel)]='query' [config]='config'>
+                            <ng-container *queryInput="let rule; type: 'date'">
+                                <input type='date' [(ngModel)]="rule.value">
+                            </ng-container>
+                        </query-builder>
 
-                    <div class="pull-right">
-                        <button type="button" class="btn btn-info" (click)="executeQuery()">
-                            <span class="fa fa-fw fa-search"></span> Execute Query
-                        </button>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-info" (click)="executeQuery()">
+                                <span class="fa fa-fw fa-search"></span> Execute Query
+                            </button>
+                        </div>
+
                     </div>
+                </div>
 
+                <p-table [value]="results" [rows]="10" [paginator]="true"
+                         #dt class="tabledata"
+                         [responsive]="true" [resizableColumns]="true" [reorderableColumns]="true"
+                         [globalFilterFields]="['Txn Type','EI TimeStamp','Txn Id', 'Order ID', 'SAP Document Number', 'DCNUMBER']">
+
+                    <ng-template pTemplate="caption">
+                        <div style="text-align: right">
+                            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                            <input type="text" pInputText size="50" placeholder="Global Filter"
+                                   (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                        </div>
+                    </ng-template>
+
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th *ngFor="let col of cols" [pSortableColumn]="col.field">
+                                {{col.header}}
+                            </th>
+                        </tr>
+                    </ng-template>
+
+
+                    <ng-template pTemplate="body" let-result>
+                        <tr>
+                            <td *ngFor="let col of cols">
+                                {{result[col.field]}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+
+
+            </div>
+        </div>
+        <!--<div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-content table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Salary</th>
+                                <th>Country</th>
+                                <th>City</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Dakota Rice</td>
+                                <td>$36,738</td>
+                                <td>Niger</td>
+                                <td>Oud-Turnhout</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Minerva Hooper</td>
+                                <td>$23,789</td>
+                                <td>Curaçao</td>
+                                <td>Sinaai-Waas</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Sage Rodriguez</td>
+                                <td>$56,142</td>
+                                <td>Netherlands</td>
+                                <td>Baileux</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Philip Chaney</td>
+                                <td>$38,735</td>
+                                <td>Korea, South</td>
+                                <td>Overland Park</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Doris Greene</td>
+                                <td>$63,542</td>
+                                <td>Malawi</td>
+                                <td>Feldkirchen in Kärnten</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Mason Porter</td>
+                                <td>$78,615</td>
+                                <td>Chile</td>
+                                <td>Gloucester</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+    </div>
+    <!--
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+
+
+                <div class="col-md-12">
+                    <div class="card card-plain">
+                        <div class="card-header" data-background-color="red">
+                            <h4 class="title">Table on Plain Background</h4>
+                            <p class="category">Here is a subtitle for this table</p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--<div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card-content table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Salary</th>
-                            <th>Country</th>
-                            <th>City</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Dakota Rice</td>
-                            <td>$36,738</td>
-                            <td>Niger</td>
-                            <td>Oud-Turnhout</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Minerva Hooper</td>
-                            <td>$23,789</td>
-                            <td>Curaçao</td>
-                            <td>Sinaai-Waas</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Sage Rodriguez</td>
-                            <td>$56,142</td>
-                            <td>Netherlands</td>
-                            <td>Baileux</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Philip Chaney</td>
-                            <td>$38,735</td>
-                            <td>Korea, South</td>
-                            <td>Overland Park</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Doris Greene</td>
-                            <td>$63,542</td>
-                            <td>Malawi</td>
-                            <td>Feldkirchen in Kärnten</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>Mason Porter</td>
-                            <td>$78,615</td>
-                            <td>Chile</td>
-                            <td>Gloucester</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>-->
+    -->
 </div>
-<!--
-<div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-
-
-            <div class="col-md-12">
-                <div class="card card-plain">
-                    <div class="card-header" data-background-color="red">
-                        <h4 class="title">Table on Plain Background</h4>
-                        <p class="category">Here is a subtitle for this table</p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
--->

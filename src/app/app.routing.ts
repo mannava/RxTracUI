@@ -18,7 +18,7 @@ const routes: Routes =[
     { path: 'search',     component: TableListComponent },
     { path: 'reviews',     component: TypographyComponent },
     { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent },
+    { path: 'profile',           component: MapsComponent },
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'upgrade',        component: UpgradeComponent },
     { path: '',               redirectTo: 'dashboard', pathMatch: 'full' }

@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {QueryBuilderConfig} from 'angular2-query-builder';
+import {NotificationsService} from 'angular2-notifications';
+import {DashboardService} from '../dashboard/dashboard.service';
 
 @Component({
     selector: 'app-table-list',
@@ -7,7 +9,8 @@ import {QueryBuilderConfig} from 'angular2-query-builder';
     styleUrls: ['./table-list.component.css']
 })
 export class TableListComponent implements OnInit {
-
+    public cols: any[];
+    public results: any;
     query = {
         condition: 'and',
         rules: [
@@ -57,10 +60,25 @@ export class TableListComponent implements OnInit {
     };
 
 
-    constructor() {
+    constructor(private dashboardService: DashboardService, private notificationsService: NotificationsService) {
+        this.getDashboardData('all');
+    }
+
+    getDashboardData(card) {
+        this.dashboardService.getDashboardData(card).subscribe(data => {
+            this.results = data;
+        });
     }
 
     ngOnInit() {
+        this.cols = [
+            {field: 'Txn Type', header: 'TRANSACTION TYPE'},
+            {field: 'EI TimeStamp', header: 'TIMESTAMP'},
+            {field: 'Txn Id', header: 'TRANSACTION ID'},
+            {field: 'Order ID', header: 'ORDER ID'},
+            {field: 'SAP Document Number', header: 'SAP'},
+            {field: 'DCNUMBER', header: 'DCNUMBER'}
+        ];
     }
 
     executeQuery() {

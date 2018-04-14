@@ -253,8 +253,8 @@
   }
 
   [data-background-color="red"] {
-    background: linear-gradient(60deg, $red-400, $red-600);
-    @include shadow-big-color($brand-danger);
+    background: linear-gradient(60deg, $mckesson-700, $mckesson-600);
+    @include shadow-big-color($brand-primary);
   }
 
   [data-background-color="brown"] {
