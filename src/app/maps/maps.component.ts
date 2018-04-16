@@ -19,6 +19,9 @@ interface Marker {
 export class MapsComponent implements OnInit {
     public allCardsResults: any;
     public results: any;
+    public customer:any;
+    public chain:any;
+    public group:any
 
     public display: boolean = false;
     public currentWidget: string = '';
@@ -28,7 +31,7 @@ export class MapsComponent implements OnInit {
         this.currentWidget = widget;
     }
 
-    country: any;
+
     filteredChainsSingle: any;
     filteredCustomersSingle: any;
     filteredGroupsSingle: any;
