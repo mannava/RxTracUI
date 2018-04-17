@@ -11,6 +11,7 @@ import {DashboardService} from '../dashboard/dashboard.service';
 export class TableListComponent implements OnInit {
     public cols: any[];
     public results: any;
+    public isVisible: boolean = false;
     query = {
         condition: 'and',
         rules: [
@@ -70,6 +71,7 @@ export class TableListComponent implements OnInit {
         });
     }
 
+
     ngOnInit() {
         this.cols = [
             {field: 'Txn Type', header: 'TRANSACTION TYPE'},
@@ -83,6 +85,7 @@ export class TableListComponent implements OnInit {
 
     executeQuery() {
         console.log(this.query);
+        this.isVisible = true;
     }
 
 
