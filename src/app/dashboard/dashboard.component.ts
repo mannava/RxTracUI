@@ -81,7 +81,8 @@ export class DashboardComponent implements OnInit {
             this.dropship_data.forEach(function (item, idx) {
                 item['vendor'] = 'Allergan';
                 item['order_id'] = Math.floor(Math.random() * (20099551 - 99999999 + 1) + 99999999);
-                item['timestamp'] = new Date()//this.randomDate(new Date(2018, 03, 16), new Date());
+
+                item['timestamp'] = new Date(Math.floor(Math.random() * (1523940168606 - 1523940768606 + 1) + 1523940768606));
                 var track_num = Number(item['tracking_number']);
                 if (isNaN(track_num)) {
                     item['shippment_type'] = 'https://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=' + item['tracking_number'];
