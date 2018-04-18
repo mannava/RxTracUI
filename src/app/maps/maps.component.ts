@@ -19,6 +19,9 @@ interface Marker {
 export class MapsComponent implements OnInit {
     public allCardsResults: any;
     public results: any;
+    public customer:any;
+    public chain:any;
+    public group:any
 
     public display: boolean = false;
     public currentWidget: string = '';
@@ -28,10 +31,10 @@ export class MapsComponent implements OnInit {
         this.currentWidget = widget;
     }
 
-    country: any;
-    filteredChainsSingle: any[];
-    filteredCustomersSingle: any[];
-    filteredGroupsSingle: any[];
+
+    filteredChainsSingle: any;
+    filteredCustomersSingle: any;
+    filteredGroupsSingle: any;
 
 
     constructor(private profileService: ProfileService, private notificationsService: NotificationsService) {
@@ -39,7 +42,7 @@ export class MapsComponent implements OnInit {
     }
 
 
-    filterResult(query, results: any[]): any[] {
+    filterResult(query, results: any): any {
         const filtered: any[] = [];
         for (let i = 0; i < results.length; i++) {
             const result = results[i];
@@ -54,7 +57,7 @@ export class MapsComponent implements OnInit {
         const query = event.query;
         if (query && query.length > 2) {
             this.profileService.getCustData(query, type).subscribe(data => {
-                this.filteredChainsSingle = this.filterResult(query, data.results);
+                this.filteredChainsSingle = this.filterResult(query, data);
             });
         }
     }
@@ -63,7 +66,7 @@ export class MapsComponent implements OnInit {
         const query = event.query;
         if (query && query.length > 2) {
             this.profileService.getCustData(query, type).subscribe(data => {
-                this.filteredGroupsSingle = this.filterResult(query, data.results);
+                this.filteredGroupsSingle = this.filterResult(query, data);
             });
         }
     }
@@ -72,7 +75,7 @@ export class MapsComponent implements OnInit {
         const query = event.query;
         if (query && query.length > 2) {
             this.profileService.getCustData(query, type).subscribe(data => {
-                this.filteredCustomersSingle = this.filterResult(query, data.results);
+                this.filteredCustomersSingle = this.filterResult(query, data);
             });
         }
     }

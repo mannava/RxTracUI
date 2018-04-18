@@ -30,7 +30,7 @@
                 <p-table [value]="results" [rows]="10" [paginator]="true"
                          #dt class="tabledata"
                          [responsive]="true" [resizableColumns]="true" [reorderableColumns]="true"
-                         [globalFilterFields]="['Txn Type','EI TimeStamp','Txn Id', 'Order ID', 'SAP Document Number', 'DCNUMBER']">
+                         [globalFilterFields]="['Txn Type','EI TimeStamp','Txn Id', 'Order ID', 'SAP Document Number', 'DCNUMBER']" [hidden]="!isVisible">
 
                     <ng-template pTemplate="caption">
                         <div style="text-align: right">

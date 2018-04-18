@@ -25,7 +25,7 @@
                         <i class="material-icons">reorder</i>
                     </div>
                     <div class="card-content">
-                        <p class="category">{{result_set['edi_orders']['cnt']}} Orders</p>
+                        <p class="category">514 Orders</p>
                         <h3 class="title">&nbsp;</h3>
                     </div>
                     <div class="card-footer">
@@ -43,12 +43,12 @@
                         <!--<i class="fa fas fa-random fa-2x"></i>-->
                     </div>
                     <div class="card-content">
-                        <p class="category">{{result_set['ent_orders']['cnt']}} Orders</p>
-                        <h3 class="title">{{result_set['ent_deliveries']['cnt']}} Deliveries</h3>
+                        <p class="category">629 Orders</p>
+                        <h3 class="title">580 Deliveries</h3>
                     </div>
                     <div class="card-footer">
                         <div class="dashboardheads">
-                            <!--<i class="material-icons">local_offer</i>--> ENT Integration
+                            <!--<i class="material-icons">local_offer</i>--> Enterprise Integration
                         </div>
                     </div>
                 </div>
@@ -62,8 +62,8 @@
                         <i class="material-icons" style="line-height:20px"><img src="/assets/img/sap.svg"></i>
                     </div>
                     <div class="card-content">
-                        <p class="category">{{result_set['sap_orders']['cnt']}} Orders</p>
-                        <h3 class="title">{{result_set['sap_deliveries']['cnt']}} Deliveries</h3>
+                        <p class="category">543 Orders</p>
+                        <h3 class="title">482 Deliveries</h3>
                     </div>
                     <div class="card-footer">
                         <div class="dashboardheads">
@@ -81,7 +81,7 @@
                     </div>
                     <div class="card-content">
                         <p class="category">&nbsp;</p>
-                        <h3 class="title">{{result_set['acx_deliveries']['cnt']}} Deliveries</h3>
+                        <h3 class="title">597 Deliveries</h3>
                     </div>
                     <div class="card-footer">
                         <div class="dashboardheads">
@@ -99,7 +99,8 @@
                     </div>
                     <div class="card-content">
                         <p class="category">&nbsp;</p>
-                        <h3 class="title">{{result_set['dropship_deliveries']['cnt']}} Deliveries</h3>
+                        <!--<h3 class="title">{{result_set['dropship_deliveries']['cnt']}} Orders</h3>-->
+                        <h3 class="title">{{dropship_data.length}} Orders</h3>
                     </div>
                     <div class="card-footer">
                         <div class="dashboardheads">
@@ -157,12 +158,15 @@
 
                             <p-table [value]="results" [rows]="10" [paginator]="true"
                                      #dt class="tabledata"
-                                     [responsive]="true" [resizableColumns]="true"[reorderableColumns]="true" [globalFilterFields]="['Txn Type','EI TimeStamp','Txn Id', 'Order ID', 'SAP Document Number', 'DCNUMBER']">
+                                     [responsive]="true" [resizableColumns]="true" [reorderableColumns]="true"
+                                     [globalFilterFields]="['Txn Type','EI TimeStamp','Txn Id', 'Order ID', 'SAP Document Number', 'DCNUMBER']">
 
                                 <ng-template pTemplate="caption">
                                     <div style="text-align: right">
                                         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                                        <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                                        <input type="text" pInputText size="50" placeholder="Global Filter"
+                                               (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                               style="width:auto">
                                     </div>
                                 </ng-template>
 
@@ -178,7 +182,14 @@
                                 <ng-template pTemplate="body" let-result>
                                     <tr>
                                         <td *ngFor="let col of cols">
-                                            {{result[col.field]}}
+                                            <span *ngIf="col.field === 'tracking_number'">
+
+                                                     <a href="{{result['shippment_type']}}" target="_blank" > {{result[col.field]}}</a>
+                                            </span>
+
+                                            <span *ngIf="col.field != 'tracking_number'">
+                                                     {{result[col.field]}}
+                                            </span>
                                         </td>
                                     </tr>
                                 </ng-template>

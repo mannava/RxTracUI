@@ -21,7 +21,7 @@
                     <br>
 
                     <p-autoComplete [(ngModel)]="chain"
-                                    [suggestions]="filteredCountriesSingle"
+                                    [suggestions]="filteredChainsSingle"
                                     (completeMethod)="filterChainSingle($event, 'chain')"
                                     field="name"
                                     placeholder="Chain"
@@ -30,8 +30,8 @@
                                     [minLength]="1"></p-autoComplete>
                     <br>
 
-                    <p-autoComplete [(ngModel)]="country"
-                                    [suggestions]="filteredCountriesSingle"
+                    <p-autoComplete [(ngModel)]="group"
+                                    [suggestions]="filteredGroupsSingle"
                                     (completeMethod)="filterGroupSingle($event ,'group')"
                                     field="name"
                                     placeholder="Group"
@@ -43,7 +43,7 @@
                 </div>
                 <div class="pull-right">
                     <button type="submit" class="btn btn-lg btn-info"
-                            (click)="saveReview(username.value, comments.value, description.value)"><span
+                            ><span
                             class="fa fa-fw fa-search"></span> Search
                     </button>
                 </div>
@@ -55,13 +55,13 @@
             <div class="card">
                 <div class="card-header" data-background-color="red">
                     <div class="ctr">
-                        <h4 [class.gridtitle]="animate" class="tablehead" style="width: 50%">Customer</h4>
+                        <h4  class="tablehead" style="width: 50%">Customer</h4>
                         <span style="width: 50%">
                             <button type="button" class="btn btn-sm btn-info pull-right"
                                     (click)="showDialog('Customer')">
                                 <i class="fa fas fa-plus addFontClr"></i>
                             </button>
-                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="addNew()">
+                            <button type="button" class="btn btn-sm btn-info pull-right" >
                                 <i class="fa fas fa-minus delFontClr"></i>
                             </button>
                         </span>
@@ -84,13 +84,13 @@
                                              #dt class="tabledata"
                                              [responsive]="true" reorderableColumns="true" [editable]="true">
                                     <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                                    <p-column field="Country" header="Customer" class="tabledata"
+                                    <p-column field="Customer" header="Customer" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true">
 
                                         <ng-template pTemplate="editor">
-                                            <p-autoComplete [(ngModel)]="country"
-                                                            [suggestions]="filteredCountriesSingle"
-                                                            (completeMethod)="filterCountrySingle($event)"
+                                            <p-autoComplete [(ngModel)]="customer"
+                                                            [suggestions]="filteredCustomersSingle"
+                                                            (completeMethod)="filterCustomerSingle($event, 'customer')"
                                                             field="name"
                                                             [size]="30"
                                                             placeholder="Countries"
@@ -113,12 +113,12 @@
             <div class="card">
                 <div class="card-header" data-background-color="red">
                     <div class="ctr">
-                        <h4 [class.gridtitle]="animate" class="tablehead" style="width: 50%">Chain</h4>
+                        <h4  class="tablehead" style="width: 50%">Chain</h4>
                         <span style="width: 50%">
                             <button type="button" class="btn btn-sm btn-info pull-right" (click)="showDialog('Chain')">
                                 <i class="fa fas fa-plus addFontClr"></i>
                             </button>
-                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="addNew()">
+                            <button type="button" class="btn btn-sm btn-info pull-right" >
                                 <i class="fa fas fa-minus delFontClr"></i>
                             </button>
                         </span>
@@ -141,13 +141,13 @@
                                              #dt class="tabledata"
                                              [responsive]="true" reorderableColumns="true" [editable]="true">
                                     <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                                    <p-column field="Country" header="Chain" class="tabledata"
+                                    <p-column field="Chain" header="Chain" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true">
 
                                         <ng-template pTemplate="editor">
-                                            <p-autoComplete [(ngModel)]="country"
-                                                            [suggestions]="filteredCountriesSingle"
-                                                            (completeMethod)="filterCountrySingle($event)"
+                                            <p-autoComplete [(ngModel)]="chain"
+                                                            [suggestions]="filteredChainsSingle"
+                                                            (completeMethod)="filterChainSingle($event, 'chain')"
                                                             field="name"
                                                             [size]="30"
                                                             placeholder="Countries"
@@ -169,12 +169,12 @@
         <div class="card">
             <div class="card-header" data-background-color="red">
                 <div class="ctr">
-                    <h4 [class.gridtitle]="animate" class="tablehead" style="width: 50%">Group</h4>
+                    <h4  class="tablehead" style="width: 50%">Group</h4>
                     <span style="width: 50%">
                             <button type="button" class="btn btn-sm btn-info pull-right" (click)="showDialog('Group')">
                                 <i class="fa fas fa-plus addFontClr"></i>
                             </button>
-                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="addNew()">
+                            <button type="button" class="btn btn-sm btn-info pull-right" >
                                 <i class="fa fas fa-minus delFontClr"></i>
                             </button>
                         </span>
@@ -197,13 +197,13 @@
                                          [responsive]="true" reorderableColumns="true" [editable]="true">
 
                                 <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                                <p-column field="Country" header="Group" class="tabledata"
+                                <p-column field="Group" header="Group" class="tabledata"
                                           filterPlaceholder="Search" [editable]="true">
 
                                     <ng-template pTemplate="editor">
-                                        <p-autoComplete [(ngModel)]="country"
-                                                        [suggestions]="filteredCountriesSingle"
-                                                        (completeMethod)="filterCountrySingle($event)"
+                                        <p-autoComplete [(ngModel)]="group"
+                                                        [suggestions]="filteredGroupsSingle"
+                                                        (completeMethod)="filterGroupSingle($event, 'group')"
                                                         field="name"
                                                         [size]="30"
                                                         placeholder="Countries"
@@ -276,12 +276,12 @@
           [minY]="70"><br>
     <div style="min-height: 230px">
         <div class="ctr-col">
-            <p-autoComplete [(ngModel)]="country"
-                            [suggestions]="filteredCountriesSingle"
-                            (completeMethod)="filterCountrySingle($event)"
+            <p-autoComplete [(ngModel)]="customer"
+                            [suggestions]="filteredCustomersSingle"
+                            (completeMethod)="filterCustomerSingle($event, 'customer')"
                             field="name"
                             [size]="30"
-                            placeholder="Countries"
+                            placeholder="Customers"
                             [minLength]="1"></p-autoComplete>
             <br><br>
             <input type="text" placeholder="Profile" class="txtentry">
