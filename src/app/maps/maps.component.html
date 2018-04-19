@@ -9,57 +9,70 @@
             </div>
             <div class="main-content">
                 <div class="ctr-col">
+                    <div class="ctr">
+                        <div class="inputTitle">Customer</div>
+                        <div class="">
+                            <p-autoComplete [(ngModel)]="customer"
+                                            [suggestions]="filteredCustomersSingle"
+                                            (completeMethod)="filterCustomerSingle($event, 'customer')"
+                                            field="desc"
+                                            size="35"
+                                            placeholder="Customer"
+                                            [minLength]="1">
+                                <ng-template let-cust pTemplate="item">
+                                    <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
+                                        <span style="font-size:11px;margin:10px 10px 0 0">{{cust.label}}</span>
+                                    </div>
+                                </ng-template>
 
-                    <p-autoComplete [(ngModel)]="customer"
-                                    [suggestions]="filteredCustomersSingle"
-                                    (completeMethod)="filterCustomerSingle($event, 'customer')"
-                                    field="desc"
-                                    size="35"
-                                    placeholder="Customer"
-                                    [minLength]="1">
-                        <ng-template let-cust pTemplate="item">
-                            <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                                <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
-                                <span style="font-size:11px;margin:10px 10px 0 0">{{cust.label}}</span>
-                            </div>
-                        </ng-template>
-
-                    </p-autoComplete>
+                            </p-autoComplete>
+                        </div>
+                    </div>
                     <br>
 
-                    <p-autoComplete [(ngModel)]="chain"
-                                    [suggestions]="filteredChainsSingle"
-                                    (completeMethod)="filterCustomerSingle($event, 'chain')"
-                                    field="desc"
-                                    size="35"
-                                    placeholder="Chain"
-                                    [minLength]="1">
-                        <ng-template let-cust pTemplate="item">
-                            <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                                <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
-                                <span style="font-size:11px;margin:10px 10px 0 0">{{cust.label}}</span>
-                            </div>
-                        </ng-template>
 
-                    </p-autoComplete>
+                    <div class="ctr">
+                        <div class="inputTitle">Chain</div>
+                        <div class="">
+                            <p-autoComplete [(ngModel)]="chain"
+                                            [suggestions]="filteredChainsSingle"
+                                            (completeMethod)="filterCustomerSingle($event, 'chain')"
+                                            field="desc"
+                                            size="35"
+                                            placeholder="Chain"
+                                            [minLength]="1">
+                                <ng-template let-cust pTemplate="item">
+                                    <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
+                                        <span style="font-size:11px;margin:10px 10px 0 0">{{cust.label}}</span>
+                                    </div>
+                                </ng-template>
+
+                            </p-autoComplete>
+                        </div>
+                    </div>
                     <br>
+                    <div class="ctr">
+                        <div class="inputTitle">Group</div>
+                        <div class="">
+                            <p-autoComplete [(ngModel)]="group"
+                                            [suggestions]="filteredGroupsSingle"
+                                            (completeMethod)="filterCustomerSingle($event ,'group')"
+                                            field="desc"
+                                            size="35"
+                                            placeholder="Group"
+                                            [minLength]="1">
+                                <ng-template let-cust pTemplate="item">
+                                    <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
+                                        <span style="font-size:11px;margin:10px 10px 0 0">{{cust.label}}</span>
+                                    </div>
+                                </ng-template>
 
-                    <p-autoComplete [(ngModel)]="group"
-                                    [suggestions]="filteredGroupsSingle"
-                                    (completeMethod)="filterCustomerSingle($event ,'group')"
-                                    field="desc"
-                                    size="35"
-                                    placeholder="Group"
-                                    [minLength]="1">
-                        <ng-template let-cust pTemplate="item">
-                            <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                                <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
-                                <span style="font-size:11px;margin:10px 10px 0 0">{{cust.label}}</span>
-                            </div>
-                        </ng-template>
-
-                    </p-autoComplete>
-
+                            </p-autoComplete>
+                        </div>
+                    </div>
 
                 </div>
                 <div class="pull-right">

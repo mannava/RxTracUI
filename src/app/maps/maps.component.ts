@@ -64,9 +64,18 @@ export class MapsComponent implements OnInit {
     }
 
 
-
     ngOnInit() {
 
+    }
+
+    getProfile(event, type) {
+        const query = event.query;
+        if (query && query.length > 2) {
+            this.customerStr = query;
+            this.profileService.getProfile(query, type).subscribe(data => {
+                console.log(data);
+            });
+        }
     }
 
     showDialog(widget) {

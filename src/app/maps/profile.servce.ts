@@ -24,9 +24,17 @@ export class ProfileService {
 
     public getCustData(str, type): Observable<Object> {
 
-        this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8;', 'Accept': '*/*'});
-
         return this.http.get(AppService.ISM_ENDPOINT + type + '?searchstring=' + str + '&level=' + 1)
+            .map((res: Response) => res)
+            .catch
+            ((error: any) => {
+                return Observable.throw(error);
+            });
+    }
+
+    public getProfile(str, type): Observable<Object> {
+
+        return this.http.get(AppService.ISM_ENDPOINT + 'getProfile?operation=select&' + '?searchKey=' + str)
             .map((res: Response) => res)
             .catch
             ((error: any) => {
