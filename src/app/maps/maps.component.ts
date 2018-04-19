@@ -2,15 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ProfileService} from './profile.servce';
 import {NotificationsService} from 'angular2-notifications';
 
-declare const google: any;
-
-interface Marker {
-    lat: number;
-    lng: number;
-    label?: string;
-    draggable?: boolean;
-}
-
 @Component({
     selector: 'app-maps',
     templateUrl: './maps.component.html',
@@ -19,23 +10,20 @@ interface Marker {
 export class MapsComponent implements OnInit {
     public allCardsResults: any;
     public results: any;
-    public customer:any;
-    public chain:any;
-    public group:any
+    public customer: any;
+    public chain: any;
+    public group: any;
 
-    public display: boolean = false;
-    public currentWidget: string = '';
+    public customerStr: any;
+    public chainStr: any;
 
-    showDialog(widget) {
-        this.display = true;
-        this.currentWidget = widget;
-    }
+    public display: any = false;
+    public currentWidget: any = '';
 
-
-    filteredChainsSingle: any;
-    filteredCustomersSingle: any;
-    filteredGroupsSingle: any;
-
+    public filteredChainsSingle: any;
+    public filteredCustomersSingle: any;
+    public filteredGroupsSingle: any;
+    public isDataAvailable: any = false;
 
     constructor(private profileService: ProfileService, private notificationsService: NotificationsService) {
         this.getDashboardData('all');
@@ -44,18 +32,30 @@ export class MapsComponent implements OnInit {
 
     filterResult(query, results: any): any {
         const filtered: any[] = [];
-        for (let i = 0; i < results.length; i++) {
-            const result = results[i];
-            if (result.desc.toLowerCase().indexOf(query.toLowerCase()) === 0) {
-                filtered.push(result.desc);
+        if (results.results) {
+            results = results.results;
+            for (let i = 0; i < results.length; i++) {
+                const obj = results[i];
+                filtered.push(obj);
             }
+            return filtered;
         }
-        return filtered;
+    }
+
+    filterCustomerSingle(event, type) {
+        const query = event.query;
+        if (query && query.length > 2) {
+            this.customerStr = query;
+            this.profileService.getCustData(query, type).subscribe(data => {
+                this.filteredCustomersSingle = this.filterResult(query, data);
+            });
+        }
     }
 
     filterChainSingle(event, type) {
         const query = event.query;
         if (query && query.length > 2) {
+            this.chainStr = query;
             this.profileService.getCustData(query, type).subscribe(data => {
                 this.filteredChainsSingle = this.filterResult(query, data);
             });
@@ -65,17 +65,8 @@ export class MapsComponent implements OnInit {
     filterGroupSingle(event, type) {
         const query = event.query;
         if (query && query.length > 2) {
-            this.profileService.getCustData(query, type).subscribe(data => {
+            this.profileService.getCustData(this.chainStr, type, undefined, query).subscribe(data => {
                 this.filteredGroupsSingle = this.filterResult(query, data);
-            });
-        }
-    }
-
-    filterCustomerSingle(event, type) {
-        const query = event.query;
-        if (query && query.length > 2) {
-            this.profileService.getCustData(query, type).subscribe(data => {
-                this.filteredCustomersSingle = this.filterResult(query, data);
             });
         }
     }
@@ -85,6 +76,11 @@ export class MapsComponent implements OnInit {
 
     }
 
+    showDialog(widget) {
+        this.display = true;
+        this.currentWidget = widget;
+    }
+
     getDashboardData(card) {
         this.profileService.getDashboardData(card).subscribe(data => {
             this.allCardsResults = data;
@@ -92,4 +88,7 @@ export class MapsComponent implements OnInit {
         });
     }
 
+    recordSearch() {
+        this.isDataAvailable = !this.isDataAvailable;
+    }
 }

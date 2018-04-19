@@ -13,112 +13,206 @@
                     <p-autoComplete [(ngModel)]="customer"
                                     [suggestions]="filteredCustomersSingle"
                                     (completeMethod)="filterCustomerSingle($event, 'customer')"
-                                    field="name"
+                                    field="desc"
+                                    size="35"
                                     placeholder="Customer"
-                                    [size]="100"
-                                    styleClass="autoCmHeight"
-                                    [minLength]="1"></p-autoComplete>
+                                    [minLength]="1">
+                        <ng-template let-cust pTemplate="item">
+                            <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                                <span style="width:22px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
+                                <span style="font-size:12px;float:right;margin:10px 10px 0 0">{{cust.label}}</span>
+                            </div>
+                        </ng-template>
+
+                    </p-autoComplete>
                     <br>
 
                     <p-autoComplete [(ngModel)]="chain"
                                     [suggestions]="filteredChainsSingle"
                                     (completeMethod)="filterChainSingle($event, 'chain')"
-                                    field="name"
+                                    field="desc"
+                                    size="35"
                                     placeholder="Chain"
-                                    [size]="100"
-                                    styleClass="autoCmHeight"
-                                    [minLength]="1"></p-autoComplete>
+                                    [minLength]="1">
+                        <ng-template let-cust pTemplate="item">
+                            <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                                <span style="width:22px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
+                                <span style="font-size:12px;float:right;margin:10px 10px 0 0">{{cust.label}}</span>
+                            </div>
+                        </ng-template>
+
+                    </p-autoComplete>
                     <br>
 
                     <p-autoComplete [(ngModel)]="group"
                                     [suggestions]="filteredGroupsSingle"
                                     (completeMethod)="filterGroupSingle($event ,'group')"
-                                    field="name"
+                                    field="desc"
+                                    size="35"
                                     placeholder="Group"
-                                    [size]="100"
-                                    styleClass="autoCmHeight"
-                                    [minLength]="1"></p-autoComplete>
+                                    [minLength]="1">
+                        <ng-template let-cust pTemplate="item">
+                            <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                                <span style="width:22px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
+                                <span style="font-size:12px;float:right;margin:10px 10px 0 0">{{cust.label}}</span>
+                            </div>
+                        </ng-template>
+
+                    </p-autoComplete>
 
 
                 </div>
                 <div class="pull-right">
-                    <button type="submit" class="btn btn-lg btn-info"
-                            ><span
+                    <button type="submit" class="btn btn-sm btn-info" (click)='recordSearch()'><span
                             class="fa fa-fw fa-search"></span> Search
                     </button>
                 </div>
             </div>
         </div>
+        <div [hidden]="!isDataAvailable">
+            <div class="ctr">
 
-        <div class="ctr">
-
-            <div class="card">
-                <div class="card-header" data-background-color="red">
-                    <div class="ctr">
-                        <h4  class="tablehead" style="width: 50%">Customer</h4>
-                        <span style="width: 50%">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <div class="ctr">
+                            <h4 class="tablehead" style="width: 50%">Customer</h4>
+                            <span style="width: 50%">
                             <button type="button" class="btn btn-sm btn-info pull-right"
                                     (click)="showDialog('Customer')">
                                 <i class="fa fas fa-plus addFontClr"></i>
                             </button>
-                            <button type="button" class="btn btn-sm btn-info pull-right" >
+                            <button type="button" class="btn btn-sm btn-info pull-right">
                                 <i class="fa fas fa-minus delFontClr"></i>
                             </button>
                         </span>
+                        </div>
+                        <p class="category">respective message</p>
                     </div>
-                    <p class="category">respective message</p>
-                </div>
-                <div class="card-content">
-                    <div class="ui-widget-header pull-right"
-                         style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
-                        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                        <input #gb type="text" pInputText size="35" placeholder="Global Filter">
-                    </div>
-                    <div class="main-content">
-                        <div class="container-fluid">
+                    <div class="card-content">
+                        <div class="ui-widget-header pull-right"
+                             style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
+                            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                            <input #gb type="text" pInputText placeholder="Global Filter">
+                        </div>
+                        <div class="main-content">
+                            <div class="container-fluid">
 
-                            <div class="row">
+                                <div class="row">
 
-                                <p-dataTable [value]="results" [rows]="10" [paginator]="true"
-                                             [globalFilter]="gb"
-                                             #dt class="tabledata"
-                                             [responsive]="true" reorderableColumns="true" [editable]="true">
-                                    <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                                    <p-column field="Customer" header="Customer" class="tabledata"
-                                              filterPlaceholder="Search" [editable]="true">
+                                    <p-dataTable [value]="filteredCustomersSingle" [rows]="10" [paginator]="true"
+                                                 [globalFilter]="gb"
+                                                 #dt class="tabledata"
+                                                 [responsive]="true" reorderableColumns="true" [editable]="true">
+                                        <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+                                        <p-column field="desc" header="Customer" class="tabledata"
+                                                  filterPlaceholder="Search" [editable]="true">
 
-                                        <ng-template pTemplate="editor">
-                                            <p-autoComplete [(ngModel)]="customer"
-                                                            [suggestions]="filteredCustomersSingle"
-                                                            (completeMethod)="filterCustomerSingle($event, 'customer')"
-                                                            field="name"
-                                                            [size]="30"
-                                                            placeholder="Countries"
-                                                            [minLength]="1"></p-autoComplete>
-                                        </ng-template>
-                                    </p-column>
+                                            <ng-template pTemplate="editor">
+                                                <p-autoComplete [(ngModel)]="customer"
+                                                                [suggestions]="filteredCustomersSingle"
+                                                                (completeMethod)="filterCustomerSingle($event, 'customer')"
+                                                                field="desc"
+                                                                size="35"
+                                                                placeholder="Customer"
+                                                                [minLength]="1">
+                                                    <ng-template let-cust pTemplate="item">
+                                                        <div class="ui-helper-clearfix"
+                                                             style="border-bottom:1px solid #D5D5D5">
+                                                            <span style="width:22px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
+                                                            <span style="font-size:12px;float:right;margin:10px 10px 0 0">{{cust.label}}</span>
+                                                        </div>
+                                                    </ng-template>
 
-                                    <p-column field="Txn Type" header="Profile" class="tabledata"
-                                              filterPlaceholder="Search" [editable]="true"></p-column>
-                                </p-dataTable>
+                                                </p-autoComplete>
+                                            </ng-template>
+                                        </p-column>
+
+                                        <p-column field="label" header="Profile" class="tabledata"
+                                                  filterPlaceholder="Search" [editable]="true"></p-column>
+                                    </p-dataTable>
+                                </div>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
+                <span style="margin: 5px"></span>
 
-            </div>
-            <span style="margin: 5px"></span>
-
-            <div class="card">
-                <div class="card-header" data-background-color="red">
-                    <div class="ctr">
-                        <h4  class="tablehead" style="width: 50%">Chain</h4>
-                        <span style="width: 50%">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <div class="ctr">
+                            <h4 class="tablehead" style="width: 50%">Chain</h4>
+                            <span style="width: 50%">
                             <button type="button" class="btn btn-sm btn-info pull-right" (click)="showDialog('Chain')">
                                 <i class="fa fas fa-plus addFontClr"></i>
                             </button>
-                            <button type="button" class="btn btn-sm btn-info pull-right" >
+                            <button type="button" class="btn btn-sm btn-info pull-right">
+                                <i class="fa fas fa-minus delFontClr"></i>
+                            </button>
+                        </span>
+                        </div>
+                        <p class="category">respective message</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="ui-widget-header pull-right"
+                             style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
+                            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                            <input #gb type="text" pInputText placeholder="Global Filter">
+                        </div>
+                        <div class="main-content">
+                            <div class="container-fluid">
+
+                                <div class="row">
+
+                                    <p-dataTable [value]="filteredChainsSingle" [rows]="10" [paginator]="true"
+                                                 [globalFilter]="gb"
+                                                 #dt class="tabledata"
+                                                 [responsive]="true" reorderableColumns="true" [editable]="true">
+                                        <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+                                        <p-column field="desc" header="Chain" class="tabledata"
+                                                  filterPlaceholder="Search" [editable]="true">
+
+                                            <ng-template pTemplate="editor">
+                                                <p-autoComplete [(ngModel)]="chain"
+                                                                [suggestions]="filteredChainsSingle"
+                                                                (completeMethod)="filterChainSingle($event, 'chain')"
+                                                                field="desc"
+                                                                size="35"
+                                                                placeholder="Chain"
+                                                                [minLength]="1">
+                                                    <ng-template let-chain pTemplate="item">
+                                                        <div class="ui-helper-clearfix"
+                                                             style="border-bottom:1px solid #D5D5D5">
+                                                            <span style="width:22px;display:inline-block;margin:5px 0 2px 5px">{{chain.desc}}</span>
+                                                            <span style="font-size:12px;float:right;margin:10px 10px 0 0">{{chain.label}}</span>
+                                                        </div>
+                                                    </ng-template>
+
+                                                </p-autoComplete>
+                                            </ng-template>
+                                        </p-column>
+
+                                        <p-column field="label" header="Profile" class="tabledata"
+                                                  filterPlaceholder="Search" [editable]="true"></p-column>
+                                    </p-dataTable>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="card">
+                <div class="card-header" data-background-color="red">
+                    <div class="ctr">
+                        <h4 class="tablehead" style="width: 50%">Group</h4>
+                        <span style="width: 50%">
+                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="showDialog('Group')">
+                                <i class="fa fas fa-plus addFontClr"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-info pull-right">
                                 <i class="fa fas fa-minus delFontClr"></i>
                             </button>
                         </span>
@@ -129,145 +223,100 @@
                     <div class="ui-widget-header pull-right"
                          style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
                         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                        <input #gb type="text" pInputText size="35" placeholder="Global Filter">
+                        <input #gb type="text" pInputText placeholder="Global Filter">
                     </div>
                     <div class="main-content">
                         <div class="container-fluid">
 
                             <div class="row">
 
-                                <p-dataTable [value]="results" [rows]="10" [paginator]="true"
+                                <p-dataTable [value]="filteredGroupsSingle" [rows]="10" [paginator]="true"
                                              [globalFilter]="gb"
                                              #dt class="tabledata"
                                              [responsive]="true" reorderableColumns="true" [editable]="true">
+
                                     <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                                    <p-column field="Chain" header="Chain" class="tabledata"
+                                    <p-column field="desc" header="Group" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true">
 
                                         <ng-template pTemplate="editor">
-                                            <p-autoComplete [(ngModel)]="chain"
-                                                            [suggestions]="filteredChainsSingle"
-                                                            (completeMethod)="filterChainSingle($event, 'chain')"
-                                                            field="name"
-                                                            [size]="30"
-                                                            placeholder="Countries"
-                                                            [minLength]="1"></p-autoComplete>
+                                            <p-autoComplete [(ngModel)]="group"
+                                                            [suggestions]="filteredGroupsSingle"
+                                                            (completeMethod)="filterGroupSingle($event, 'chain')"
+                                                            field="desc"
+                                                            size="35"
+                                                            placeholder="Group"
+                                                            [minLength]="1">
+                                                <ng-template let-group pTemplate="item">
+                                                    <div class="ui-helper-clearfix"
+                                                         style="border-bottom:1px solid #D5D5D5">
+                                                        <span style="width:22px;display:inline-block;margin:5px 0 2px 5px">{{group.desc}}</span>
+                                                        <span style="font-size:12px;float:right;margin:10px 10px 0 0">{{group.label}}</span>
+                                                    </div>
+                                                </ng-template>
+
+                                            </p-autoComplete>
                                         </ng-template>
                                     </p-column>
 
-                                    <p-column field="Txn Type" header="Profile" class="tabledata"
+                                    <p-column field="label" header="Profile" class="tabledata"
+                                              filterPlaceholder="Search" [editable]="true"></p-column>
+
+                                    <p-column field="Txn Id" header="Region" class="tabledata"
+                                              filterPlaceholder="Search" [editable]="true"></p-column>
+                                    <p-column field="Order ID" header="District" class="tabledata"
+                                              filterPlaceholder="Search" [editable]="true"></p-column>
+                                    <p-column field="SAP Document Number" header="Profile" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true"></p-column>
                                 </p-dataTable>
+
+
+                                <!--<p-table [value]="results" [rows]="10" [paginator]="true"
+                                         #dt class="tabledata"
+                                         [responsive]="true" [resizableColumns]="true" [reorderableColumns]="true"
+                                         [globalFilterFields]="['Txn Type','EI TimeStamp','Txn Id', 'Order ID', 'SAP Document Number', 'DCNUMBER']">
+
+                                    <ng-template pTemplate="caption">
+                                        <div style="text-align: right">
+                                            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                            <input type="text" pInputText size="50" placeholder="Global Filter"
+                                                   (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                                   style="width:auto">
+                                        </div>
+                                    </ng-template>
+
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th *ngFor="let col of cols" [pSortableColumn]="col.field">
+                                                {{col.header}}
+                                                <p-sortIcon [field]="col.field"></p-sortIcon>
+                                            </th>
+                                        </tr>
+                                    </ng-template>
+
+
+                                    <ng-template pTemplate="body" let-result>
+                                        <tr>
+                                            <td *ngFor="let col of cols" pEditableColumn>
+                                                <p-cellEditor>
+                                                    <ng-template pTemplate="input">
+                                                        <input type="text" [(ngModel)]="result[col.field]">
+                                                    </ng-template>
+                                                    <ng-template pTemplate="output">
+                                                        {{result[col.field]}}
+                                                    </ng-template>
+                                                </p-cellEditor>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>-->
                             </div>
                         </div>
                     </div>
 
                 </div>
             </div>
-
         </div>
-        <div class="card">
-            <div class="card-header" data-background-color="red">
-                <div class="ctr">
-                    <h4  class="tablehead" style="width: 50%">Group</h4>
-                    <span style="width: 50%">
-                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="showDialog('Group')">
-                                <i class="fa fas fa-plus addFontClr"></i>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-info pull-right" >
-                                <i class="fa fas fa-minus delFontClr"></i>
-                            </button>
-                        </span>
-                </div>
-                <p class="category">respective message</p>
-            </div>
-            <div class="card-content">
-                <div class="ui-widget-header pull-right"
-                     style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
-                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                    <input #gb type="text" pInputText size="35" placeholder="Global Filter">
-                </div>
-                <div class="main-content">
-                    <div class="container-fluid">
-
-                        <div class="row">
-
-                            <p-dataTable [value]="results" [rows]="10" [paginator]="true" [globalFilter]="gb"
-                                         #dt class="tabledata"
-                                         [responsive]="true" reorderableColumns="true" [editable]="true">
-
-                                <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                                <p-column field="Group" header="Group" class="tabledata"
-                                          filterPlaceholder="Search" [editable]="true">
-
-                                    <ng-template pTemplate="editor">
-                                        <p-autoComplete [(ngModel)]="group"
-                                                        [suggestions]="filteredGroupsSingle"
-                                                        (completeMethod)="filterGroupSingle($event, 'group')"
-                                                        field="name"
-                                                        [size]="30"
-                                                        placeholder="Countries"
-                                                        [minLength]="1"></p-autoComplete>
-                                    </ng-template>
-                                </p-column>
-
-                                <p-column field="Txn Type" header="Subgroup" class="tabledata"
-                                          filterPlaceholder="Search" [editable]="true"></p-column>
-                                <p-column field="Txn Id" header="Region" class="tabledata"
-                                          filterPlaceholder="Search" [editable]="true"></p-column>
-                                <p-column field="Order ID" header="District" class="tabledata"
-                                          filterPlaceholder="Search" [editable]="true"></p-column>
-                                <p-column field="SAP Document Number" header="Profile" class="tabledata"
-                                          filterPlaceholder="Search" [editable]="true"></p-column>
-                            </p-dataTable>
-
-
-                            <!--<p-table [value]="results" [rows]="10" [paginator]="true"
-                                     #dt class="tabledata"
-                                     [responsive]="true" [resizableColumns]="true" [reorderableColumns]="true"
-                                     [globalFilterFields]="['Txn Type','EI TimeStamp','Txn Id', 'Order ID', 'SAP Document Number', 'DCNUMBER']">
-
-                                <ng-template pTemplate="caption">
-                                    <div style="text-align: right">
-                                        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                                        <input type="text" pInputText size="50" placeholder="Global Filter"
-                                               (input)="dt.filterGlobal($event.target.value, 'contains')"
-                                               style="width:auto">
-                                    </div>
-                                </ng-template>
-
-                                <ng-template pTemplate="header">
-                                    <tr>
-                                        <th *ngFor="let col of cols" [pSortableColumn]="col.field">
-                                            {{col.header}}
-                                            <p-sortIcon [field]="col.field"></p-sortIcon>
-                                        </th>
-                                    </tr>
-                                </ng-template>
-
-
-                                <ng-template pTemplate="body" let-result>
-                                    <tr>
-                                        <td *ngFor="let col of cols" pEditableColumn>
-                                            <p-cellEditor>
-                                                <ng-template pTemplate="input">
-                                                    <input type="text" [(ngModel)]="result[col.field]">
-                                                </ng-template>
-                                                <ng-template pTemplate="output">
-                                                    {{result[col.field]}}
-                                                </ng-template>
-                                            </p-cellEditor>
-                                        </td>
-                                    </tr>
-                                </ng-template>
-                            </p-table>-->
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
     </div>
 </div>
 
@@ -280,7 +329,6 @@
                             [suggestions]="filteredCustomersSingle"
                             (completeMethod)="filterCustomerSingle($event, 'customer')"
                             field="name"
-                            [size]="30"
                             placeholder="Customers"
                             [minLength]="1"></p-autoComplete>
             <br><br>
