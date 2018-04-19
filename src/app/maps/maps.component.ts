@@ -47,29 +47,22 @@ export class MapsComponent implements OnInit {
         if (query && query.length > 2) {
             this.customerStr = query;
             this.profileService.getCustData(query, type).subscribe(data => {
-                this.filteredCustomersSingle = this.filterResult(query, data);
+                switch (type) {
+                    case 'customer':
+                        this.filteredCustomersSingle = this.filterResult(query, data);
+                        break;
+                    case 'chain':
+                        this.filteredChainsSingle = this.filterResult(query, data);
+                        break;
+                    case 'group':
+                        this.filteredGroupsSingle = this.filterResult(query, data);
+                        break;
+                    default:
+                }
             });
         }
     }
 
-    filterChainSingle(event, type) {
-        const query = event.query;
-        if (query && query.length > 2) {
-            this.chainStr = query;
-            this.profileService.getCustData(query, type).subscribe(data => {
-                this.filteredChainsSingle = this.filterResult(query, data);
-            });
-        }
-    }
-
-    filterGroupSingle(event, type) {
-        const query = event.query;
-        if (query && query.length > 2) {
-            this.profileService.getCustData(this.chainStr, type, undefined, query).subscribe(data => {
-                this.filteredGroupsSingle = this.filterResult(query, data);
-            });
-        }
-    }
 
 
     ngOnInit() {

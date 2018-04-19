@@ -19,8 +19,8 @@
                                     [minLength]="1">
                         <ng-template let-cust pTemplate="item">
                             <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                                <span style="width:22px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
-                                <span style="font-size:12px;float:right;margin:10px 10px 0 0">{{cust.label}}</span>
+                                <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
+                                <span style="font-size:11px;margin:10px 10px 0 0">{{cust.label}}</span>
                             </div>
                         </ng-template>
 
@@ -29,15 +29,15 @@
 
                     <p-autoComplete [(ngModel)]="chain"
                                     [suggestions]="filteredChainsSingle"
-                                    (completeMethod)="filterChainSingle($event, 'chain')"
+                                    (completeMethod)="filterCustomerSingle($event, 'chain')"
                                     field="desc"
                                     size="35"
                                     placeholder="Chain"
                                     [minLength]="1">
                         <ng-template let-cust pTemplate="item">
                             <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                                <span style="width:22px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
-                                <span style="font-size:12px;float:right;margin:10px 10px 0 0">{{cust.label}}</span>
+                                <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
+                                <span style="font-size:11px;margin:10px 10px 0 0">{{cust.label}}</span>
                             </div>
                         </ng-template>
 
@@ -46,15 +46,15 @@
 
                     <p-autoComplete [(ngModel)]="group"
                                     [suggestions]="filteredGroupsSingle"
-                                    (completeMethod)="filterGroupSingle($event ,'group')"
+                                    (completeMethod)="filterCustomerSingle($event ,'group')"
                                     field="desc"
                                     size="35"
                                     placeholder="Group"
                                     [minLength]="1">
                         <ng-template let-cust pTemplate="item">
                             <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                                <span style="width:22px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
-                                <span style="font-size:12px;float:right;margin:10px 10px 0 0">{{cust.label}}</span>
+                                <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
+                                <span style="font-size:11px;margin:10px 10px 0 0">{{cust.label}}</span>
                             </div>
                         </ng-template>
 
@@ -118,8 +118,8 @@
                                                     <ng-template let-cust pTemplate="item">
                                                         <div class="ui-helper-clearfix"
                                                              style="border-bottom:1px solid #D5D5D5">
-                                                            <span style="width:22px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
-                                                            <span style="font-size:12px;float:right;margin:10px 10px 0 0">{{cust.label}}</span>
+                                                            <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
+                                                            <span style="font-size:11px;margin:10px 10px 0 0">{{cust.label}}</span>
                                                         </div>
                                                     </ng-template>
 
@@ -176,7 +176,7 @@
                                             <ng-template pTemplate="editor">
                                                 <p-autoComplete [(ngModel)]="chain"
                                                                 [suggestions]="filteredChainsSingle"
-                                                                (completeMethod)="filterChainSingle($event, 'chain')"
+                                                                (completeMethod)="filterCustomerSingle($event, 'chain')"
                                                                 field="desc"
                                                                 size="35"
                                                                 placeholder="Chain"
@@ -184,8 +184,8 @@
                                                     <ng-template let-chain pTemplate="item">
                                                         <div class="ui-helper-clearfix"
                                                              style="border-bottom:1px solid #D5D5D5">
-                                                            <span style="width:22px;display:inline-block;margin:5px 0 2px 5px">{{chain.desc}}</span>
-                                                            <span style="font-size:12px;float:right;margin:10px 10px 0 0">{{chain.label}}</span>
+                                                            <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{chain.desc}}</span>
+                                                            <span style="font-size:11px;margin:10px 10px 0 0">{{chain.label}}</span>
                                                         </div>
                                                     </ng-template>
 
@@ -242,7 +242,7 @@
                                         <ng-template pTemplate="editor">
                                             <p-autoComplete [(ngModel)]="group"
                                                             [suggestions]="filteredGroupsSingle"
-                                                            (completeMethod)="filterGroupSingle($event, 'chain')"
+                                                            (completeMethod)="filterCustomerSingle($event, 'chain')"
                                                             field="desc"
                                                             size="35"
                                                             placeholder="Group"
@@ -250,8 +250,8 @@
                                                 <ng-template let-group pTemplate="item">
                                                     <div class="ui-helper-clearfix"
                                                          style="border-bottom:1px solid #D5D5D5">
-                                                        <span style="width:22px;display:inline-block;margin:5px 0 2px 5px">{{group.desc}}</span>
-                                                        <span style="font-size:12px;float:right;margin:10px 10px 0 0">{{group.label}}</span>
+                                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{group.desc}}</span>
+                                                        <span style="font-size:11px;margin:10px 10px 0 0">{{group.label}}</span>
                                                     </div>
                                                 </ng-template>
 
@@ -259,7 +259,7 @@
                                         </ng-template>
                                     </p-column>
 
-                                    <p-column field="label" header="Profile" class="tabledata"
+                                    <p-column field="label" header="SubGroup" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true"></p-column>
 
                                     <p-column field="Txn Id" header="Region" class="tabledata"
@@ -338,13 +338,11 @@
         <div class="ctr pull-right">
             <button type="button" (click)="display=false"
                     class="btn btn-danger btn-sm CancelClr"><span class="fa fas fa-times"></span> CANCEL
-            </button>&nbsp; &nbsp;
+            </button>
             <button type="button" pButton icon="fa-check" (click)="display=false" label="Yes"
                     class="btn btn-sm btn-info "><span class="fa fa-fw fa-save"></span> &nbsp;SAVE &nbsp;
             </button>
         </div>
 
     </div>
-
-
 </p-dialog>

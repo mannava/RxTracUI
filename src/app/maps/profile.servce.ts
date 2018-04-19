@@ -22,11 +22,11 @@ export class ProfileService {
             });
     }
 
-    public getCustData(str = '', type = '', level = 1, group = ''): Observable<Object> {
+    public getCustData(str, type): Observable<Object> {
 
         this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8;', 'Accept': '*/*'});
 
-        return this.http.get(AppService.ISM_ENDPOINT + type + '?searchstring=' + str + '&level=' + level + '&group=' + group)
+        return this.http.get(AppService.ISM_ENDPOINT + type + '?searchstring=' + str + '&level=' + 1)
             .map((res: Response) => res)
             .catch
             ((error: any) => {
