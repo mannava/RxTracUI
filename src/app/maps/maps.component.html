@@ -14,7 +14,7 @@
                         <div class="">
                             <p-autoComplete [(ngModel)]="customer"
                                             [suggestions]="filteredCustomersSingle"
-                                            (completeMethod)="filterCustomerSingle($event, 'customer')"
+                                            (completeMethod)="filterSingle($event, 'customer')"
                                             field="desc"
                                             size="35"
                                             placeholder="Customer"
@@ -37,7 +37,7 @@
                         <div class="">
                             <p-autoComplete [(ngModel)]="chain"
                                             [suggestions]="filteredChainsSingle"
-                                            (completeMethod)="filterCustomerSingle($event, 'chain')"
+                                            (completeMethod)="filterSingle($event, 'chain')"
                                             field="desc"
                                             size="35"
                                             placeholder="Chain"
@@ -58,7 +58,7 @@
                         <div class="">
                             <p-autoComplete [(ngModel)]="group"
                                             [suggestions]="filteredGroupsSingle"
-                                            (completeMethod)="filterCustomerSingle($event ,'group')"
+                                            (completeMethod)="filterSingle($event ,'group')"
                                             field="desc"
                                             size="35"
                                             placeholder="Group"
@@ -112,18 +112,18 @@
 
                                 <div class="row">
 
-                                    <p-dataTable [value]="filteredCustomersSingle" [rows]="10" [paginator]="true"
+                                    <p-dataTable [value]="tableJSON['customers']" [rows]="10" [paginator]="true"
                                                  [globalFilter]="gb"
                                                  #dt class="tabledata"
                                                  [responsive]="true" reorderableColumns="true" [editable]="true">
                                         <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                                        <p-column field="desc" header="Customer" class="tabledata"
+                                        <p-column field="customer" header="Customer" class="tabledata"
                                                   filterPlaceholder="Search" [editable]="true">
 
                                             <ng-template pTemplate="editor">
                                                 <p-autoComplete [(ngModel)]="customer"
                                                                 [suggestions]="filteredCustomersSingle"
-                                                                (completeMethod)="filterCustomerSingle($event, 'customer')"
+                                                                (completeMethod)="filterSingle($event, 'customer')"
                                                                 field="desc"
                                                                 size="35"
                                                                 placeholder="Customer"
@@ -140,7 +140,7 @@
                                             </ng-template>
                                         </p-column>
 
-                                        <p-column field="label" header="Profile" class="tabledata"
+                                        <p-column field="profile" header="Profile" class="tabledata"
                                                   filterPlaceholder="Search" [editable]="true"></p-column>
                                     </p-dataTable>
                                 </div>
@@ -178,27 +178,29 @@
 
                                 <div class="row">
 
-                                    <p-dataTable [value]="filteredChainsSingle" [rows]="10" [paginator]="true"
+                                    <p-dataTable [value]="tableJSON['chains']" [rows]="10" [paginator]="true"
                                                  [globalFilter]="gb"
                                                  #dt class="tabledata"
                                                  [responsive]="true" reorderableColumns="true" [editable]="true">
                                         <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                                        <p-column field="desc" header="Chain" class="tabledata"
+                                        <p-column field="nat_chain" header="Chain" class="tabledata"
                                                   filterPlaceholder="Search" [editable]="true">
-
-                                            <ng-template pTemplate="editor">
-                                                <p-autoComplete [(ngModel)]="chain"
+                                            <!--<ng-template let-col let-chain="rowData" pTemplate="editor">
+                                                <p-dropdown [(ngModel)]="col.desc" [options]="chain[col.desc]" [autoWidth]="false" [style]="{'width':'100%'}" required="true"  appendTo="body"></p-dropdown>
+                                            </ng-template>-->
+                                            <ng-template pTemplate="editor" let-col let-chain="rowData">
+                                                <p-autoComplete [(ngModel)]="chain[col.desc]"
                                                                 [suggestions]="filteredChainsSingle"
-                                                                (completeMethod)="filterCustomerSingle($event, 'chain')"
+                                                                (completeMethod)="filterSingle($event, 'chain')"
                                                                 field="desc"
                                                                 size="35"
                                                                 placeholder="Chain"
                                                                 [minLength]="1">
-                                                    <ng-template let-chain pTemplate="item">
+                                                    <ng-template let-c pTemplate="item">
                                                         <div class="ui-helper-clearfix"
                                                              style="border-bottom:1px solid #D5D5D5">
-                                                            <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{chain.desc}}</span>
-                                                            <span style="font-size:11px;margin:10px 10px 0 0">{{chain.label}}</span>
+                                                            <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.desc}}</span>
+                                                            <span style="font-size:11px;margin:10px 10px 0 0">{{c.label}}</span>
                                                         </div>
                                                     </ng-template>
 
@@ -206,7 +208,7 @@
                                             </ng-template>
                                         </p-column>
 
-                                        <p-column field="label" header="Profile" class="tabledata"
+                                        <p-column field="profile" header="Profile" class="tabledata"
                                                   filterPlaceholder="Search" [editable]="true"></p-column>
                                     </p-dataTable>
                                 </div>
@@ -243,19 +245,19 @@
 
                             <div class="row">
 
-                                <p-dataTable [value]="filteredGroupsSingle" [rows]="10" [paginator]="true"
+                                <p-dataTable [value]="tableJSON['groups']" [rows]="10" [paginator]="true"
                                              [globalFilter]="gb"
                                              #dt class="tabledata"
                                              [responsive]="true" reorderableColumns="true" [editable]="true">
 
                                     <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                                    <p-column field="desc" header="Group" class="tabledata"
+                                    <p-column field="nat_group" header="Group" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true">
 
                                         <ng-template pTemplate="editor">
                                             <p-autoComplete [(ngModel)]="group"
                                                             [suggestions]="filteredGroupsSingle"
-                                                            (completeMethod)="filterCustomerSingle($event, 'chain')"
+                                                            (completeMethod)="filterSingle($event, 'chain')"
                                                             field="desc"
                                                             size="35"
                                                             placeholder="Group"
@@ -272,14 +274,14 @@
                                         </ng-template>
                                     </p-column>
 
-                                    <p-column field="label" header="SubGroup" class="tabledata"
+                                    <p-column field="nat_subgroup" header="SubGroup" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true"></p-column>
 
-                                    <p-column field="Txn Id" header="Region" class="tabledata"
+                                    <p-column field="nat_region" header="Region" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true"></p-column>
-                                    <p-column field="Order ID" header="District" class="tabledata"
+                                    <p-column field="nat_district" header="District" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true"></p-column>
-                                    <p-column field="SAP Document Number" header="Profile" class="tabledata"
+                                    <p-column field="profile" header="Profile" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true"></p-column>
                                 </p-dataTable>
 
@@ -340,7 +342,7 @@
         <div class="ctr-col">
             <p-autoComplete [(ngModel)]="customer"
                             [suggestions]="filteredCustomersSingle"
-                            (completeMethod)="filterCustomerSingle($event, 'customer')"
+                            (completeMethod)="filterSingle($event, 'customer')"
                             field="name"
                             placeholder="Customers"
                             [minLength]="1"></p-autoComplete>

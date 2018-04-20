@@ -25,6 +25,60 @@ export class MapsComponent implements OnInit {
     public filteredGroupsSingle: any;
     public isDataAvailable: any = false;
 
+    public tableJSON: Object = {
+        'customers': [
+            {
+                'customer': '0000170173',
+                'customer_name': 'ABC PHARMACY',
+                'profile': '01',
+                'profile_name': 'Profile ab'
+            }
+        ],
+        'chains': [
+            {
+                'nat_chain': '252',
+                'description': 'RITE AID DSD',
+                'plant': '',
+                'profile': '96',
+                'profile_name': 'Rite Aid'
+            },
+            {
+                'nat_chain': '815',
+                'description': 'CVS HEALTH DSD',
+                'plant': '',
+                'profile': 'ZR',
+                'profile_name': 'CVS'
+            },
+            {
+                'nat_chain': '953',
+                'description': 'MEIJER',
+                'plant': '',
+                'profile': '3B',
+                'profile_name': 'Meijer'
+            },
+            {
+                'nat_chain': '321',
+                'description': 'WEGMAN',
+                'plant': '8165',
+                'profile': '01',
+                'profile_name': 'Profile ab'
+            }
+        ],
+        'groups': [
+            {
+                'nat_group': '0392',
+                'nat_group_description': 'ALBERTSONS',
+                'nat_subgroup': '000007',
+                'nat_subgroup_description': 'ALBERTSONS-SAFEWAY',
+                'nat_region': '',
+                'nat_district': '',
+                'plant': '',
+                'profile': 'H)',
+                'profile_name': 'Albertsons-Safeway'
+            }
+        ]
+    }
+
     constructor(private profileService: ProfileService, private notificationsService: NotificationsService) {
         this.getDashboardData('all');
     }
@@ -42,7 +96,7 @@ export class MapsComponent implements OnInit {
         }
     }
 
-    filterCustomerSingle(event, type) {
+    filterSingle(event, type) {
         const query = event.query;
         if (query && query.length > 2) {
             this.customerStr = query;
