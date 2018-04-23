@@ -24,6 +24,9 @@ export class MapsComponent implements OnInit {
     public filteredCustomersSingle: any;
     public filteredGroupsSingle: any;
     public isDataAvailable: any = false;
+    public cust_cols: any;
+    public chain_cols: any;
+    public group_cols: any;
 
     public tableJSON: Object = {
         'customers': [
@@ -77,7 +80,7 @@ export class MapsComponent implements OnInit {
                 'profile_name': 'Albertsons-Safeway'
             }
         ]
-    }
+    };
 
     constructor(private profileService: ProfileService, private notificationsService: NotificationsService) {
         this.getDashboardData('all');
@@ -119,6 +122,23 @@ export class MapsComponent implements OnInit {
 
 
     ngOnInit() {
+        /*this.cust_cols = [
+            {field: 'customer', header: 'Customer'},
+            {field: 'profile', header: 'Profile'}
+        ];
+
+        this.chain_cols = [
+            {field: 'nat_chain', header: 'Chain'},
+            {field: 'profile', header: 'Profile'}
+        ];
+
+        this.group_cols = [
+            {field: 'nat_group', header: 'Group'},
+            {field: 'nat_subgroup', header: 'Sub Group'},
+            {field: 'nat_region', header: 'Region'},
+            {field: 'nat_district', header: 'District'},
+            {field: 'profile', header: 'Profile'}
+        ];*/
 
     }
 
@@ -132,9 +152,98 @@ export class MapsComponent implements OnInit {
         }
     }
 
-    showDialog(widget) {
-        this.display = true;
-        this.currentWidget = widget;
+    showDialog(type) {
+        //this.display = true;
+        //this.currentWidget = widget;
+
+        //BETTER WRITE CLEAN METHODS
+        switch (type) {
+            case 'Customer':
+                const cust_obj = {
+                    'customer': '',
+                    'customer_name': '',
+                    'profile': '',
+                    'profile_name': ''
+                };
+                const firstCust = this.tableJSON['customers'][0];
+                if (firstCust && firstCust.customer.length > 1 || firstCust.profile.length > 1) {
+                    this.tableJSON['customers'].unshift(cust_obj);
+                    this.tableJSON['customers'] = [...this.tableJSON['customers']];
+                } else {
+                    this.notificationsService.error(
+                        'Error',
+                        'Should not allowed more than one empty row.',
+                        {
+                            timeOut: 1500,
+                            pauseOnHover: true,
+                            clickToClose: false,
+                            maxLength: 0,
+                            maxStack: 1
+                        }
+                    );
+                }
+                break;
+            case 'Chain':
+                const chain_obj = {
+                    'nat_chain': '',
+                    'description': '',
+                    'plant': '',
+                    'profile': '',
+                    'profile_name': ''
+                };
+                const firstChain = this.tableJSON['chains'][0];
+                if (firstChain && firstChain.nat_chain.length > 1 || firstChain.profile.length > 1) {
+                    this.tableJSON['chains'].unshift(chain_obj);
+                    this.tableJSON['chains'] = [...this.tableJSON['chains']];
+                } else {
+                    this.notificationsService.error(
+                        'Error',
+                        'Should not allowed more than one empty row.',
+                        {
+                            timeOut: 1500,
+                            pauseOnHover: true,
+                            clickToClose: false,
+                            maxLength: 0,
+                            maxStack: 1
+                        }
+                    );
+                }
+                break;
+            case 'Group':
+                const group_obj = {
+                    'nat_group': '',
+                    'nat_group_description': '',
+                    'nat_subgroup': '',
+                    'nat_subgroup_description': '',
+                    'nat_region': '',
+                    'nat_district': '',
+                    'plant': '',
+                    'profile': '',
+                    'profile_name': ''
+                };
+                const firstGroup = this.tableJSON['groups'][0];
+                if (firstGroup && firstGroup.nat_group.length > 1 || firstGroup.profile.length > 1) {
+                    this.tableJSON['groups'].unshift(group_obj);
+                    this.tableJSON['groups'] = [...this.tableJSON['groups']];
+                } else {
+                    this.notificationsService.error(
+                        'Error',
+                        'Should not allowed more than one empty row.',
+                        {
+                            timeOut: 1500,
+                            pauseOnHover: true,
+                            clickToClose: false,
+                            maxLength: 0,
+                            maxStack: 1
+                        }
+                    );
+                }
+                break;
+            default:
+        }
+
+
+
     }
 
     getDashboardData(card) {
