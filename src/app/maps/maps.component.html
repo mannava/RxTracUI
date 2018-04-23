@@ -102,47 +102,50 @@
                         <p class="category">respective message</p>
                     </div>
                     <div class="card-content">
-                        <div class="ui-widget-header pull-right"
+                        <!--<div class="ui-widget-header pull-right"
                              style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
                             <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
                             <input #gb type="text" pInputText placeholder="Global Filter">
-                        </div>
+                        </div>-->
                         <div class="main-content">
                             <div class="container-fluid">
 
                                 <div class="row">
 
-                                     <p-dataTable [value]="tableJSON['customers']" [rows]="10" [paginator]="true"
-                                                  [globalFilter]="gb"
-                                                  #dt class="tabledata"
-                                                  [responsive]="true" reorderableColumns="true" [editable]="true">
-                                         <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                                         <p-column field="customer" header="Customer" class="tabledata"
-                                                   filterPlaceholder="Search" [editable]="true">
+                                    <p-dataTable [value]="tableJSON['customers']" [rows]="10" [paginator]="true"
+                                                 [globalFilter]="gb"
+                                                 #dt class="tabledata"
+                                                 [responsive]="true" reorderableColumns="true" [editable]="true"
+                                                 (OnEdit)="OnEdit($event, 'customer')"
+                                                 (OnEditComplete)="OnEditComplete($event, 'customer')"
+                                                 (OnEditCancel)="OnEditCancel($event, 'customer')">
+                                        <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+                                        <p-column field="customer" header="Customer" class="tabledata"
+                                                  filterPlaceholder="Search" [editable]="true">
 
-                                             <ng-template pTemplate="editor">
-                                                 <p-autoComplete [(ngModel)]="customer"
-                                                                 [suggestions]="filteredCustomersSingle"
-                                                                 (completeMethod)="filterSingle($event, 'customer')"
-                                                                 field="desc"
-                                                                 size="35"
-                                                                 placeholder="Customer"
-                                                                 [minLength]="1">
-                                                     <ng-template let-cust pTemplate="item">
-                                                         <div class="ui-helper-clearfix"
-                                                              style="border-bottom:1px solid #D5D5D5">
-                                                             <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
-                                                             <span style="font-size:11px;margin:10px 10px 0 0">{{cust.label}}</span>
-                                                         </div>
-                                                     </ng-template>
+                                            <ng-template pTemplate="editor">
+                                                <p-autoComplete [(ngModel)]="customer"
+                                                                [suggestions]="filteredCustomersSingle"
+                                                                (completeMethod)="filterSingle($event, 'customer')"
+                                                                field="desc"
+                                                                size="35"
+                                                                placeholder="Customer"
+                                                                [minLength]="1">
+                                                    <ng-template let-cust pTemplate="item">
+                                                        <div class="ui-helper-clearfix"
+                                                             style="border-bottom:1px solid #D5D5D5">
+                                                            <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
+                                                            <span style="font-size:11px;margin:10px 10px 0 0">{{cust.label}}</span>
+                                                        </div>
+                                                    </ng-template>
 
-                                                 </p-autoComplete>
-                                             </ng-template>
-                                         </p-column>
+                                                </p-autoComplete>
+                                            </ng-template>
+                                        </p-column>
 
-                                         <p-column field="profile" header="Profile" class="tabledata"
-                                                   filterPlaceholder="Search" [editable]="true"></p-column>
-                                     </p-dataTable>
+                                        <p-column field="profile" header="Profile" class="tabledata"
+                                                  filterPlaceholder="Search" [editable]="true"></p-column>
+                                    </p-dataTable>
 
                                     <!--<p-table [value]="tableJSON['customers']" [rows]="10" [paginator]="true"
                                              #dt class="tabledata"
@@ -241,11 +244,11 @@
                         <p class="category">respective message</p>
                     </div>
                     <div class="card-content">
-                        <div class="ui-widget-header pull-right"
+                        <!--<div class="ui-widget-header pull-right"
                              style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
                             <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
                             <input #gb type="text" pInputText placeholder="Global Filter">
-                        </div>
+                        </div>-->
                         <div class="main-content">
                             <div class="container-fluid">
 
@@ -308,11 +311,11 @@
                     <p class="category">respective message</p>
                 </div>
                 <div class="card-content">
-                    <div class="ui-widget-header pull-right"
-                         style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
-                        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                        <input #gb type="text" pInputText placeholder="Global Filter">
-                    </div>
+                    <!-- <div class="ui-widget-header pull-right"
+                          style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
+                         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                         <input #gb type="text" pInputText placeholder="Global Filter">
+                     </div>-->
                     <div class="main-content">
                         <div class="container-fluid">
 

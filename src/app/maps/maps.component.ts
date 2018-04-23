@@ -142,6 +142,18 @@ export class MapsComponent implements OnInit {
 
     }
 
+    OnEdit(e, type) {
+        console.log(e, type);
+    }
+
+    OnEditComplete(e, type) {
+        console.log(e, type);
+    }
+
+    OnEditCancel(e, type) {
+        console.log(e, type);
+    }
+
     getProfile(event, type) {
         const query = event.query;
         if (query && query.length > 2) {
@@ -241,7 +253,6 @@ export class MapsComponent implements OnInit {
                 break;
             default:
         }
-
 
 
     }
