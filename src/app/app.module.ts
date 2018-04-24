@@ -19,7 +19,7 @@ import {UpgradeComponent} from './upgrade/upgrade.component';
 import {HttpClientModule} from '@angular/common/http';
 import {DashboardService} from './dashboard/dashboard.service';
 import {
-    AutoCompleteModule, DataTableModule, MultiSelectModule, PaginatorModule
+    AutoCompleteModule, ConfirmDialogModule, DataTableModule, MultiSelectModule, PaginatorModule
 } from 'primeng/primeng';
 import {QueryBuilderModule} from 'angular2-query-builder';
 import {SimpleNotificationsModule} from 'angular2-notifications';
@@ -28,6 +28,7 @@ import {ReviewService} from './typography/typography.service';
 import {ProfileService} from './maps/profile.servce';
 import {TableModule} from 'primeng/table';
 import {DialogModule} from "primeng/dialog";
+import {ConfirmationService} from "primeng/api";
 
 @NgModule({
     declarations: [
@@ -52,6 +53,7 @@ import {DialogModule} from "primeng/dialog";
         QueryBuilderModule,
         PaginatorModule,
         AutoCompleteModule,
+        ConfirmDialogModule,
         TableModule,
         DialogModule,
         MultiSelectModule,
@@ -60,7 +62,7 @@ import {DialogModule} from "primeng/dialog";
 
     ],
 
-    providers: [DashboardService, ReviewService, ProfileService],
+    providers: [DashboardService, ReviewService, ProfileService, ConfirmationService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

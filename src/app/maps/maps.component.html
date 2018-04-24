@@ -91,10 +91,10 @@
                             <h4 class="tablehead" style="width: 50%">Customer</h4>
                             <span style="width: 50%">
                             <button type="button" class="btn btn-sm btn-info pull-right"
-                                    (click)="showDialog('Customer')">
+                                    (click)="showDialog('customer')">
                                 <i class="fa fas fa-plus addFontClr"></i>
                             </button>
-                            <button type="button" class="btn btn-sm btn-info pull-right">
+                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="deleteSelectedRecs('customer')">
                                 <i class="fa fas fa-minus delFontClr"></i>
                             </button>
                         </span>
@@ -116,9 +116,10 @@
                                                  [globalFilter]="gb"
                                                  #dt class="tabledata"
                                                  [responsive]="true" reorderableColumns="true" [editable]="true"
-                                                 (OnEdit)="OnEdit($event, 'customer')"
-                                                 (OnEditComplete)="OnEditComplete($event, 'customer')"
-                                                 (OnEditCancel)="OnEditCancel($event, 'customer')">
+                                                 (onEdit)="OnEdit($event, 'customer')"
+                                                 (onEditComplete)="OnEditComplete($event, 'customer')"
+                                                 (onEditCancel)="OnEditCancel($event, 'customer')"
+                                                 (onRowSelect)="onRowSelection($event, 'customer')">
                                         <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
                                         <p-column field="customer" header="Customer" class="tabledata"
                                                   filterPlaceholder="Search" [editable]="true">
@@ -233,10 +234,10 @@
                         <div class="ctr">
                             <h4 class="tablehead" style="width: 50%">Chain</h4>
                             <span style="width: 50%">
-                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="showDialog('Chain')">
+                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="showDialog('chain')">
                                 <i class="fa fas fa-plus addFontClr"></i>
                             </button>
-                            <button type="button" class="btn btn-sm btn-info pull-right">
+                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="deleteSelectedRecs('chain')">
                                 <i class="fa fas fa-minus delFontClr"></i>
                             </button>
                         </span>
@@ -257,7 +258,11 @@
                                     <p-dataTable [value]="tableJSON['chains']" [rows]="10" [paginator]="true"
                                                  [globalFilter]="gb"
                                                  #dt class="tabledata"
-                                                 [responsive]="true" reorderableColumns="true" [editable]="true">
+                                                 [responsive]="true" reorderableColumns="true" [editable]="true"
+                                                 (onEdit)="OnEdit($event, 'chain')"
+                                                 (onEditComplete)="OnEditComplete($event, 'chain')"
+                                                 (onEditCancel)="OnEditCancel($event, 'chain')"
+                                                 (onRowSelect)="onRowSelection($event, 'chain')">>
                                         <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
                                         <p-column field="nat_chain" header="Chain" class="tabledata"
                                                   filterPlaceholder="Search" [editable]="true">
@@ -300,10 +305,10 @@
                     <div class="ctr">
                         <h4 class="tablehead" style="width: 50%">Group</h4>
                         <span style="width: 50%">
-                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="showDialog('Group')">
+                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="showDialog('group')">
                                 <i class="fa fas fa-plus addFontClr"></i>
                             </button>
-                            <button type="button" class="btn btn-sm btn-info pull-right">
+                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="deleteSelectedRecs('group')">
                                 <i class="fa fas fa-minus delFontClr"></i>
                             </button>
                         </span>
@@ -324,7 +329,11 @@
                                 <p-dataTable [value]="tableJSON['groups']" [rows]="10" [paginator]="true"
                                              [globalFilter]="gb"
                                              #dt class="tabledata"
-                                             [responsive]="true" reorderableColumns="true" [editable]="true">
+                                             [responsive]="true" reorderableColumns="true" [editable]="true"
+                                             (onEdit)="OnEdit($event, 'group')"
+                                             (onEditComplete)="OnEditComplete($event, 'group')"
+                                             (onEditCancel)="OnEditCancel($event, 'group')"
+                                             (onRowSelect)="onRowSelection($event, 'group')">>
 
                                     <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
                                     <p-column field="nat_group" header="Group" class="tabledata"
@@ -411,6 +420,10 @@
     </div>
 </div>
 
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+
+<!--
+
 <p-dialog header="{{currentWidget}}" [(visible)]="display" modal="modal" [responsive]="true" [width]="350"
           [minWidth]="200"
           [minY]="70"><br>
@@ -437,3 +450,4 @@
 
     </div>
 </p-dialog>
+-->

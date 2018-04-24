@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ProfileService} from './profile.servce';
 import {NotificationsService} from 'angular2-notifications';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
+
 
 @Component({
     selector: 'app-maps',
@@ -15,18 +18,14 @@ export class MapsComponent implements OnInit {
     public group: any;
 
     public customerStr: any;
-    public chainStr: any;
 
     public display: any = false;
-    public currentWidget: any = '';
 
     public filteredChainsSingle: any;
     public filteredCustomersSingle: any;
     public filteredGroupsSingle: any;
-    public isDataAvailable: any = false;
-    public cust_cols: any;
-    public chain_cols: any;
-    public group_cols: any;
+    public isDataAvailable: any = false
+    public currentObj: object = {};
 
     public tableJSON: Object = {
         'customers': [
@@ -82,7 +81,7 @@ export class MapsComponent implements OnInit {
         ]
     };
 
-    constructor(private profileService: ProfileService, private notificationsService: NotificationsService) {
+    constructor(private profileService: ProfileService, private notificationsService: NotificationsService, private confirmationService: ConfirmationService) {
         this.getDashboardData('all');
     }
 
@@ -143,15 +142,18 @@ export class MapsComponent implements OnInit {
     }
 
     OnEdit(e, type) {
-        console.log(e, type);
+        console.log('oedit ', e, type);
     }
 
     OnEditComplete(e, type) {
-        console.log(e, type);
+        /*if (e && e.data) {
+            this.currentObj[type] = e.data;
+        }*/
+        console.log('oedit complete ', e, type);
     }
 
     OnEditCancel(e, type) {
-        console.log(e, type);
+        console.log('oedit cancel ', e, type);
     }
 
     getProfile(event, type) {
@@ -170,7 +172,7 @@ export class MapsComponent implements OnInit {
 
         //BETTER WRITE CLEAN METHODS
         switch (type) {
-            case 'Customer':
+            case 'customer':
                 const cust_obj = {
                     'customer': '',
                     'customer_name': '',
@@ -195,7 +197,7 @@ export class MapsComponent implements OnInit {
                     );
                 }
                 break;
-            case 'Chain':
+            case 'chain':
                 const chain_obj = {
                     'nat_chain': '',
                     'description': '',
@@ -221,7 +223,7 @@ export class MapsComponent implements OnInit {
                     );
                 }
                 break;
-            case 'Group':
+            case 'group':
                 const group_obj = {
                     'nat_group': '',
                     'nat_group_description': '',
@@ -257,11 +259,28 @@ export class MapsComponent implements OnInit {
 
     }
 
+    deleteSelectedRecs(type) {
+        if (this.currentObj && this.currentObj[type]) {
+            this.confirmationService.confirm({
+                message: 'Are you sure that you want to perform this action?',
+                accept: () => {
+                    //Actual logic to perform a confirmation
+                }
+            });
+        } else {
+            alert('select something');
+        }
+    }
+
     getDashboardData(card) {
         this.profileService.getDashboardData(card).subscribe(data => {
             this.allCardsResults = data;
             this.results = data;
         });
+    }
+
+    onRowSelection(e, type) {
+        this.currentObj[type] = e.data;
     }
 
     recordSearch() {
