@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import {Dashboard} from './dashboard.interface';
-import {NotificationsService} from "angular2-notifications";
+import {NotificationsService} from 'angular2-notifications';
 
 @Injectable()
 export class DashboardService {
@@ -17,13 +17,10 @@ export class DashboardService {
     public getDashboardData(card): Observable<Object> {
         return this.http.get(AppService.API_ENDPOINT + card)
             .map((res: Response) => res)
-            .catch
-            ((error: any) => {
-                this.handleError(error);
-            });
+            .catch((e: any) => Observable.throw(this.errorHandler(e)));
     }
 
-    private handleError(error: any) {
+    private errorHandler(error: any) {
         const errMsg = (error.message) ? error.message :
             error.status ? `${error.status} - ${error.statusText}` : 'Server error';
         this.notificationsService.error(

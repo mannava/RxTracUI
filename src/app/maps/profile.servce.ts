@@ -5,7 +5,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import {NotificationsService} from "angular2-notifications";
+import {NotificationsService} from 'angular2-notifications';
 
 @Injectable()
 export class ProfileService {
@@ -17,33 +17,24 @@ export class ProfileService {
     public getDashboardData(card): Observable<Object> {
         return this.http.get(AppService.API_ENDPOINT + card)
             .map((res: Response) => res)
-            .catch
-            ((error: any) => {
-                this.handleError(err);
-            });
+            .catch((e: any) => Observable.throw(this.errorHandler(e)));
     }
 
     public getCustData(str, type): Observable<Object> {
 
         return this.http.get(AppService.ISM_ENDPOINT + type + '?searchstring=' + str + '&level=' + 1)
             .map((res: Response) => res)
-            .catch
-            ((error: any) => {
-                this.handleError(err);
-            });
+            .catch((e: any) => Observable.throw(this.errorHandler(e)));
     }
 
     public getProfile(str, type): Observable<Object> {
 
         return this.http.get(AppService.ISM_ENDPOINT + 'getProfile?operation=select&' + '?searchKey=' + str)
             .map((res: Response) => res)
-            .catch
-            ((error: any) => {
-                this.handleError(err);
-            });
+            .catch((e: any) => Observable.throw(this.errorHandler(e)));
     }
 
-    private handleError(error: any) {
+    private errorHandler(error: any) {
         const errMsg = (error.message) ? error.message :
             error.status ? `${error.status} - ${error.statusText}` : 'Server error';
         this.notificationsService.error(
