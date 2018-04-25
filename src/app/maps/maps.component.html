@@ -89,15 +89,23 @@
                     <div class="card-header" data-background-color="red">
                         <div class="ctr">
                             <h4 class="tablehead" style="width: 50%">Customer</h4>
-                            <span style="width: 50%">
-                            <button type="button" class="btn btn-sm btn-info pull-right"
-                                    (click)="showDialog('customer')">
-                                <i class="fa fas fa-plus addFontClr"></i>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="deleteSelectedRecs('customer')">
-                                <i class="fa fas fa-minus delFontClr"></i>
-                            </button>
-                        </span>
+                            <div style="width: 50%">
+                                <div class="btn-group pull-right">
+                                    <button type="button" class="btn-group btn btn-sm btn-info"
+                                            (click)="deleteSelectedRecs('customer')">
+                                        <i class="fa fas fa-trash fa-2x"></i>
+                                    </button>
+                                    <button type="button" class="btn-group btn btn-sm btn-info"
+                                            (click)="addNew('customer')">
+                                        <i class="fa fas fa-plus-square fa-2x"></i>
+                                    </button>
+
+                                    <button type="button" class="btn-group btn btn-sm btn-info"
+                                            (click)="saveTable('customer')">
+                                        <i class="fa fas fa-save fa-2x"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         <p class="category">respective message</p>
                     </div>
@@ -119,7 +127,8 @@
                                                  (onEdit)="OnEdit($event, 'customer')"
                                                  (onEditComplete)="OnEditComplete($event, 'customer')"
                                                  (onEditCancel)="OnEditCancel($event, 'customer')"
-                                                 (onRowSelect)="onRowSelection($event, 'customer')">
+                                                 (onRowSelect)="onRowSelection($event, 'customer')"
+                                                 (onRowUnselect)="onRowUnselect($event, 'customer')">
                                         <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
                                         <p-column field="customer" header="Customer" class="tabledata"
                                                   filterPlaceholder="Search" [editable]="true">
@@ -233,14 +242,23 @@
                     <div class="card-header" data-background-color="red">
                         <div class="ctr">
                             <h4 class="tablehead" style="width: 50%">Chain</h4>
-                            <span style="width: 50%">
-                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="showDialog('chain')">
-                                <i class="fa fas fa-plus addFontClr"></i>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="deleteSelectedRecs('chain')">
-                                <i class="fa fas fa-minus delFontClr"></i>
-                            </button>
-                        </span>
+                            <div style="width: 50%">
+                                <div class="btn-group pull-right">
+                                    <button type="button" class="btn-group btn btn-sm btn-info"
+                                            (click)="deleteSelectedRecs('chain')">
+                                        <i class="fa fas fa-trash fa-2x"></i>
+                                    </button>
+                                    <button type="button" class="btn-group btn btn-sm btn-info"
+                                            (click)="addNew('chain')">
+                                        <i class="fa fas fa-plus-square fa-2x"></i>
+                                    </button>
+
+                                    <button type="button" class="btn-group btn btn-sm btn-info"
+                                            (click)="saveTable('chain')">
+                                        <i class="fa fas fa-save fa-2x"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         <p class="category">respective message</p>
                     </div>
@@ -262,7 +280,8 @@
                                                  (onEdit)="OnEdit($event, 'chain')"
                                                  (onEditComplete)="OnEditComplete($event, 'chain')"
                                                  (onEditCancel)="OnEditCancel($event, 'chain')"
-                                                 (onRowSelect)="onRowSelection($event, 'chain')">>
+                                                 (onRowSelect)="onRowSelection($event, 'chain')"
+                                                 (onRowUnselect)="onRowUnselect($event, 'chain')">
                                         <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
                                         <p-column field="nat_chain" header="Chain" class="tabledata"
                                                   filterPlaceholder="Search" [editable]="true">
@@ -304,23 +323,32 @@
                 <div class="card-header" data-background-color="red">
                     <div class="ctr">
                         <h4 class="tablehead" style="width: 50%">Group</h4>
-                        <span style="width: 50%">
-                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="showDialog('group')">
-                                <i class="fa fas fa-plus addFontClr"></i>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-info pull-right" (click)="deleteSelectedRecs('group')">
-                                <i class="fa fas fa-minus delFontClr"></i>
-                            </button>
-                        </span>
+                        <div style="width: 50%">
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn-group btn btn-sm btn-info"
+                                        (click)="deleteSelectedRecs('group')">
+                                    <i class="fa fas fa-trash fa-2x"></i>
+                                </button>
+                                <button type="button" class="btn-group btn btn-sm btn-info"
+                                        (click)="addNew('group')">
+                                    <i class="fa fas fa-plus-square fa-2x"></i>
+                                </button>
+
+                                <button type="button" class="btn-group btn btn-sm btn-info"
+                                        (click)="saveTable('group')">
+                                    <i class="fa fas fa-save fa-2x"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <p class="category">respective message</p>
                 </div>
                 <div class="card-content">
-                     <div class="ui-widget-header pull-right"
-                          style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
-                         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                         <input #gb type="text" pInputText placeholder="Global Filter">
-                     </div>
+                    <div class="ui-widget-header pull-right"
+                         style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
+                        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                        <input #gb type="text" pInputText placeholder="Global Filter">
+                    </div>
                     <div class="main-content">
                         <div class="container-fluid">
 
@@ -333,7 +361,8 @@
                                              (onEdit)="OnEdit($event, 'group')"
                                              (onEditComplete)="OnEditComplete($event, 'group')"
                                              (onEditCancel)="OnEditCancel($event, 'group')"
-                                             (onRowSelect)="onRowSelection($event, 'group')">>
+                                             (onRowSelect)="onRowSelection($event, 'group')"
+                                             (onRowUnselect)="onRowUnselect($event, 'group')">
 
                                     <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
                                     <p-column field="nat_group" header="Group" class="tabledata"

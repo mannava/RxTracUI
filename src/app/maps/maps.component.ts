@@ -11,7 +11,7 @@ import {ConfirmationService} from 'primeng/api';
     styleUrls: ['./maps.component.css']
 })
 export class MapsComponent implements OnInit {
-    public allCardsResults: any;
+
     public results: any;
     public customer: any;
     public chain: any;
@@ -82,7 +82,6 @@ export class MapsComponent implements OnInit {
     };
 
     constructor(private profileService: ProfileService, private notificationsService: NotificationsService, private confirmationService: ConfirmationService) {
-        this.getDashboardData('all');
     }
 
 
@@ -166,7 +165,7 @@ export class MapsComponent implements OnInit {
         }
     }
 
-    showDialog(type) {
+    addNew(type) {
         //this.display = true;
         //this.currentWidget = widget;
 
@@ -268,19 +267,46 @@ export class MapsComponent implements OnInit {
                 }
             });
         } else {
-            alert('select something');
+            this.notificationsService.info(
+                ' Important Note ',
+                'Should select at least one ' + type,
+                {
+                    timeOut: 1500,
+                    pauseOnHover: true,
+                    clickToClose: false,
+                    maxLength: 0,
+                    maxStack: 1
+                }
+            );
         }
     }
 
-    getDashboardData(card) {
-        this.profileService.getDashboardData(card).subscribe(data => {
-            this.allCardsResults = data;
-            this.results = data;
-        });
+    onRowSelection(e, type) {
+        if (this.currentObj[type]) {
+            this.currentObj[type].push(e.data);
+        } else {
+            this.currentObj[type] = [];
+        }
+
     }
 
-    onRowSelection(e, type) {
-        this.currentObj[type] = e.data;
+
+    onRowUnselect(e, type) {
+
+    }
+
+    saveTable(type) {
+        this.notificationsService.success(
+            type,
+             'Saved successfully.',
+            {
+                timeOut: 1500,
+                pauseOnHover: true,
+                clickToClose: false,
+                maxLength: 0,
+                maxStack: 1
+            }
+        );
     }
 
     recordSearch() {
