@@ -5,12 +5,13 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import {NotificationsService} from "angular2-notifications";
 
 @Injectable()
 export class ProfileService {
     private headers: any;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private notificationsService: NotificationsService) {
     }
 
     public getDashboardData(card): Observable<Object> {
@@ -18,7 +19,7 @@ export class ProfileService {
             .map((res: Response) => res)
             .catch
             ((error: any) => {
-                return Observable.throw(error);
+                this.handleError(err);
             });
     }
 
@@ -28,7 +29,7 @@ export class ProfileService {
             .map((res: Response) => res)
             .catch
             ((error: any) => {
-                return Observable.throw(error);
+                this.handleError(err);
             });
     }
 
@@ -38,7 +39,24 @@ export class ProfileService {
             .map((res: Response) => res)
             .catch
             ((error: any) => {
-                return Observable.throw(error);
+                this.handleError(err);
             });
+    }
+
+    private handleError(error: any) {
+        const errMsg = (error.message) ? error.message :
+            error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+        this.notificationsService.error(
+            ' Server Error ',
+            error.message,
+            {
+                timeOut: 1500,
+                pauseOnHover: true,
+                clickToClose: false,
+                maxLength: 0,
+                maxStack: 1
+            }
+        );
+        return Observable.throw(errMsg);
     }
 };
