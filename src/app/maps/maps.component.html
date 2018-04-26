@@ -111,18 +111,18 @@
                         <p class="category">respective message</p>
                     </div>
                     <div class="card-content">
-                        <div class="ui-widget-header pull-right"
+                       <!-- <div class="ui-widget-header pull-right"
                              style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
                             <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
                             <input #gb type="text" pInputText placeholder="Global Filter">
-                        </div>
+                        </div>-->
                         <div class="main-content">
                             <div class="container-fluid">
 
                                 <div class="row">
 
                                     <p-dataTable [value]="tableJSON['customers']" [rows]="10" [paginator]="true"
-                                                 [globalFilter]="gb"
+
                                                  #dt class="tabledata"
                                                  [responsive]="true" reorderableColumns="true" [editable]="true"
                                                  (onEditInit)="onEditInit($event, 'customer')"
@@ -135,18 +135,19 @@
                                         <p-column field="customer" header="Customer" class="tabledata"
                                                   filterPlaceholder="Search" [editable]="true">
 
-                                            <ng-template pTemplate="editor">
-                                                <p-autoComplete [(ngModel)]="cust_tbl"
+                                            <ng-template pTemplate="editor" let-col let-cust_tbl="rowData">
+                                                <p-autoComplete [(ngModel)]="cust_tbl[col.field]"
                                                                 [suggestions]="filteredCustomersSingle"
                                                                 (completeMethod)="filterSingle($event, 'customer')"
+                                                                (onFocus)="onFocusEnter($event, cust_tbl['nat_customer'])"
                                                                 field="desc"
                                                                 size="35"
                                                                 [minLength]="1">
-                                                    <ng-template let-cust pTemplate="item">
+                                                    <ng-template let-c pTemplate="item">
                                                         <div class="ui-helper-clearfix"
                                                              style="border-bottom:1px solid #D5D5D5">
-                                                            <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
-                                                            <span style="font-size:11px;margin:10px 10px 0 0">{{cust.label}}</span>
+                                                            <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.desc}}</span>
+                                                            <span style="font-size:11px;margin:10px 10px 0 0">{{c.label}}</span>
                                                         </div>
                                                     </ng-template>
 
@@ -264,18 +265,17 @@
                         <p class="category">respective message</p>
                     </div>
                     <div class="card-content">
-                        <div class="ui-widget-header pull-right"
+                        <!--<div class="ui-widget-header pull-right"
                              style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
                             <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
                             <input #gb type="text" pInputText placeholder="Global Filter">
-                        </div>
+                        </div>-->
                         <div class="main-content">
                             <div class="container-fluid">
 
                                 <div class="row">
 
                                     <p-dataTable [value]="tableJSON['chains']" [rows]="10" [paginator]="true"
-                                                 [globalFilter]="gb"
                                                  #dt class="tabledata"
                                                  [responsive]="true" reorderableColumns="true" [editable]="true"
                                                  (onEditInit)="onEditInit($event, 'chain')"
@@ -285,7 +285,7 @@
                                                  (onRowSelect)="onRowSelection($event, 'chain')"
                                                  (onRowUnselect)="onRowUnselect($event, 'chain')">
                                         <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                                        <p-column field="nat_chain" header="Chain" class="tabledata"
+                                        <p-column field="chain_desc" header="Chain" class="tabledata"
                                                   filterPlaceholder="Search" [editable]="true">
                                             <!--<ng-template let-col let-chain="rowData" pTemplate="editor">
                                                 <p-dropdown [(ngModel)]="col.desc" [options]="chain[col.desc]" [autoWidth]="false" [style]="{'width':'100%'}" required="true"  appendTo="body"></p-dropdown>
@@ -294,7 +294,7 @@
                                                 <p-autoComplete [(ngModel)]="chain_tbl[col.field]"
                                                                 [suggestions]="filteredChainsSingle"
                                                                 (completeMethod)="filterSingle($event, 'chain')"
-                                                                (onFocus)="onFocusEnter($event, chain_tbl, col.field)"
+                                                                (onFocus)="onFocusEnter($event, chain_tbl['nat_chain'])"
                                                                 field="desc"
                                                                 size="35"
                                                                 [minLength]="1">
@@ -346,18 +346,17 @@
                     <p class="category">respective message</p>
                 </div>
                 <div class="card-content">
-                    <div class="ui-widget-header pull-right"
+                   <!-- <div class="ui-widget-header pull-right"
                          style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
                         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
                         <input #gb type="text" pInputText placeholder="Global Filter">
-                    </div>
+                    </div>-->
                     <div class="main-content">
                         <div class="container-fluid">
 
                             <div class="row">
 
                                 <p-dataTable [value]="tableJSON['groups']" [rows]="10" [paginator]="true"
-                                             [globalFilter]="gb"
                                              #dt class="tabledata"
                                              [responsive]="true" reorderableColumns="true" [editable]="true"
                                              (onEditInit)="onEditInit($event, 'group')"
@@ -368,34 +367,36 @@
                                              (onRowUnselect)="onRowUnselect($event, 'group')">
 
                                     <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                                    <p-column field="nat_group" header="Group" class="tabledata"
+                                    <p-column field="group_desc" header="Group" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true">
 
-                                        <ng-template pTemplate="editor">
-                                            <p-autoComplete [(ngModel)]="grp_tbl"
-                                                            [suggestions]="filteredGroupsSingle"
-                                                            (completeMethod)="filterSingle($event, 'chain')"
-                                                            field="desc"
-                                                            size="35"
-                                                            [minLength]="1">
-                                                <ng-template let-grp pTemplate="item">
-                                                    <div class="ui-helper-clearfix"
-                                                         style="border-bottom:1px solid #D5D5D5">
-                                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{grp.desc}}</span>
-                                                        <span style="font-size:11px;margin:10px 10px 0 0">{{grp.label}}</span>
-                                                    </div>
-                                                </ng-template>
+                                        
+                                            <ng-template pTemplate="editor" let-col let-group_tbl="rowData">
+                                                <p-autoComplete [(ngModel)]="group_tbl[col.field]"
+                                                                [suggestions]="filteredGroupsSingle"
+                                                                (completeMethod)="filterSingle($event, 'group')"
+                                                                (onFocus)="onFocusEnter($event, group_tbl['nat_group'])"
+                                                                field="desc"
+                                                                size="35"
+                                                                [minLength]="1">
+                                                    <ng-template let-c pTemplate="item">
+                                                        <div class="ui-helper-clearfix"
+                                                             style="border-bottom:1px solid #D5D5D5">
+                                                            <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.desc}}</span>
+                                                            <span style="font-size:11px;margin:10px 10px 0 0">{{c.label}}</span>
+                                                        </div>
+                                                    </ng-template>
 
-                                            </p-autoComplete>
-                                        </ng-template>
+                                                </p-autoComplete>
+                                            </ng-template>
                                     </p-column>
 
-                                    <p-column field="nat_subgroup" header="SubGroup" class="tabledata"
+                                    <p-column field="subgroup_desc" header="SubGroup" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true"></p-column>
 
-                                    <p-column field="nat_region" header="Region" class="tabledata"
+                                    <p-column field="region_desc" header="Region" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true"></p-column>
-                                    <p-column field="nat_district" header="District" class="tabledata"
+                                    <p-column field="district_desc" header="District" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true"></p-column>
                                     <p-column field="profile" header="Profile" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true"></p-column>

@@ -42,6 +42,7 @@ export class MapsComponent implements OnInit {
 
         for (let i = 0; i < results.length; i++) {
             const obj = results[i];
+            //obj['lbl_desc'] = obj.desc + ' - ' + obj.label;
             filtered.push(obj);
         }
         return filtered;
@@ -127,15 +128,13 @@ export class MapsComponent implements OnInit {
         console.log('edit complete ', e, type);
     }
 
-    onFocusEnter(e, x, col) {
+    onFocusEnter(e, field) {
         const target = e.target || e.srcElement || e.currentTarget;
-        /*const idAttr = target.attributes;
-        console.log(idAttr);*/
-
+        target.value = field;
     }
 
     OnEditCancel(e, type) {
-        console.log('edit cancel ', e, type);
+        //console.log('edit cancel ', e, type);
     }
 
     getProfile(event, type) {
@@ -332,6 +331,24 @@ export class MapsComponent implements OnInit {
                     this.tableJSON = data['results'];
                     if (this.tableJSON) {
                         this.isDataAvailable = true;
+                        if (this.tableJSON['customers'].length > 0) {
+                            this.tableJSON['customers'].forEach(function (item) {
+                                item['cust_desc'] = item.customer + ' - ' + item.desc;
+                            });
+                        }
+                        if (this.tableJSON['chains'].length > 0) {
+                            this.tableJSON['chains'].forEach(function (item) {
+                                item['chain_desc'] = item.nat_chain + ' - ' + item.description;
+                            });
+                        }
+                        if (this.tableJSON['groups'].length > 0) {
+                            this.tableJSON['groups'].forEach(function (item) {
+                                item['group_desc'] = item.nat_group + ' - ' + item.nat_group_description;
+                                item['subgroup_desc'] = item.nat_subgroup + ' - ' + item.nat_subgroup_description;
+                                item['region_desc'] = item.nat_region + ' - ' + item.nat_region_description;
+                                item['district_desc'] = item.nat_district + ' - ' + item.nat_district_description;
+                            });
+                        }
 
                     } else {
                         this.notificationsService.error(
