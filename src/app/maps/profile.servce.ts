@@ -29,7 +29,7 @@ export class ProfileService {
     }
 
 
-    public searchQuery(customer, chain, group): Observable<Object> {
+    public searchQuery(customer = '', chain = '', group = ''): Observable<Object> {
 
 
         //http://esswsddp02.mckesson.com:8243/1.0.0/ism/process/customer/assignment?customer=0000000007,0000170173&chain=252,815&group=0230,0550,0392&operation=select

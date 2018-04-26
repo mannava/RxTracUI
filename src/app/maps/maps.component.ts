@@ -314,11 +314,15 @@ export class MapsComponent implements OnInit {
             );
 
         } else {
-            const cust = this.customer && this.customer.desc;
-            const chain = this.chain && this.chain.desc;
-            const group = this.group && this.group.desc;
+            let customer, chain, group;
+            customer = (this.customer && this.customer['desc']) ? this.customer['desc'] : this.customer;
 
-            this.profileService.searchQuery(cust, chain, group).subscribe(data => {
+
+            chain = (this.chain && this.chain['desc']) ? this.chain['desc'] : this.chain;
+
+            group = (this.group && this.group['desc']) ? this.group['desc'] : this.group;
+
+            this.profileService.searchQuery(customer, chain, group).subscribe(data => {
                 if (data && data['responseCode'] === 500) {
                     this.notificationsService.error(
                         'Server Error',
