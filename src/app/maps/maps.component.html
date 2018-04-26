@@ -111,11 +111,11 @@
                         <p class="category">respective message</p>
                     </div>
                     <div class="card-content">
-                       <!-- <div class="ui-widget-header pull-right"
-                             style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
-                            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                            <input #gb type="text" pInputText placeholder="Global Filter">
-                        </div>-->
+                        <!-- <div class="ui-widget-header pull-right"
+                              style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
+                             <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                             <input #gb type="text" pInputText placeholder="Global Filter">
+                         </div>-->
                         <div class="main-content">
                             <div class="container-fluid">
 
@@ -295,6 +295,7 @@
                                                                 [suggestions]="filteredChainsSingle"
                                                                 (completeMethod)="filterSingle($event, 'chain')"
                                                                 (onFocus)="onFocusEnter($event, chain_tbl['nat_chain'])"
+                                                                (onSelect)="onSelectAC($event, 'chain_desc', 'nat_chain', chain_tbl)"
                                                                 field="desc"
                                                                 size="35"
                                                                 [minLength]="1">
@@ -346,11 +347,11 @@
                     <p class="category">respective message</p>
                 </div>
                 <div class="card-content">
-                   <!-- <div class="ui-widget-header pull-right"
-                         style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
-                        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                        <input #gb type="text" pInputText placeholder="Global Filter">
-                    </div>-->
+                    <!-- <div class="ui-widget-header pull-right"
+                          style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
+                         <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                         <input #gb type="text" pInputText placeholder="Global Filter">
+                     </div>-->
                     <div class="main-content">
                         <div class="container-fluid">
 
@@ -370,25 +371,25 @@
                                     <p-column field="group_desc" header="Group" class="tabledata"
                                               filterPlaceholder="Search" [editable]="true">
 
-                                        
-                                            <ng-template pTemplate="editor" let-col let-group_tbl="rowData">
-                                                <p-autoComplete [(ngModel)]="group_tbl[col.field]"
-                                                                [suggestions]="filteredGroupsSingle"
-                                                                (completeMethod)="filterSingle($event, 'group')"
-                                                                (onFocus)="onFocusEnter($event, group_tbl['nat_group'])"
-                                                                field="desc"
-                                                                size="35"
-                                                                [minLength]="1">
-                                                    <ng-template let-c pTemplate="item">
-                                                        <div class="ui-helper-clearfix"
-                                                             style="border-bottom:1px solid #D5D5D5">
-                                                            <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.desc}}</span>
-                                                            <span style="font-size:11px;margin:10px 10px 0 0">{{c.label}}</span>
-                                                        </div>
-                                                    </ng-template>
 
-                                                </p-autoComplete>
-                                            </ng-template>
+                                        <ng-template pTemplate="editor" let-col let-group_tbl="rowData">
+                                            <p-autoComplete [(ngModel)]="group_tbl[col.field]"
+                                                            [suggestions]="filteredGroupsSingle"
+                                                            (completeMethod)="filterSingle($event, 'group')"
+                                                            (onFocus)="onFocusEnter($event, group_tbl['nat_group'])"
+                                                            field="desc"
+                                                            size="35"
+                                                            [minLength]="1">
+                                                <ng-template let-c pTemplate="item">
+                                                    <div class="ui-helper-clearfix"
+                                                         style="border-bottom:1px solid #D5D5D5">
+                                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.desc}}</span>
+                                                        <span style="font-size:11px;margin:10px 10px 0 0">{{c.label}}</span>
+                                                    </div>
+                                                </ng-template>
+
+                                            </p-autoComplete>
+                                        </ng-template>
                                     </p-column>
 
                                     <p-column field="subgroup_desc" header="SubGroup" class="tabledata"

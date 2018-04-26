@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ProfileService} from './profile.servce';
 import {NotificationsService} from 'angular2-notifications';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
@@ -31,6 +31,7 @@ export class MapsComponent implements OnInit {
     public grp_tbl: any;
 
     public tableJSON: Object = {};
+    @ViewChild('dt') dataTable: ElementRef;
 
     constructor(private profileService: ProfileService, private notificationsService: NotificationsService, private confirmationService: ConfirmationService) {
     }
@@ -129,12 +130,19 @@ export class MapsComponent implements OnInit {
     }
 
     onFocusEnter(e, field) {
+        console.log('focusentry');
         const target = e.target || e.srcElement || e.currentTarget;
         target.value = field;
     }
 
     OnEditCancel(e, type) {
         //console.log('edit cancel ', e, type);
+    }
+
+    onSelectAC(acObj, childObj, attr, tableRow) {
+        tableRow[attr] = acObj.desc;
+        tableRow['description'] = acObj.label;
+        tableRow[childObj] = acObj.desc + ' - ' + acObj.label;
     }
 
     getProfile(event, type) {
