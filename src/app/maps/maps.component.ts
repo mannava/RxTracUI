@@ -38,14 +38,13 @@ export class MapsComponent implements OnInit {
 
     filterResult(query, results: any): any {
         const filtered: any[] = [];
-        if (results.results) {
-            results = results.results;
-            for (let i = 0; i < results.length; i++) {
-                const obj = results[i];
-                filtered.push(obj);
-            }
-            return filtered;
+
+
+        for (let i = 0; i < results.length; i++) {
+            const obj = results[i];
+            filtered.push(obj);
         }
+        return filtered;
     }
 
     filterSingle(event, type) {
@@ -56,9 +55,9 @@ export class MapsComponent implements OnInit {
                 if (data && data['responseCode'] === 500) {
                     this.notificationsService.error(
                         'Error',
-                        'No matching Records Found',
+                        'Does not match with any ' + type,
                         {
-                            timeOut: 1500,
+                            timeOut: 2000,
                             pauseOnHover: true,
                             clickToClose: false,
                             maxLength: 0,
@@ -72,13 +71,13 @@ export class MapsComponent implements OnInit {
                 } else {
                     switch (type) {
                         case 'customer':
-                            this.filteredCustomersSingle = this.filterResult(query, data);
+                            this.filteredCustomersSingle = this.filterResult(query, data['results']);
                             break;
                         case 'chain':
-                            this.filteredChainsSingle = this.filterResult(query, data);
+                            this.filteredChainsSingle = this.filterResult(query, data['results']);
                             break;
                         case 'group':
-                            this.filteredGroupsSingle = this.filterResult(query, data);
+                            this.filteredGroupsSingle = this.filterResult(query, data['results']);
                             break;
                         default:
                     }
@@ -110,8 +109,8 @@ export class MapsComponent implements OnInit {
     }
 
     onEditInit(e, type) {
-        console.log(this.cust_tbl, this.chain_tbl, this.grp_tbl);
-        console.log('init ', e.data, type);
+        //console.log(this.cust_tbl, this.chain_tbl, this.grp_tbl);
+        //console.log('init ', e.data, type);
     }
 
     OnEdit(e, type) {
@@ -125,8 +124,11 @@ export class MapsComponent implements OnInit {
         console.log('edit complete ', e, type);
     }
 
-    onFocus(e, x, col) {
-        console.log('foucs ', e, x, col);
+    onFocusEnter(e, x, col) {
+        const target = e.target || e.srcElement || e.currentTarget;
+        /*const idAttr = target.attributes;
+        console.log(idAttr);*/
+
     }
 
     OnEditCancel(e, type) {
@@ -165,7 +167,7 @@ export class MapsComponent implements OnInit {
                         'Error',
                         'Should not allowed more than one empty row.',
                         {
-                            timeOut: 1500,
+                            timeOut: 2000,
                             pauseOnHover: true,
                             clickToClose: false,
                             maxLength: 0,
@@ -191,7 +193,7 @@ export class MapsComponent implements OnInit {
                         'Error',
                         'Should not allowed more than one empty row.',
                         {
-                            timeOut: 1500,
+                            timeOut: 2000,
                             pauseOnHover: true,
                             clickToClose: false,
                             maxLength: 0,
@@ -221,7 +223,7 @@ export class MapsComponent implements OnInit {
                         'Error',
                         'Should not allowed more than one empty row.',
                         {
-                            timeOut: 1500,
+                            timeOut: 2000,
                             pauseOnHover: true,
                             clickToClose: false,
                             maxLength: 0,
@@ -249,7 +251,7 @@ export class MapsComponent implements OnInit {
                 ' Important Note ',
                 'Should select at least one ' + type,
                 {
-                    timeOut: 1500,
+                    timeOut: 2000,
                     pauseOnHover: true,
                     clickToClose: false,
                     maxLength: 0,
@@ -278,7 +280,7 @@ export class MapsComponent implements OnInit {
             type,
             'Saved successfully.',
             {
-                timeOut: 1500,
+                timeOut: 2000,
                 pauseOnHover: true,
                 clickToClose: false,
                 maxLength: 0,
@@ -291,9 +293,9 @@ export class MapsComponent implements OnInit {
         if (!this.customer && !this.chain && !this.group) {
             this.notificationsService.error(
                 'Error',
-                'No content perform search',
+                'Enter content to perform search',
                 {
-                    timeOut: 1500,
+                    timeOut: 2000,
                     pauseOnHover: true,
                     clickToClose: false,
                     maxLength: 0,
@@ -307,23 +309,41 @@ export class MapsComponent implements OnInit {
             const group = this.group && this.group.desc;
 
             this.profileService.searchQuery(cust, chain, group).subscribe(data => {
-                this.tableJSON = data['results'];
-                if (this.tableJSON) {
-                    this.isDataAvailable = true;
-
-                } else {
+                if (data && data['responseCode'] === 500) {
                     this.notificationsService.error(
                         'Server Error',
-                        'same',
+                         data['message'],
                         {
-                            timeOut: 1500,
+                            timeOut: 2000,
                             pauseOnHover: true,
                             clickToClose: false,
                             maxLength: 0,
                             maxStack: 1
                         }
                     );
-                    this.isDataAvailable = false;
+                    this.filteredCustomersSingle = [];
+                    this.filteredChainsSingle = [];
+                    this.filteredGroupsSingle = [];
+
+                } else {
+                    this.tableJSON = data['results'];
+                    if (this.tableJSON) {
+                        this.isDataAvailable = true;
+
+                    } else {
+                        this.notificationsService.error(
+                            'Server Error',
+                            'same',
+                            {
+                                timeOut: 2000,
+                                pauseOnHover: true,
+                                clickToClose: false,
+                                maxLength: 0,
+                                maxStack: 1
+                            }
+                        );
+                        this.isDataAvailable = false;
+                    }
                 }
                 /* if (data && data.status === 'failure') {
 

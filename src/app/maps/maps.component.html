@@ -42,10 +42,10 @@
                                             size="35"
                                             placeholder="Chain"
                                             [minLength]="1">
-                                <ng-template let-cust pTemplate="item">
+                                <ng-template let-chain pTemplate="item">
                                     <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
-                                        <span style="font-size:11px;margin:10px 10px 0 0">{{cust.label}}</span>
+                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{chain.desc}}</span>
+                                        <span style="font-size:11px;margin:10px 10px 0 0">{{chain.label}}</span>
                                     </div>
                                 </ng-template>
 
@@ -63,10 +63,10 @@
                                             size="35"
                                             placeholder="Group"
                                             [minLength]="1">
-                                <ng-template let-cust pTemplate="item">
+                                <ng-template let-grp pTemplate="item">
                                     <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
-                                        <span style="font-size:11px;margin:10px 10px 0 0">{{cust.label}}</span>
+                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{grp.desc}}</span>
+                                        <span style="font-size:11px;margin:10px 10px 0 0">{{grp.label}}</span>
                                     </div>
                                 </ng-template>
 
@@ -293,7 +293,7 @@
                                                 <p-autoComplete [(ngModel)]="chain_tbl[col.field]"
                                                                 [suggestions]="filteredChainsSingle"
                                                                 (completeMethod)="filterSingle($event, 'chain')"
-                                                                (onFocus)="onFocus($event, chain_tbl, col.field)"
+                                                                (onFocus)="onFocusEnter($event, chain_tbl, col.field)"
                                                                 field="desc"
                                                                 size="35"
                                                                 [minLength]="1">
