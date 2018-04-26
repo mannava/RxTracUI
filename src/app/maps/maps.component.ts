@@ -53,17 +53,35 @@ export class MapsComponent implements OnInit {
         if (query && query.length > 2) {
             this.customerStr = query;
             this.profileService.getCustData(query, type).subscribe(data => {
-                switch (type) {
-                    case 'customer':
-                        this.filteredCustomersSingle = this.filterResult(query, data);
-                        break;
-                    case 'chain':
-                        this.filteredChainsSingle = this.filterResult(query, data);
-                        break;
-                    case 'group':
-                        this.filteredGroupsSingle = this.filterResult(query, data);
-                        break;
-                    default:
+                if (data && data['responseCode'] === 500) {
+                    this.notificationsService.error(
+                        'Error',
+                        'No matching Records Found',
+                        {
+                            timeOut: 1500,
+                            pauseOnHover: true,
+                            clickToClose: false,
+                            maxLength: 0,
+                            maxStack: 1
+                        }
+                    );
+                    this.filteredCustomersSingle = [];
+                    this.filteredChainsSingle = [];
+                    this.filteredGroupsSingle = [];
+
+                } else {
+                    switch (type) {
+                        case 'customer':
+                            this.filteredCustomersSingle = this.filterResult(query, data);
+                            break;
+                        case 'chain':
+                            this.filteredChainsSingle = this.filterResult(query, data);
+                            break;
+                        case 'group':
+                            this.filteredGroupsSingle = this.filterResult(query, data);
+                            break;
+                        default:
+                    }
                 }
             });
         }
@@ -270,36 +288,51 @@ export class MapsComponent implements OnInit {
     }
 
     recordSearch() {
-        const cust = this.customer || this.customer.desc;
-        const chain = this.chain || this.chain.desc;
-        const group = this.group || this.group.desc;
+        if (!this.customer && !this.chain && !this.group) {
+            this.notificationsService.error(
+                'Error',
+                'No content perform search',
+                {
+                    timeOut: 1500,
+                    pauseOnHover: true,
+                    clickToClose: false,
+                    maxLength: 0,
+                    maxStack: 1
+                }
+            );
 
-        this.profileService.searchQuery(cust, chain, group).subscribe(data => {
-            this.tableJSON = data['results'];
-            if (this.tableJSON) {
-                this.isDataAvailable = true;
+        } else {
+            const cust = this.customer && this.customer.desc;
+            const chain = this.chain && this.chain.desc;
+            const group = this.group && this.group.desc;
 
-            } else {
-                this.notificationsService.error(
-                    'Server Error',
-                    'same',
-                    {
-                        timeOut: 1500,
-                        pauseOnHover: true,
-                        clickToClose: false,
-                        maxLength: 0,
-                        maxStack: 1
-                    }
-                );
-                this.isDataAvailable = false;
-            }
-            /* if (data && data.status === 'failure') {
+            this.profileService.searchQuery(cust, chain, group).subscribe(data => {
+                this.tableJSON = data['results'];
+                if (this.tableJSON) {
+                    this.isDataAvailable = true;
 
-             } else {
-                 this.isDataAvailable = true;
-             }*/
+                } else {
+                    this.notificationsService.error(
+                        'Server Error',
+                        'same',
+                        {
+                            timeOut: 1500,
+                            pauseOnHover: true,
+                            clickToClose: false,
+                            maxLength: 0,
+                            maxStack: 1
+                        }
+                    );
+                    this.isDataAvailable = false;
+                }
+                /* if (data && data.status === 'failure') {
 
-        });
-        //this.isDataAvailable = !this.isDataAvailable ;
+                 } else {
+                     this.isDataAvailable = true;
+                 }*/
+
+            });
+            //this.isDataAvailable = !this.isDataAvailable ;
+        }
     }
 }
