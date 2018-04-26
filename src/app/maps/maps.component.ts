@@ -48,11 +48,14 @@ export class MapsComponent implements OnInit {
     }
 
     filterSingle(event, type) {
+        const comp = event.originalEvent.target;
+        comp.style = 'border-color:none;color:none';
         const query = event.query;
         if (query && query.length > 2) {
             this.customerStr = query;
             this.profileService.getCustData(query, type).subscribe(data => {
                 if (data && data['responseCode'] === 500) {
+                    comp.style = 'border-color:red;color:red';
                     this.notificationsService.error(
                         'Error',
                         'Does not match with any ' + type,
@@ -312,7 +315,7 @@ export class MapsComponent implements OnInit {
                 if (data && data['responseCode'] === 500) {
                     this.notificationsService.error(
                         'Server Error',
-                         data['message'],
+                        data['message'],
                         {
                             timeOut: 2000,
                             pauseOnHover: true,
