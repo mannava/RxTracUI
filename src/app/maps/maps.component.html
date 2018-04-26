@@ -124,6 +124,7 @@
                                                  [globalFilter]="gb"
                                                  #dt class="tabledata"
                                                  [responsive]="true" reorderableColumns="true" [editable]="true"
+                                                 (onEditInit)="onEditInit($event, 'customer')"
                                                  (onEdit)="OnEdit($event, 'customer')"
                                                  (onEditComplete)="OnEditComplete($event, 'customer')"
                                                  (onEditCancel)="OnEditCancel($event, 'customer')"
@@ -134,12 +135,11 @@
                                                   filterPlaceholder="Search" [editable]="true">
 
                                             <ng-template pTemplate="editor">
-                                                <p-autoComplete [(ngModel)]="customer"
+                                                <p-autoComplete [(ngModel)]="cust_tbl"
                                                                 [suggestions]="filteredCustomersSingle"
                                                                 (completeMethod)="filterSingle($event, 'customer')"
                                                                 field="desc"
                                                                 size="35"
-                                                                placeholder="Customer"
                                                                 [minLength]="1">
                                                     <ng-template let-cust pTemplate="item">
                                                         <div class="ui-helper-clearfix"
@@ -277,6 +277,7 @@
                                                  [globalFilter]="gb"
                                                  #dt class="tabledata"
                                                  [responsive]="true" reorderableColumns="true" [editable]="true"
+                                                 (onEditInit)="onEditInit($event, 'chain')"
                                                  (onEdit)="OnEdit($event, 'chain')"
                                                  (onEditComplete)="OnEditComplete($event, 'chain')"
                                                  (onEditCancel)="OnEditCancel($event, 'chain')"
@@ -288,13 +289,13 @@
                                             <!--<ng-template let-col let-chain="rowData" pTemplate="editor">
                                                 <p-dropdown [(ngModel)]="col.desc" [options]="chain[col.desc]" [autoWidth]="false" [style]="{'width':'100%'}" required="true"  appendTo="body"></p-dropdown>
                                             </ng-template>-->
-                                            <ng-template pTemplate="editor" let-col let-chain="rowData">
-                                                <p-autoComplete [(ngModel)]="chain[col.desc]"
+                                            <ng-template pTemplate="editor" let-col let-chain_tbl="rowData">
+                                                <p-autoComplete [(ngModel)]="chain_tbl[col.field]"
                                                                 [suggestions]="filteredChainsSingle"
                                                                 (completeMethod)="filterSingle($event, 'chain')"
+                                                                (onFocus)="onFocus($event, chain_tbl, col.field)"
                                                                 field="desc"
                                                                 size="35"
-                                                                placeholder="Chain"
                                                                 [minLength]="1">
                                                     <ng-template let-c pTemplate="item">
                                                         <div class="ui-helper-clearfix"
@@ -358,6 +359,7 @@
                                              [globalFilter]="gb"
                                              #dt class="tabledata"
                                              [responsive]="true" reorderableColumns="true" [editable]="true"
+                                             (onEditInit)="onEditInit($event, 'group')"
                                              (onEdit)="OnEdit($event, 'group')"
                                              (onEditComplete)="OnEditComplete($event, 'group')"
                                              (onEditCancel)="OnEditCancel($event, 'group')"
@@ -369,18 +371,17 @@
                                               filterPlaceholder="Search" [editable]="true">
 
                                         <ng-template pTemplate="editor">
-                                            <p-autoComplete [(ngModel)]="group"
+                                            <p-autoComplete [(ngModel)]="grp_tbl"
                                                             [suggestions]="filteredGroupsSingle"
                                                             (completeMethod)="filterSingle($event, 'chain')"
                                                             field="desc"
                                                             size="35"
-                                                            placeholder="Group"
                                                             [minLength]="1">
-                                                <ng-template let-group pTemplate="item">
+                                                <ng-template let-grp pTemplate="item">
                                                     <div class="ui-helper-clearfix"
                                                          style="border-bottom:1px solid #D5D5D5">
-                                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{group.desc}}</span>
-                                                        <span style="font-size:11px;margin:10px 10px 0 0">{{group.label}}</span>
+                                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{grp.desc}}</span>
+                                                        <span style="font-size:11px;margin:10px 10px 0 0">{{grp.label}}</span>
                                                     </div>
                                                 </ng-template>
 

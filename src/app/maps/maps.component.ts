@@ -24,62 +24,13 @@ export class MapsComponent implements OnInit {
     public filteredChainsSingle: any;
     public filteredCustomersSingle: any;
     public filteredGroupsSingle: any;
-    public isDataAvailable: any = false
+    public isDataAvailable: any = false;
     public currentObj: object = {};
+    public cust_tbl: any;
+    public chain_tbl: any;
+    public grp_tbl: any;
 
-    public tableJSON: Object = {
-        'customers': [
-            {
-                'customer': '0000170173',
-                'customer_name': 'ABC PHARMACY',
-                'profile': '01',
-                'profile_name': 'Profile ab'
-            }
-        ],
-        'chains': [
-            {
-                'nat_chain': '252',
-                'description': 'RITE AID DSD',
-                'plant': '',
-                'profile': '96',
-                'profile_name': 'Rite Aid'
-            },
-            {
-                'nat_chain': '815',
-                'description': 'CVS HEALTH DSD',
-                'plant': '',
-                'profile': 'ZR',
-                'profile_name': 'CVS'
-            },
-            {
-                'nat_chain': '953',
-                'description': 'MEIJER',
-                'plant': '',
-                'profile': '3B',
-                'profile_name': 'Meijer'
-            },
-            {
-                'nat_chain': '321',
-                'description': 'WEGMAN',
-                'plant': '8165',
-                'profile': '01',
-                'profile_name': 'Profile ab'
-            }
-        ],
-        'groups': [
-            {
-                'nat_group': '0392',
-                'nat_group_description': 'ALBERTSONS',
-                'nat_subgroup': '000007',
-                'nat_subgroup_description': 'ALBERTSONS-SAFEWAY',
-                'nat_region': '',
-                'nat_district': '',
-                'plant': '',
-                'profile': 'H)',
-                'profile_name': 'Albertsons-Safeway'
-            }
-        ]
-    };
+    public tableJSON: Object = {};
 
     constructor(private profileService: ProfileService, private notificationsService: NotificationsService, private confirmationService: ConfirmationService) {
     }
@@ -140,19 +91,28 @@ export class MapsComponent implements OnInit {
 
     }
 
+    onEditInit(e, type) {
+        console.log(this.cust_tbl, this.chain_tbl, this.grp_tbl);
+        console.log('init ', e.data, type);
+    }
+
     OnEdit(e, type) {
-        console.log('oedit ', e, type);
+        console.log('edit ', e, type);
     }
 
     OnEditComplete(e, type) {
         /*if (e && e.data) {
             this.currentObj[type] = e.data;
         }*/
-        console.log('oedit complete ', e, type);
+        console.log('edit complete ', e, type);
+    }
+
+    onFocus(e, x, col) {
+        console.log('foucs ', e, x, col);
     }
 
     OnEditCancel(e, type) {
-        console.log('oedit cancel ', e, type);
+        console.log('edit cancel ', e, type);
     }
 
     getProfile(event, type) {
@@ -298,7 +258,7 @@ export class MapsComponent implements OnInit {
     saveTable(type) {
         this.notificationsService.success(
             type,
-             'Saved successfully.',
+            'Saved successfully.',
             {
                 timeOut: 1500,
                 pauseOnHover: true,
@@ -310,6 +270,36 @@ export class MapsComponent implements OnInit {
     }
 
     recordSearch() {
-        this.isDataAvailable = !this.isDataAvailable;
+        const cust = this.customer || this.customer.desc;
+        const chain = this.chain || this.chain.desc;
+        const group = this.group || this.group.desc;
+
+        this.profileService.searchQuery(cust, chain, group).subscribe(data => {
+            this.tableJSON = data['results'];
+            if (this.tableJSON) {
+                this.isDataAvailable = true;
+
+            } else {
+                this.notificationsService.error(
+                    'Server Error',
+                    'same',
+                    {
+                        timeOut: 1500,
+                        pauseOnHover: true,
+                        clickToClose: false,
+                        maxLength: 0,
+                        maxStack: 1
+                    }
+                );
+                this.isDataAvailable = false;
+            }
+            /* if (data && data.status === 'failure') {
+
+             } else {
+                 this.isDataAvailable = true;
+             }*/
+
+        });
+        //this.isDataAvailable = !this.isDataAvailable ;
     }
 }

@@ -14,12 +14,6 @@ export class ProfileService {
     constructor(private http: HttpClient, private notificationsService: NotificationsService) {
     }
 
-    public getDashboardData(card): Observable<Object> {
-        return this.http.get(AppService.API_ENDPOINT + card)
-            .map((res: Response) => res)
-            .catch((e: any) => Observable.throw(this.errorHandler(e)));
-    }
-
     public getCustData(str, type): Observable<Object> {
 
         return this.http.get(AppService.ISM_ENDPOINT + type + '?searchstring=' + str + '&level=' + 1)
@@ -30,6 +24,18 @@ export class ProfileService {
     public getProfile(str, type): Observable<Object> {
 
         return this.http.get(AppService.ISM_ENDPOINT + 'getProfile?operation=select&' + '?searchKey=' + str)
+            .map((res: Response) => res)
+            .catch((e: any) => Observable.throw(this.errorHandler(e)));
+    }
+
+
+    public searchQuery(customer, chain, group): Observable<Object> {
+
+
+        //http://esswsddp02.mckesson.com:8243/1.0.0/ism/process/customer/assignment?customer=0000000007,0000170173&chain=252,815&group=0230,0550,0392&operation=select
+
+
+        return this.http.get(AppService.ISM_ENDPOINT + 'customer/assignment?customer=' + customer + '&chain=' + chain + '&group=' + group + '&operation=select')
             .map((res: Response) => res)
             .catch((e: any) => Observable.throw(this.errorHandler(e)));
     }
