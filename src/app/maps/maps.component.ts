@@ -11,51 +11,67 @@ import {ConfirmationService} from 'primeng/api';
     styleUrls: ['./maps.component.css']
 })
 export class MapsComponent implements OnInit {
-
-    public results: any;
     public customer: any;
     public chain: any;
     public group: any;
 
-    public customerStr: any;
-
-    public display: any = false;
-
-    public filteredChainsSingle: any;
-    public filteredCustomersSingle: any;
-    public filteredGroupsSingle: any;
+    public filteredChainsISM: any;
+    public filteredCustomersISM: any;
+    public filteredGroupsISM: any;
+    public filteredProfile: any;
     public isDataAvailable: any = false;
     public currentObj: object = {};
-    public cust_tbl: any;
-    public chain_tbl: any;
-    public grp_tbl: any;
 
     public tableJSON: Object = {};
-    @ViewChild('dt') dataTable: ElementRef;
 
     constructor(private profileService: ProfileService, private notificationsService: NotificationsService, private confirmationService: ConfirmationService) {
     }
 
-
     filterResult(query, results: any): any {
         const filtered: any[] = [];
-
-
         for (let i = 0; i < results.length; i++) {
             const obj = results[i];
-            //obj['lbl_desc'] = obj.desc + ' - ' + obj.label;
             filtered.push(obj);
         }
         return filtered;
     }
 
-    filterSingle(event, type) {
+    filterProfile(event) {
         const comp = event.originalEvent.target;
         comp.style = 'border-color:none;color:none';
         const query = event.query;
         if (query && query.length > 2) {
-            this.customerStr = query;
-            this.profileService.getCustData(query, type).subscribe(data => {
+            this.profileService.getProfile(query).subscribe(data => {
+                if (data && data['responseCode'] === 500) {
+                    comp.style = 'border-color:red;color:red';
+                    this.notificationsService.error(
+                        'Error',
+                        'Does not match with any profile.',
+                        {
+                            timeOut: 2000,
+                            pauseOnHover: true,
+                            clickToClose: false,
+                            maxLength: 0,
+                            maxStack: 1
+                        }
+                    );
+                    this.filteredCustomersISM = [];
+                    this.filteredChainsISM = [];
+                    this.filteredGroupsISM = [];
+
+                } else {
+                    this.filteredProfile = this.filterResult(query, data['results']);
+                }
+            });
+        }
+    }
+
+    filterISM(event, type, level = 1, group = '', subgroup = '', region = '', district = '') {
+        const comp = event.originalEvent.target;
+        comp.style = 'border-color:none;color:none';
+        const query = event.query;
+        if (query && query.length > 2) {
+            this.profileService.getCustData(query, type, level, group).subscribe(data => {
                 if (data && data['responseCode'] === 500) {
                     comp.style = 'border-color:red;color:red';
                     this.notificationsService.error(
@@ -69,20 +85,20 @@ export class MapsComponent implements OnInit {
                             maxStack: 1
                         }
                     );
-                    this.filteredCustomersSingle = [];
-                    this.filteredChainsSingle = [];
-                    this.filteredGroupsSingle = [];
+                    this.filteredCustomersISM = [];
+                    this.filteredChainsISM = [];
+                    this.filteredGroupsISM = [];
 
                 } else {
                     switch (type) {
                         case 'customer':
-                            this.filteredCustomersSingle = this.filterResult(query, data['results']);
+                            this.filteredCustomersISM = this.filterResult(query, data['results']);
                             break;
                         case 'chain':
-                            this.filteredChainsSingle = this.filterResult(query, data['results']);
+                            this.filteredChainsISM = this.filterResult(query, data['results']);
                             break;
                         case 'group':
-                            this.filteredGroupsSingle = this.filterResult(query, data['results']);
+                            this.filteredGroupsISM = this.filterResult(query, data['results']);
                             break;
                         default:
                     }
@@ -114,19 +130,12 @@ export class MapsComponent implements OnInit {
     }
 
     onEditInit(e, type) {
-        //console.log(this.cust_tbl, this.chain_tbl, this.grp_tbl);
-        //console.log('init ', e.data, type);
     }
 
     OnEdit(e, type) {
-       // console.log('edit ', e, type);
     }
 
     OnEditComplete(e, type) {
-        /*if (e && e.data) {
-            this.currentObj[type] = e.data;
-        }*/
-       // console.log('edit complete ', e, type);
     }
 
     onFocusEnter(e, field) {
@@ -146,21 +155,7 @@ export class MapsComponent implements OnInit {
         console.log(tableRow);
     }
 
-    getProfile(event, type) {
-        const query = event.query;
-        if (query && query.length > 2) {
-            this.customerStr = query;
-            this.profileService.getProfile(query, type).subscribe(data => {
-                console.log(data);
-            });
-        }
-    }
-
     addNew(type) {
-        //this.display = true;
-        //this.currentWidget = widget;
-
-        //BETTER WRITE CLEAN METHODS
         switch (type) {
             case 'customer':
                 const cust_obj = {
@@ -336,9 +331,9 @@ export class MapsComponent implements OnInit {
                             maxStack: 1
                         }
                     );
-                    this.filteredCustomersSingle = [];
-                    this.filteredChainsSingle = [];
-                    this.filteredGroupsSingle = [];
+                    this.filteredCustomersISM = [];
+                    this.filteredChainsISM = [];
+                    this.filteredGroupsISM = [];
 
                 } else {
                     this.tableJSON = data['results'];

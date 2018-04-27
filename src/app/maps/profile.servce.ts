@@ -14,14 +14,14 @@ export class ProfileService {
     constructor(private http: HttpClient, private notificationsService: NotificationsService) {
     }
 
-    public getCustData(str, type): Observable<Object> {
+    public getCustData(str, type, level = 1, group = '', subgroup = '', region = '', district = ''): Observable<Object> {
 
-        return this.http.get(AppService.ISM_ENDPOINT + type + '?searchstring=' + str + '&level=' + 1)
+        return this.http.get(AppService.ISM_ENDPOINT + type + '?searchstring=' + str + '&level=' + level + '&group=' + group + '&subgroup=' + subgroup + '&region=' + region + '&district=' + district)
             .map((res: Response) => res)
             .catch((e: any) => Observable.throw(this.errorHandler(e)));
     }
 
-    public getProfile(str, type): Observable<Object> {
+    public getProfile(str): Observable<Object> {
 
         return this.http.get(AppService.ISM_ENDPOINT + 'getProfile?operation=select&' + '?searchKey=' + str)
             .map((res: Response) => res)
