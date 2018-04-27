@@ -7,7 +7,7 @@ export class AppService {
     public static version: string = '1.0.0/';
     public static port: string = ':8243/';
 
-    public static ISM_DEV_ENDPOINT = 'http://ism-dev.app.dev-west.paas.mckesson.com/';
+    public static ISM_DEV_ENDPOINT = 'https://ism-dev.app.dev-west.paas.mckesson.com/';
 
     //public static ISM_ENDPOINT = 'http://esswsddp02.mckesson.com' + API_ENDPOINT.port + API_ENDPOINT.version + 'ism/process/';
 

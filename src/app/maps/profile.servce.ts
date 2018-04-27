@@ -23,7 +23,7 @@ export class ProfileService {
 
     public getProfile(str): Observable<Object> {
 
-        return this.http.get(AppService.ISM_ENDPOINT + 'getProfile?operation=select&' + '?searchKey=' + str)
+        return this.http.get(AppService.ISM_DEV_ENDPOINT + 'getProfile?operation=select&' + 'searchKey=' + str)
             .map((res: Response) => res)
             .catch((e: any) => Observable.throw(this.errorHandler(e)));
     }

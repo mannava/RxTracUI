@@ -30,8 +30,7 @@ export class MapsComponent implements OnInit {
     filterResult(query, results: any): any {
         const filtered: any[] = [];
         for (let i = 0; i < results.length; i++) {
-            const obj = results[i];
-            filtered.push(obj);
+            filtered.push(results[i]);
         }
         return filtered;
     }
@@ -40,7 +39,7 @@ export class MapsComponent implements OnInit {
         const comp = event.originalEvent.target;
         comp.style = 'border-color:none;color:none';
         const query = event.query;
-        if (query && query.length > 2) {
+        if (query && query.length > 0) {
             this.profileService.getProfile(query).subscribe(data => {
                 if (data && data['responseCode'] === 500) {
                     comp.style = 'border-color:red;color:red';
@@ -60,7 +59,8 @@ export class MapsComponent implements OnInit {
                     this.filteredGroupsISM = [];
 
                 } else {
-                    this.filteredProfile = this.filterResult(query, data['results']);
+                    const result = data['results'][0]['programs'];
+                    this.filteredProfile = result;
                 }
             });
         }
@@ -92,13 +92,13 @@ export class MapsComponent implements OnInit {
                 } else {
                     switch (type) {
                         case 'customer':
-                            this.filteredCustomersISM = this.filterResult(query, data['results']);
+                            this.filteredCustomersISM = data['results'];
                             break;
                         case 'chain':
-                            this.filteredChainsISM = this.filterResult(query, data['results']);
+                            this.filteredChainsISM = data['results'];
                             break;
                         case 'group':
-                            this.filteredGroupsISM = this.filterResult(query, data['results']);
+                            this.filteredGroupsISM = data['results'];
                             break;
                         default:
                     }
