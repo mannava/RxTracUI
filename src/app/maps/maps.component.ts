@@ -119,18 +119,18 @@ export class MapsComponent implements OnInit {
     }
 
     OnEdit(e, type) {
-        console.log('edit ', e, type);
+       // console.log('edit ', e, type);
     }
 
     OnEditComplete(e, type) {
         /*if (e && e.data) {
             this.currentObj[type] = e.data;
         }*/
-        console.log('edit complete ', e, type);
+       // console.log('edit complete ', e, type);
     }
 
     onFocusEnter(e, field) {
-        console.log('focusentry');
+        //console.log('focusentry', e.target, field);
         const target = e.target || e.srcElement || e.currentTarget;
         target.value = field;
     }
@@ -143,6 +143,7 @@ export class MapsComponent implements OnInit {
         tableRow[attr] = acObj.desc;
         tableRow['description'] = acObj.label;
         tableRow[childObj] = acObj.desc + ' - ' + acObj.label;
+        console.log(tableRow);
     }
 
     getProfile(event, type) {

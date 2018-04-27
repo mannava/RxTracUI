@@ -132,7 +132,7 @@
                                                  (onRowSelect)="onRowSelection($event, 'customer')"
                                                  (onRowUnselect)="onRowUnselect($event, 'customer')">
                                         <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                                        <p-column field="customer" header="Customer" class="tabledata"
+                                        <p-column field="cust_desc" header="Customer" class="tabledata"
                                                   filterPlaceholder="Search" [editable]="true">
 
                                             <ng-template pTemplate="editor" let-col let-cust_tbl="rowData">
@@ -140,6 +140,7 @@
                                                                 [suggestions]="filteredCustomersSingle"
                                                                 (completeMethod)="filterSingle($event, 'customer')"
                                                                 (onFocus)="onFocusEnter($event, cust_tbl['nat_customer'])"
+                                                                (onSelect)="onSelectAC($event, 'cust_desc', 'nat_customer', chain_tbl)"
                                                                 field="desc"
                                                                 size="35"
                                                                 [minLength]="1">
@@ -377,6 +378,7 @@
                                                             [suggestions]="filteredGroupsSingle"
                                                             (completeMethod)="filterSingle($event, 'group')"
                                                             (onFocus)="onFocusEnter($event, group_tbl['nat_group'])"
+                                                            (onSelect)="onSelectAC($event, 'group_desc', 'nat_group', group_tbl)"
                                                             field="desc"
                                                             size="35"
                                                             [minLength]="1">
