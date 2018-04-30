@@ -11,6 +11,7 @@ import {ConfirmationService} from 'primeng/api';
     styleUrls: ['./maps.component.css']
 })
 export class MapsComponent implements OnInit {
+    @ViewChild('dt', {read: ElementRef}) dt: ElementRef;
     public customer: any;
     public chain: any;
     public group: any;
@@ -25,14 +26,6 @@ export class MapsComponent implements OnInit {
     public tableJSON: Object = {};
 
     constructor(private profileService: ProfileService, private notificationsService: NotificationsService, private confirmationService: ConfirmationService) {
-    }
-
-    filterResult(query, results: any): any {
-        const filtered: any[] = [];
-        for (let i = 0; i < results.length; i++) {
-            filtered.push(results[i]);
-        }
-        return filtered;
     }
 
     filterProfile(event) {
@@ -59,8 +52,10 @@ export class MapsComponent implements OnInit {
                     this.filteredGroupsISM = [];
 
                 } else {
-                    const result = data['results'][0]['programs'];
-                    this.filteredProfile = result;
+                    this.filteredProfile = data['results'];
+                    this.filteredProfile.forEach(function (item) {
+                        item['profile_desc'] = item.profile + ' - ' + item.description;
+                    });
                 }
             });
         }
@@ -152,7 +147,14 @@ export class MapsComponent implements OnInit {
         tableRow[attr] = acObj.desc;
         tableRow['description'] = acObj.label;
         tableRow[childObj] = acObj.desc + ' - ' + acObj.label;
-        console.log(tableRow);
+        this.dt.nativeElement.click();
+    }
+
+    onSelectProfile(acObj, childObj, attr, tableRow) {
+         tableRow[attr] = acObj.profile;
+         tableRow['description'] = acObj.description;
+         tableRow[childObj] = acObj.profile + ' - ' + acObj.description;
+         this.dt.nativeElement.click();
     }
 
     addNew(type) {
@@ -339,14 +341,16 @@ export class MapsComponent implements OnInit {
                     this.tableJSON = data['results'];
                     if (this.tableJSON) {
                         this.isDataAvailable = true;
-                        if (this.tableJSON['customers'].length > 0) {
+                        if (this.tableJSON['customers'].length > 1) {
                             this.tableJSON['customers'].forEach(function (item) {
                                 item['cust_desc'] = item.customer + ' - ' + item.desc;
+                                item['profile_desc'] = item.profile + ' - ' + item.profile_name;
                             });
                         }
                         if (this.tableJSON['chains'].length > 0) {
                             this.tableJSON['chains'].forEach(function (item) {
                                 item['chain_desc'] = item.nat_chain + ' - ' + item.description;
+                                item['profile_desc'] = item.profile + ' - ' + item.profile_name;
                             });
                         }
                         if (this.tableJSON['groups'].length > 0) {
@@ -355,6 +359,7 @@ export class MapsComponent implements OnInit {
                                 item['subgroup_desc'] = item.nat_subgroup + ' - ' + item.nat_subgroup_description;
                                 item['region_desc'] = item.nat_region + ' - ' + item.nat_region_description;
                                 item['district_desc'] = item.nat_district + ' - ' + item.nat_district_description;
+                                item['profile_desc'] = item.profile + ' - ' + item.profile_name;
                             });
                         }
 

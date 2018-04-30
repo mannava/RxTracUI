@@ -156,20 +156,22 @@
                                             </ng-template>
                                         </p-column>
 
-                                        <p-column field="profile" header="Profile" class="tabledata"
+                                        <p-column field="profile_desc" header="Profile" class="tabledata"
                                                   [editable]="true">
                                             <ng-template pTemplate="editor" let-col let-pro_tbl="rowData">
                                                 <p-autoComplete [(ngModel)]="pro_tbl[col.field]"
                                                                 [suggestions]="filteredProfile"
                                                                 (completeMethod)="filterProfile($event)"
-                                                                field="program"
+                                                                (onFocus)="onFocusEnter($event, pro_tbl['profile'])"
+                                                                (onSelect)="onSelectProfile($event, 'profile_desc', 'profile', pro_tbl)"
+                                                                field="profile_desc"
                                                                 size="35"
                                                                 [minLength]="1">
                                                     <ng-template let-c pTemplate="item">
                                                         <div class="ui-helper-clearfix"
                                                              style="border-bottom:1px solid #D5D5D5">
-                                                            <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.program}}</span>
-                                                            <span style="font-size:11px;margin:10px 10px 0 0">{{c.program_name}}</span>
+                                                            <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.profile}}</span>
+                                                            <span style="font-size:11px;margin:10px 10px 0 0">{{c.description}}</span>
                                                         </div>
                                                     </ng-template>
 
@@ -309,7 +311,7 @@
                                             <!--<ng-template let-col let-chain="rowData" pTemplate="editor">
                                                 <p-dropdown [(ngModel)]="col.desc" [options]="chain[col.desc]" [autoWidth]="false" [style]="{'width':'100%'}" required="true"  appendTo="body"></p-dropdown>
                                             </ng-template>-->
-                                            <ng-template pTemplate="editor" let-col let-chain_tbl="rowData">
+                                            <ng-template pTemplate="editor" let-col let-chain_tbl="rowData" let-i="rowIndex">
                                                 <p-autoComplete [(ngModel)]="chain_tbl[col.field]"
                                                                 [suggestions]="filteredChainsISM"
                                                                 (completeMethod)="filterISM($event, 'chain')"
@@ -330,20 +332,22 @@
                                             </ng-template>
                                         </p-column>
 
-                                        <p-column field="profile" header="Profile" class="tabledata"
+                                        <p-column field="profile_desc" header="Profile" class="tabledata"
                                                   [editable]="true">
                                             <ng-template pTemplate="editor" let-col let-pro_tbl="rowData">
                                                 <p-autoComplete [(ngModel)]="pro_tbl[col.field]"
                                                                 [suggestions]="filteredProfile"
                                                                 (completeMethod)="filterProfile($event)"
-                                                                field="program"
+                                                                (onFocus)="onFocusEnter($event, pro_tbl['profile'])"
+                                                                (onSelect)="onSelectProfile($event, 'profile_desc', 'profile', pro_tbl)"
+                                                                field="profile_desc"
                                                                 size="35"
                                                                 [minLength]="1">
                                                     <ng-template let-c pTemplate="item">
                                                         <div class="ui-helper-clearfix"
                                                              style="border-bottom:1px solid #D5D5D5">
-                                                            <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.program}}</span>
-                                                            <span style="font-size:11px;margin:10px 10px 0 0">{{c.program_name}}</span>
+                                                            <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.profile}}</span>
+                                                            <span style="font-size:11px;margin:10px 10px 0 0">{{c.description}}</span>
                                                         </div>
                                                     </ng-template>
 
@@ -498,20 +502,22 @@
                                             </p-autoComplete>
                                         </ng-template>
                                     </p-column>
-                                    <p-column field="profile" header="Profile" class="tabledata"
+                                    <p-column field="profile_desc" header="Profile" class="tabledata"
                                               [editable]="true">
                                         <ng-template pTemplate="editor" let-col let-pro_tbl="rowData">
                                             <p-autoComplete [(ngModel)]="pro_tbl[col.field]"
                                                             [suggestions]="filteredProfile"
                                                             (completeMethod)="filterProfile($event)"
-                                                            field="program"
+                                                            (onFocus)="onFocusEnter($event, pro_tbl['profile'])"
+                                                            (onSelect)="onSelectProfile($event, 'profile_desc', 'profile', pro_tbl)"
+                                                            field="profile_desc"
                                                             size="35"
                                                             [minLength]="1">
                                                 <ng-template let-c pTemplate="item">
                                                     <div class="ui-helper-clearfix"
                                                          style="border-bottom:1px solid #D5D5D5">
-                                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.program}}</span>
-                                                        <span style="font-size:11px;margin:10px 10px 0 0">{{c.program_name}}</span>
+                                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.profile}}</span>
+                                                        <span style="font-size:11px;margin:10px 10px 0 0">{{c.description}}</span>
                                                     </div>
                                                 </ng-template>
 

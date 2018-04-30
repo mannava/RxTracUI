@@ -9,20 +9,17 @@ import {NotificationsService} from 'angular2-notifications';
 
 @Injectable()
 export class ProfileService {
-    private headers: any;
 
     constructor(private http: HttpClient, private notificationsService: NotificationsService) {
     }
 
     public getCustData(str, type, level = 1, group = '', subgroup = '', region = '', district = ''): Observable<Object> {
-
         return this.http.get(AppService.ISM_ENDPOINT + type + '?searchstring=' + str + '&level=' + level + '&group=' + group + '&subgroup=' + subgroup + '&region=' + region + '&district=' + district)
             .map((res: Response) => res)
             .catch((e: any) => Observable.throw(this.errorHandler(e)));
     }
 
     public getProfile(str): Observable<Object> {
-
         return this.http.get(AppService.ISM_DEV_ENDPOINT + 'getProfile?operation=select&' + 'searchKey=' + str)
             .map((res: Response) => res)
             .catch((e: any) => Observable.throw(this.errorHandler(e)));
@@ -30,11 +27,6 @@ export class ProfileService {
 
 
     public searchQuery(customer = '', chain = '', group = ''): Observable<Object> {
-
-
-        //http://esswsddp02.mckesson.com:8243/1.0.0/ism/process/customer/assignment?customer=0000000007,0000170173&chain=252,815&group=0230,0550,0392&operation=select
-
-
         return this.http.get(AppService.ISM_ENDPOINT + 'customer/assignment?customer=' + customer + '&chain=' + chain + '&group=' + group + '&operation=select')
             .map((res: Response) => res)
             .catch((e: any) => Observable.throw(this.errorHandler(e)));
