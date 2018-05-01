@@ -22,7 +22,7 @@ export class MapsComponent implements OnInit {
     public filteredProfile: any;
     public isDataAvailable: any = false;
     public currentObj: object = {};
-
+    public isEditable_prime: Boolean = false;
     public tableJSON: Object = {};
 
     constructor(private profileService: ProfileService, private notificationsService: NotificationsService, private confirmationService: ConfirmationService) {
@@ -125,6 +125,7 @@ export class MapsComponent implements OnInit {
     }
 
     onEditInit(e, type) {
+        console.log(e);
     }
 
     OnEdit(e, type) {
@@ -151,10 +152,10 @@ export class MapsComponent implements OnInit {
     }
 
     onSelectProfile(acObj, childObj, attr, tableRow) {
-         tableRow[attr] = acObj.profile;
-         tableRow['description'] = acObj.description;
-         tableRow[childObj] = acObj.profile + ' - ' + acObj.description;
-         this.dt.nativeElement.click();
+        tableRow[attr] = acObj.profile;
+        tableRow['description'] = acObj.description;
+        tableRow[childObj] = acObj.profile + ' - ' + acObj.description;
+        this.dt.nativeElement.click();
     }
 
     addNew(type) {
@@ -164,13 +165,19 @@ export class MapsComponent implements OnInit {
                     'customer': '',
                     'customer_name': '',
                     'profile': '',
-                    'profile_name': ''
+                    'profile_name': '',
+                    'editable_prime': true
+
                 };
                 const firstCust = this.tableJSON['customers'][0];
-                if (firstCust && firstCust.customer.length > 1 || firstCust.profile.length > 1) {
+                if (!firstCust) {
                     this.tableJSON['customers'].unshift(cust_obj);
                     this.tableJSON['customers'] = [...this.tableJSON['customers']];
                 } else {
+                    if (firstCust.customer.length > 1) {
+                        this.tableJSON['customers'].unshift(cust_obj);
+                        this.tableJSON['customers'] = [...this.tableJSON['customers']];
+                    }
                     this.notificationsService.error(
                         'Error',
                         'Should not allowed more than one empty row.',
@@ -190,24 +197,30 @@ export class MapsComponent implements OnInit {
                     'description': '',
                     'plant': '',
                     'profile': '',
-                    'profile_name': ''
+                    'profile_name': '',
+                    'editable_prime': true
                 };
                 const firstChain = this.tableJSON['chains'][0];
-                if (firstChain && firstChain.nat_chain.length > 1 || firstChain.profile.length > 1) {
+                if (!firstChain) {
                     this.tableJSON['chains'].unshift(chain_obj);
                     this.tableJSON['chains'] = [...this.tableJSON['chains']];
                 } else {
-                    this.notificationsService.error(
-                        'Error',
-                        'Should not allowed more than one empty row.',
-                        {
-                            timeOut: 2000,
-                            pauseOnHover: true,
-                            clickToClose: false,
-                            maxLength: 0,
-                            maxStack: 1
-                        }
-                    );
+                    if (firstChain.nat_chain.length > 1) {
+                        this.tableJSON['chains'].unshift(chain_obj);
+                        this.tableJSON['chains'] = [...this.tableJSON['chains']];
+                    } else {
+                        this.notificationsService.error(
+                            'Error',
+                            'Should not allowed more than one empty row.',
+                            {
+                                timeOut: 2000,
+                                pauseOnHover: true,
+                                clickToClose: false,
+                                maxLength: 0,
+                                maxStack: 1
+                            }
+                        );
+                    }
                 }
                 break;
             case 'group':
@@ -220,13 +233,18 @@ export class MapsComponent implements OnInit {
                     'nat_district': '',
                     'plant': '',
                     'profile': '',
-                    'profile_name': ''
+                    'profile_name': '',
+                    'editable_prime': true
                 };
                 const firstGroup = this.tableJSON['groups'][0];
-                if (firstGroup && firstGroup.nat_group.length > 1 || firstGroup.profile.length > 1) {
+                if (!firstGroup) {
                     this.tableJSON['groups'].unshift(group_obj);
                     this.tableJSON['groups'] = [...this.tableJSON['groups']];
                 } else {
+                    if (firstGroup.nat_group.length > 1) {
+                        this.tableJSON['groups'].unshift(group_obj);
+                        this.tableJSON['groups'] = [...this.tableJSON['groups']];
+                    }
                     this.notificationsService.error(
                         'Error',
                         'Should not allowed more than one empty row.',
@@ -278,6 +296,9 @@ export class MapsComponent implements OnInit {
 
     }
 
+    onRowClick(e, type) {
+        this.isEditable_prime = e.data.editable_prime;
+    }
 
     onRowUnselect(e, type) {
 
@@ -345,12 +366,14 @@ export class MapsComponent implements OnInit {
                             this.tableJSON['customers'].forEach(function (item) {
                                 item['cust_desc'] = item.customer + ' - ' + item.desc;
                                 item['profile_desc'] = item.profile + ' - ' + item.profile_name;
+                                item['editable_prime'] = false;
                             });
                         }
                         if (this.tableJSON['chains'].length > 0) {
                             this.tableJSON['chains'].forEach(function (item) {
                                 item['chain_desc'] = item.nat_chain + ' - ' + item.description;
                                 item['profile_desc'] = item.profile + ' - ' + item.profile_name;
+                                item['editable_prime'] = false;
                             });
                         }
                         if (this.tableJSON['groups'].length > 0) {
@@ -360,6 +383,7 @@ export class MapsComponent implements OnInit {
                                 item['region_desc'] = item.nat_region + ' - ' + item.nat_region_description;
                                 item['district_desc'] = item.nat_district + ' - ' + item.nat_district_description;
                                 item['profile_desc'] = item.profile + ' - ' + item.profile_name;
+                                item['editable_prime'] = false;
                             });
                         }
 
