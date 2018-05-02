@@ -1,7 +1,7 @@
 {
-  "name": "md-free-angular-cli",
+  "name": "rxtrac",
   "version": "1.4.2",
-  "license": "MIT",
+  "license": "",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -24,7 +24,6 @@
     "@angular/platform-browser-dynamic": "^5.2.5",
     "@angular/platform-server": "^5.2.5",
     "@angular/router": "^5.2.5",
-    "@ng-bootstrap/ng-bootstrap": "^1.0.0",
     "angular2-notifications": "^0.9.6",
     "angular2-query-builder": "^0.2.4",
     "arrive": "2.4.1",

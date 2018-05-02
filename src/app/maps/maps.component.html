@@ -14,7 +14,7 @@
                         <div class="">
                             <p-autoComplete [(ngModel)]="customer"
                                             [suggestions]="filteredCustomersISM"
-                                            (completeMethod)="filterISM($event, 'customer')"
+                                            (completeMethod)="filterISM($event, customer_tag)"
                                             field="desc"
                                             size="35"
                                             placeholder="Customer"
@@ -38,7 +38,7 @@
                         <div class="">
                             <p-autoComplete [(ngModel)]="chain"
                                             [suggestions]="filteredChainsISM"
-                                            (completeMethod)="filterISM($event, 'chain')"
+                                            (completeMethod)="filterISM($event, chain_tag)"
                                             field="desc"
                                             size="35"
                                             placeholder="Chain"
@@ -59,7 +59,7 @@
                         <div class="">
                             <p-autoComplete [(ngModel)]="group"
                                             [suggestions]="filteredGroupsISM"
-                                            (completeMethod)="filterISM($event ,'group')"
+                                            (completeMethod)="filterISM($event ,group_tag)"
                                             field="desc"
                                             size="35"
                                             placeholder="Group"
@@ -93,16 +93,16 @@
                             <div style="width: 50%">
                                 <div class="btn-group pull-right">
                                     <button type="button" class="btn-group btn btn-sm btn-info"
-                                            (click)="deleteSelectedRecs('customer')">
+                                            (click)="deleteSelectedRecs(customer_tag)">
                                         <i class="fa fas fa-trash fa-2x"></i>
                                     </button>
                                     <button type="button" class="btn-group btn btn-sm btn-info"
-                                            (click)="addNew('customer')">
+                                            (click)="addNew(customer_tag)">
                                         <i class="fa fas fa-plus-square fa-2x"></i>
                                     </button>
 
                                     <button type="button" class="btn-group btn btn-sm btn-info"
-                                            (click)="saveTable('customer')">
+                                            (click)="saveTable(customer_tag)">
                                         <i class="fa fas fa-save fa-2x"></i>
                                     </button>
                                 </div>
@@ -125,13 +125,13 @@
 
                                                  #dt class="tabledata"
                                                  [responsive]="true" reorderableColumns="true" [editable]="true"
-                                                 (onEditInit)="onEditInit($event, 'customer')"
-                                                 (onEdit)="OnEdit($event, 'customer')"
-                                                 (onEditComplete)="OnEditComplete($event, 'customer')"
-                                                 (onEditCancel)="OnEditCancel($event, 'customer')"
-                                                 (onRowSelect)="onRowSelection($event, 'customer')"
-                                                 (onRowClick)="onRowClick($event, 'customer')"
-                                                 (onRowUnselect)="onRowUnselect($event, 'customer')">
+                                                 (onEditInit)="onEditInit($event, customer_tag)"
+                                                 (onEdit)="OnEdit($event, customer_tag)"
+                                                 (onEditComplete)="OnEditComplete($event, customer_tag)"
+                                                 (onEditCancel)="OnEditCancel($event, customer_tag)"
+                                                 (onRowSelect)="onRowSelection($event, customer_tag)"
+                                                 (onRowClick)="onRowClick($event, customer_tag)"
+                                                 (onRowUnselect)="onRowUnselect($event, customer_tag)">
                                         <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
                                         <p-column field="cust_desc" header="Customer" class="tabledata"
                                                   [editable]="isEditable_prime">
@@ -139,7 +139,7 @@
                                             <ng-template pTemplate="editor" let-col let-cust_tbl="rowData">
                                                 <p-autoComplete [(ngModel)]="cust_tbl[col.field]"
                                                                 [suggestions]="filteredCustomersISM"
-                                                                (completeMethod)="filterISM($event, 'customer')"
+                                                                (completeMethod)="filterISM($event, customer_tag)"
                                                                 (onFocus)="onFocusEnter($event, cust_tbl['nat_customer'])"
                                                                 (onSelect)="onSelectAC($event, 'cust_desc', 'nat_customer', chain_tbl)"
                                                                 placeholder="066"
@@ -221,7 +221,7 @@
                                                         <ng-template pTemplate="input">
                                                             <p-autoComplete [(ngModel)]="customer"
                                                                             [suggestions]="filteredCustomersISM"
-                                                                            (completeMethod)="filterISM($event, 'customer')"
+                                                                            (completeMethod)="filterISM($event, customer_tag)"
                                                                             field="desc"
                                                                             size="35"
                                                                             placeholder="Customer"
@@ -271,16 +271,16 @@
                             <div style="width: 50%">
                                 <div class="btn-group pull-right">
                                     <button type="button" class="btn-group btn btn-sm btn-info"
-                                            (click)="deleteSelectedRecs('chain')">
+                                            (click)="deleteSelectedRecs(chain_tag)">
                                         <i class="fa fas fa-trash fa-2x"></i>
                                     </button>
                                     <button type="button" class="btn-group btn btn-sm btn-info"
-                                            (click)="addNew('chain')">
+                                            (click)="addNew(chain_tag)">
                                         <i class="fa fas fa-plus-square fa-2x"></i>
                                     </button>
 
                                     <button type="button" class="btn-group btn btn-sm btn-info"
-                                            (click)="saveTable('chain')">
+                                            (click)="saveTable(chain_tag)">
                                         <i class="fa fas fa-save fa-2x"></i>
                                     </button>
                                 </div>
@@ -302,13 +302,13 @@
                                     <p-dataTable [value]="tableJSON['chains']" [rows]="10" [paginator]="true"
                                                  #dt class="tabledata"
                                                  [responsive]="true" reorderableColumns="true" [editable]="true"
-                                                 (onEditInit)="onEditInit($event, 'chain')"
-                                                 (onEdit)="OnEdit($event, 'chain')"
-                                                 (onEditComplete)="OnEditComplete($event, 'chain')"
-                                                 (onEditCancel)="OnEditCancel($event, 'chain')"
-                                                 (onRowSelect)="onRowSelection($event, 'chain')"
-                                                 (onRowClick)="onRowClick($event, 'chain')"
-                                                 (onRowUnselect)="onRowUnselect($event, 'chain')">
+                                                 (onEditInit)="onEditInit($event, chain_tag)"
+                                                 (onEdit)="OnEdit($event, chain_tag)"
+                                                 (onEditComplete)="OnEditComplete($event, chain_tag)"
+                                                 (onEditCancel)="OnEditCancel($event, chain_tag)"
+                                                 (onRowSelect)="onRowSelection($event, chain_tag)"
+                                                 (onRowClick)="onRowClick($event, chain_tag)"
+                                                 (onRowUnselect)="onRowUnselect($event, chain_tag)">
                                         <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
 
                                         <p-column field="chain_desc" header="Chain" class="tabledata"  [editable]="isEditable_prime">
@@ -318,7 +318,7 @@
                                             <ng-template pTemplate="editor" let-col let-chain_tbl="rowData" let-i="rowIndex">
                                                 <p-autoComplete [(ngModel)]="chain_tbl[col.field]"
                                                                 [suggestions]="filteredChainsISM"
-                                                                (completeMethod)="filterISM($event, 'chain')"
+                                                                (completeMethod)="filterISM($event, chain_tag)"
                                                                 (onFocus)="onFocusEnter($event, chain_tbl['nat_chain'])"
                                                                 (onSelect)="onSelectAC($event, 'chain_desc', 'nat_chain', chain_tbl)"
                                                                 placeholder="252"
@@ -376,16 +376,16 @@
                         <div style="width: 50%">
                             <div class="btn-group pull-right">
                                 <button type="button" class="btn-group btn btn-sm btn-info"
-                                        (click)="deleteSelectedRecs('group')">
+                                        (click)="deleteSelectedRecs(group_tag)">
                                     <i class="fa fas fa-trash fa-2x"></i>
                                 </button>
                                 <button type="button" class="btn-group btn btn-sm btn-info"
-                                        (click)="addNew('group')">
+                                        (click)="addNew(group_tag)">
                                     <i class="fa fas fa-plus-square fa-2x"></i>
                                 </button>
 
                                 <button type="button" class="btn-group btn btn-sm btn-info"
-                                        (click)="saveTable('group')">
+                                        (click)="saveTable(group_tag)">
                                     <i class="fa fas fa-save fa-2x"></i>
                                 </button>
                             </div>
@@ -407,13 +407,13 @@
                                 <p-dataTable [value]="tableJSON['groups']" [rows]="10" [paginator]="true"
                                              #dt class="tabledata"
                                              [responsive]="true" reorderableColumns="true" [editable]="true"
-                                             (onEditInit)="onEditInit($event, 'group')"
-                                             (onEdit)="OnEdit($event, 'group')"
-                                             (onEditComplete)="OnEditComplete($event, 'group')"
-                                             (onEditCancel)="OnEditCancel($event, 'group')"
-                                             (onRowSelect)="onRowSelection($event, 'group')"
-                                             (onRowClick)="onRowClick($event, 'group')"
-                                             (onRowUnselect)="onRowUnselect($event, 'group')">
+                                             (onEditInit)="onEditInit($event, group_tag)"
+                                             (onEdit)="OnEdit($event, group_tag)"
+                                             (onEditComplete)="OnEditComplete($event, group_tag)"
+                                             (onEditCancel)="OnEditCancel($event, group_tag)"
+                                             (onRowSelect)="onRowSelection($event, group_tag)"
+                                             (onRowClick)="onRowClick($event, group_tag)"
+                                             (onRowUnselect)="onRowUnselect($event, group_tag)">
 
                                     <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
                                     <p-column field="group_desc" header="Group" class="tabledata"
@@ -423,7 +423,7 @@
                                         <ng-template pTemplate="editor" let-col let-group_tbl="rowData">
                                             <p-autoComplete [(ngModel)]="group_tbl[col.field]"
                                                             [suggestions]="filteredGroupsISM"
-                                                            (completeMethod)="filterISM($event, 'group')"
+                                                            (completeMethod)="filterISM($event, group_tag)"
                                                             (onFocus)="onFocusEnter($event, group_tbl['nat_group'])"
                                                             (onSelect)="onSelectAC($event, 'group_desc', 'nat_group', group_tbl)"
                                                             field="desc"
@@ -447,7 +447,7 @@
                                         <ng-template pTemplate="editor" let-col let-subgroup_tbl="rowData">
                                             <p-autoComplete [(ngModel)]="subgroup_tbl[col.field]"
                                                             [suggestions]="filteredGroupsISM"
-                                                            (completeMethod)="filterISM($event, 'group', 2 , subgroup_tbl['nat_group'])"
+                                                            (completeMethod)="filterISM($event, group_tag, 2 , subgroup_tbl['nat_group'])"
                                                             (onFocus)="onFocusEnter($event, subgroup_tbl['nat_subgroup'])"
                                                             (onSelect)="onSelectAC($event, 'subgroup_desc', 'nat_subgroup', subgroup_tbl)"
                                                             field="desc"
@@ -470,7 +470,7 @@
                                         <ng-template pTemplate="editor" let-col let-district_desc="rowData">
                                             <p-autoComplete [(ngModel)]="district_desc[col.field]"
                                                             [suggestions]="filteredGroupsISM"
-                                                            (completeMethod)="filterISM($event, 'group', 3 , district_desc['nat_subgroup'])"
+                                                            (completeMethod)="filterISM($event, group_tag, 3 , district_desc['nat_subgroup'])"
                                                             (onFocus)="onFocusEnter($event, district_desc['nat_region'])"
                                                             (onSelect)="onSelectAC($event, 'region_desc', 'nat_region', district_desc)"
                                                             field="desc"
@@ -492,7 +492,7 @@
                                         <ng-template pTemplate="editor" let-col let-district_desc="rowData">
                                             <p-autoComplete [(ngModel)]="district_desc[col.field]"
                                                             [suggestions]="filteredGroupsISM"
-                                                            (completeMethod)="filterISM($event, 'group', 4 , district_desc['nat_region'])"
+                                                            (completeMethod)="filterISM($event, group_tag, 4 , district_desc['nat_region'])"
                                                             (onFocus)="onFocusEnter($event, district_desc['nat_region'])"
                                                             (onSelect)="onSelectAC($event, 'region_desc', 'nat_district', district_desc)"
                                                             field="desc"
@@ -595,7 +595,7 @@
         <div class="ctr-col">
             <p-autoComplete [(ngModel)]="customer"
                             [suggestions]="filteredCustomersISM"
-                            (completeMethod)="filterISM($event, 'customer')"
+                            (completeMethod)="filterISM($event, customer_tag)"
                             field="name"
                             placeholder="Customers"
                             [minLength]="1"></p-autoComplete>

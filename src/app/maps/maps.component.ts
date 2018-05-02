@@ -24,6 +24,10 @@ export class MapsComponent implements OnInit {
     public currentObj: object = {};
     public isEditable_prime: Boolean = false;
     public tableJSON: Object = {};
+    public customer_tag = 'customer';
+    public chain_tag = 'chain';
+    public group_tag = 'group';
+
 
     constructor(private profileService: ProfileService, private notificationsService: NotificationsService, private confirmationService: ConfirmationService) {
     }
