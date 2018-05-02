@@ -1,6 +1,6 @@
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0 and angular 4.x.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0 and angular 5.x.
 
-1. Install NodeJs from [NodeJs Official Page](https://nodejs.org/en).
+1. Install NodeJs
 2. Open Terminal
 3. Go to project
 4. Make sure you have installed [Angular CLI](https://github.com/angular/angular-cli) already. If not, please install.
