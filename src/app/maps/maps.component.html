@@ -16,9 +16,8 @@
                                             [suggestions]="filteredCustomersISM"
                                             (completeMethod)="filterISM($event, customer_tag)"
                                             field="desc"
-                                            size="35"
+                                            size="25"
                                             placeholder="Customer"
-
                                             [minLength]="1">
                                 <ng-template let-cust pTemplate="item">
                                     <div class="ui-helper-clearfix" class="p-autoComplete-ctr">
@@ -40,7 +39,7 @@
                                             [suggestions]="filteredChainsISM"
                                             (completeMethod)="filterISM($event, chain_tag)"
                                             field="desc"
-                                            size="35"
+                                            size="25"
                                             placeholder="Chain"
                                             [minLength]="1">
                                 <ng-template let-chain pTemplate="item">
@@ -61,7 +60,7 @@
                                             [suggestions]="filteredGroupsISM"
                                             (completeMethod)="filterISM($event ,group_tag)"
                                             field="desc"
-                                            size="35"
+                                            size="25"
                                             placeholder="Group"
                                             [minLength]="1">
                                 <ng-template let-grp pTemplate="item">
@@ -84,216 +83,221 @@
             </div>
         </div>
         <div [hidden]="!isDataAvailable">
-            <div class="ctr">
 
-                <div class="card">
-                    <div class="card-header" data-background-color="red">
-                        <div class="ctr">
-                            <h4 class="tablehead" style="width: 50%">Customer</h4>
-                            <div style="width: 50%">
-                                <div class="btn-group pull-right">
-                                    <button type="button" class="btn-group btn btn-sm btn-info"
-                                            (click)="deleteSelectedRecs(customer_tag)">
-                                        <i class="fa fas fa-trash fa-2x"></i>
-                                    </button>
-                                    <button type="button" class="btn-group btn btn-sm btn-info"
-                                            (click)="addNew(customer_tag)">
-                                        <i class="fa fas fa-plus-square fa-2x"></i>
-                                    </button>
+            <div class="row">
 
-                                    <button type="button" class="btn-group btn btn-sm btn-info"
-                                            (click)="saveTable(customer_tag)">
-                                        <i class="fa fas fa-save fa-2x"></i>
-                                    </button>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header" data-background-color="red">
+                            <div class="ctr">
+                                <h4 class="tablehead" class="headerLeft">Customer</h4>
+                                <div class="headerRight">
+                                    <div class="btn-group pull-right">
+                                        <button type="button" class="btn-group btn btn-sm btn-info"
+                                                (click)="deleteSelectedRecs(customer_tag)">
+                                            <i class="fa fas fa-trash fa-2x"></i>
+                                        </button>
+                                        <button type="button" class="btn-group btn btn-sm btn-info"
+                                                (click)="addNew(customer_tag)">
+                                            <i class="fa fas fa-plus-square fa-2x"></i>
+                                        </button>
+
+                                        <button type="button" class="btn-group btn btn-sm btn-info"
+                                                (click)="saveTable(customer_tag)">
+                                            <i class="fa fas fa-save fa-2x"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
+                            <p class="category">respective message</p>
                         </div>
-                        <p class="category">respective message</p>
-                    </div>
-                    <div class="card-content">
-                        <!-- <div class="ui-widget-header pull-right"
-                              style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
-                             <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                             <input #gb type="text" pInputText placeholder="Global Filter">
-                         </div>-->
-                        <div class="main-content">
-                            <div class="container-fluid">
+                        <div class="card-content">
+                            <!-- <div class="ui-widget-header pull-right"
+                                  style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
+                                 <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                 <input #gb type="text" pInputText placeholder="Global Filter">
+                             </div>-->
+                            <div class="main-content">
+                                <div class="container-fluid">
 
-                                <div class="row">
+                                    <div class="row">
 
-                                    <p-dataTable [value]="tableJSON[customers_tag]" [rows]="10" [paginator]="true"
+                                        <p-dataTable [value]="tableJSON[customers_tag]" [rows]="10" [paginator]="true"
 
-                                                 #dt class="tabledata"
-                                                 [responsive]="true" reorderableColumns="true" [editable]="true"
-                                                 (onRowSelect)="onRowSelection($event, customer_tag)"
-                                                 (onRowClick)="onRowClick($event, customer_tag)"
-                                                 (onRowUnselect)="onRowUnselect($event, customer_tag)">
-                                        <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                                        <p-column field="cust_desc" header="Customer" class="tabledata"
-                                                  [editable]="isEditable_prime">
+                                                     #dt class="tabledata"
+                                                     [responsive]="true" reorderableColumns="true" [editable]="true"
+                                                     (onRowSelect)="onRowSelection($event, customer_tag)"
+                                                     (onRowClick)="onRowClick($event, customer_tag)"
+                                                     (onRowUnselect)="onRowUnselect($event, customer_tag)">
+                                            <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+                                            <p-column field="cust_desc" header="Customer" class="tabledata"
+                                                      [editable]="isEditable_prime">
 
-                                            <ng-template pTemplate="editor" let-col let-cust_tbl="rowData">
-                                                <p-autoComplete [(ngModel)]="cust_tbl[col.field]"
-                                                                [suggestions]="filteredCustomersISM"
-                                                                (completeMethod)="filterISM($event, customer_tag)"
-                                                                (onFocus)="onFocusEnter($event, cust_tbl['nat_customer'])"
-                                                                (onSelect)="onSelectAC($event, 'cust_desc', 'nat_customer', cust_tbl)"
-                                                                placeholder="066"
-                                                                field="desc"
-                                                                size="35"
-                                                                [minLength]="1">
-                                                    <ng-template let-c pTemplate="item">
-                                                        <div class="ui-helper-clearfix"
-                                                             class="p-autoComplete-ctr">
-                                                            <span class="p-autoComplete-desc">{{c.desc}}</span>
-                                                            <span class="p-autoComplete-lbl">{{c.label}}</span>
-                                                        </div>
-                                                    </ng-template>
+                                                <ng-template pTemplate="editor" let-col let-cust_tbl="rowData">
+                                                    <p-autoComplete [(ngModel)]="cust_tbl[col.field]"
+                                                                    [suggestions]="filteredCustomersISM"
+                                                                    (completeMethod)="filterISM($event, customer_tag)"
+                                                                    (onFocus)="onFocusEnter($event, cust_tbl['nat_customer'])"
+                                                                    (onSelect)="onSelectAC($event, 'cust_desc', 'nat_customer', cust_tbl)"
+                                                                    placeholder="066"
+                                                                    field="desc"
+                                                                    size="35"
+                                                                    [minLength]="1">
+                                                        <ng-template let-c pTemplate="item">
+                                                            <div class="ui-helper-clearfix"
+                                                                 class="p-autoComplete-ctr">
+                                                                <span class="p-autoComplete-desc">{{c.desc}}</span>
+                                                                <span class="p-autoComplete-lbl">{{c.label}}</span>
+                                                            </div>
+                                                        </ng-template>
 
-                                                </p-autoComplete>
-                                            </ng-template>
-                                        </p-column>
+                                                    </p-autoComplete>
+                                                </ng-template>
+                                            </p-column>
 
-                                        <p-column field="profile_desc" header="Profile" class="tabledata"
-                                                  [editable]="true">
-                                            <ng-template pTemplate="editor" let-col let-pro_tbl="rowData">
-                                                <p-autoComplete [(ngModel)]="pro_tbl[col.field]"
-                                                                [suggestions]="filteredProfile"
-                                                                (completeMethod)="filterProfile($event)"
-                                                                (onFocus)="onFocusEnter($event, pro_tbl['profile'])"
-                                                                (onSelect)="onSelectProfile($event, 'profile_desc', 'profile', pro_tbl)"
-                                                                field="profile_desc"
-                                                                placeholder="96"
-                                                                size="35"
-                                                                [minLength]="1">
-                                                    <ng-template let-c pTemplate="item">
-                                                        <div class="ui-helper-clearfix"
-                                                             class="p-autoComplete-ctr">
-                                                            <span class="p-autoComplete-desc">{{c.profile}}</span>
-                                                            <span class="p-autoComplete-lbl">{{c.description}}</span>
-                                                        </div>
-                                                    </ng-template>
+                                            <p-column field="profile_desc" header="Profile" class="tabledata"
+                                                      [editable]="true">
+                                                <ng-template pTemplate="editor" let-col let-pro_tbl="rowData">
+                                                    <p-autoComplete [(ngModel)]="pro_tbl[col.field]"
+                                                                    [suggestions]="filteredProfile"
+                                                                    (completeMethod)="filterProfile($event)"
+                                                                    (onFocus)="onFocusEnter($event, pro_tbl['profile'])"
+                                                                    (onSelect)="onSelectProfile($event, 'profile_desc', 'profile', pro_tbl)"
+                                                                    field="profile_desc"
+                                                                    placeholder="96"
+                                                                    size="35"
+                                                                    [minLength]="1">
+                                                        <ng-template let-c pTemplate="item">
+                                                            <div class="ui-helper-clearfix"
+                                                                 class="p-autoComplete-ctr">
+                                                                <span class="p-autoComplete-desc">{{c.profile}}</span>
+                                                                <span class="p-autoComplete-lbl">{{c.description}}</span>
+                                                            </div>
+                                                        </ng-template>
 
-                                                </p-autoComplete>
-                                            </ng-template>
-                                        </p-column>
-                                    </p-dataTable>
+                                                    </p-autoComplete>
+                                                </ng-template>
+                                            </p-column>
+                                        </p-dataTable>
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </div>
-
-                </div>
-                <span style="margin: 5px"></span>
-
-                <div class="card">
-                    <div class="card-header" data-background-color="red">
-                        <div class="ctr">
-                            <h4 class="tablehead" style="width: 50%">Chain</h4>
-                            <div style="width: 50%">
-                                <div class="btn-group pull-right">
-                                    <button type="button" class="btn-group btn btn-sm btn-info"
-                                            (click)="deleteSelectedRecs(chain_tag)">
-                                        <i class="fa fas fa-trash fa-2x"></i>
-                                    </button>
-                                    <button type="button" class="btn-group btn btn-sm btn-info"
-                                            (click)="addNew(chain_tag)">
-                                        <i class="fa fas fa-plus-square fa-2x"></i>
-                                    </button>
-
-                                    <button type="button" class="btn-group btn btn-sm btn-info"
-                                            (click)="saveTable(chain_tag)">
-                                        <i class="fa fas fa-save fa-2x"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="category">respective message</p>
-                    </div>
-                    <div class="card-content">
-                        <!--<div class="ui-widget-header pull-right"
-                             style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
-                            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                            <input #gb type="text" pInputText placeholder="Global Filter">
-                        </div>-->
-                        <div class="main-content">
-                            <div class="container-fluid">
-
-                                <div class="row">
-
-                                    <p-dataTable [value]="tableJSON[chains_tag]" [rows]="10" [paginator]="true"
-                                                 #dt class="tabledata"
-                                                 [responsive]="true" reorderableColumns="true" [editable]="true"
-                                                 (onRowSelect)="onRowSelection($event, chain_tag)"
-                                                 (onRowClick)="onRowClick($event, chain_tag)"
-                                                 (onRowUnselect)="onRowUnselect($event, chain_tag)">
-                                        <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-
-                                        <p-column field="chain_desc" header="Chain" class="tabledata"  [editable]="isEditable_prime">
-                                            <!--<ng-template let-col let-chain="rowData" pTemplate="editor">
-                                                <p-dropdown [(ngModel)]="col.desc" [options]="chain[col.desc]" [autoWidth]="false" [style]="{'width':'100%'}" required="true"  appendTo="body"></p-dropdown>
-                                            </ng-template>-->
-                                            <ng-template pTemplate="editor" let-col let-chain_tbl="rowData" let-i="rowIndex">
-                                                <p-autoComplete [(ngModel)]="chain_tbl[col.field]"
-                                                                [suggestions]="filteredChainsISM"
-                                                                (completeMethod)="filterISM($event, chain_tag)"
-                                                                (onFocus)="onFocusEnter($event, chain_tbl['nat_chain'])"
-                                                                (onSelect)="onSelectAC($event, 'chain_desc', 'nat_chain', chain_tbl)"
-                                                                placeholder="252"
-                                                                field="desc"
-                                                                size="35"
-                                                                [minLength]="1">
-                                                    <ng-template let-c pTemplate="item">
-                                                        <div class="ui-helper-clearfix"
-                                                             class="p-autoComplete-ctr">
-                                                            <span class="p-autoComplete-desc">{{c.desc}}</span>
-                                                            <span class="p-autoComplete-lbl">{{c.label}}</span>
-                                                        </div>
-                                                    </ng-template>
-
-                                                </p-autoComplete>
-                                            </ng-template>
-                                        </p-column>
-
-                                        <p-column field="profile_desc" header="Profile" class="tabledata"
-                                                  [editable]="true">
-                                            <ng-template pTemplate="editor" let-col let-pro_tbl="rowData">
-                                                <p-autoComplete [(ngModel)]="pro_tbl[col.field]"
-                                                                [suggestions]="filteredProfile"
-                                                                (completeMethod)="filterProfile($event)"
-                                                                (onFocus)="onFocusEnter($event, pro_tbl['profile'])"
-                                                                (onSelect)="onSelectProfile($event, 'profile_desc', 'profile', pro_tbl)"
-                                                                field="profile_desc"
-                                                                placeholder="96"
-                                                                size="35"
-                                                                [minLength]="1">
-                                                    <ng-template let-c pTemplate="item">
-                                                        <div class="ui-helper-clearfix"
-                                                             class="p-autoComplete-ctr">
-                                                            <span class="p-autoComplete-desc">{{c.profile}}</span>
-                                                            <span class="p-autoComplete-lbl">{{c.description}}</span>
-                                                        </div>
-                                                    </ng-template>
-
-                                                </p-autoComplete>
-                                            </ng-template>
-                                        </p-column>
-                                    </p-dataTable>
-                                </div>
-                            </div>
                         </div>
 
                     </div>
                 </div>
+                <!-- <span style="margin: 5px"></span>-->
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header" data-background-color="red">
+                            <div class="ctr">
+                                <h4 class="tablehead" class="headerLeft">Chain</h4>
+                                <div class="headerRight">
+                                    <div class="btn-group pull-right">
+                                        <button type="button" class="btn-group btn btn-sm btn-info"
+                                                (click)="deleteSelectedRecs(chain_tag)">
+                                            <i class="fa fas fa-trash fa-2x"></i>
+                                        </button>
+                                        <button type="button" class="btn-group btn btn-sm btn-info"
+                                                (click)="addNew(chain_tag)">
+                                            <i class="fa fas fa-plus-square fa-2x"></i>
+                                        </button>
 
+                                        <button type="button" class="btn-group btn btn-sm btn-info"
+                                                (click)="saveTable(chain_tag)">
+                                            <i class="fa fas fa-save fa-2x"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="category">respective message</p>
+                        </div>
+                        <div class="card-content">
+                            <!--<div class="ui-widget-header pull-right"
+                                 style="padding:4px 14px;border-bottom: 0 none;margin-right: 15px;">
+                                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                <input #gb type="text" pInputText placeholder="Global Filter">
+                            </div>-->
+                            <div class="main-content">
+                                <div class="container-fluid">
+
+                                    <div class="row">
+
+                                        <p-dataTable [value]="tableJSON[chains_tag]" [rows]="10" [paginator]="true"
+                                                     #dt class="tabledata"
+                                                     [responsive]="true" reorderableColumns="true" [editable]="true"
+                                                     (onRowSelect)="onRowSelection($event, chain_tag)"
+                                                     (onRowClick)="onRowClick($event, chain_tag)"
+                                                     (onRowUnselect)="onRowUnselect($event, chain_tag)">
+                                            <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+
+                                            <p-column field="chain_desc" header="Chain" class="tabledata"
+                                                      [editable]="isEditable_prime">
+                                                <!--<ng-template let-col let-chain="rowData" pTemplate="editor">
+                                                    <p-dropdown [(ngModel)]="col.desc" [options]="chain[col.desc]" [autoWidth]="false" [style]="{'width':'100%'}" required="true"  appendTo="body"></p-dropdown>
+                                                </ng-template>-->
+                                                <ng-template pTemplate="editor" let-col let-chain_tbl="rowData"
+                                                             let-i="rowIndex">
+                                                    <p-autoComplete [(ngModel)]="chain_tbl[col.field]"
+                                                                    [suggestions]="filteredChainsISM"
+                                                                    (completeMethod)="filterISM($event, chain_tag)"
+                                                                    (onFocus)="onFocusEnter($event, chain_tbl['nat_chain'])"
+                                                                    (onSelect)="onSelectAC($event, 'chain_desc', 'nat_chain', chain_tbl)"
+                                                                    placeholder="252"
+                                                                    field="desc"
+                                                                    size="35"
+                                                                    [minLength]="1">
+                                                        <ng-template let-c pTemplate="item">
+                                                            <div class="ui-helper-clearfix"
+                                                                 class="p-autoComplete-ctr">
+                                                                <span class="p-autoComplete-desc">{{c.desc}}</span>
+                                                                <span class="p-autoComplete-lbl">{{c.label}}</span>
+                                                            </div>
+                                                        </ng-template>
+
+                                                    </p-autoComplete>
+                                                </ng-template>
+                                            </p-column>
+
+                                            <p-column field="profile_desc" header="Profile" class="tabledata"
+                                                      [editable]="true">
+                                                <ng-template pTemplate="editor" let-col let-pro_tbl="rowData">
+                                                    <p-autoComplete [(ngModel)]="pro_tbl[col.field]"
+                                                                    [suggestions]="filteredProfile"
+                                                                    (completeMethod)="filterProfile($event)"
+                                                                    (onFocus)="onFocusEnter($event, pro_tbl['profile'])"
+                                                                    (onSelect)="onSelectProfile($event, 'profile_desc', 'profile', pro_tbl)"
+                                                                    field="profile_desc"
+                                                                    placeholder="96"
+                                                                    size="35"
+                                                                    [minLength]="1">
+                                                        <ng-template let-c pTemplate="item">
+                                                            <div class="ui-helper-clearfix"
+                                                                 class="p-autoComplete-ctr">
+                                                                <span class="p-autoComplete-desc">{{c.profile}}</span>
+                                                                <span class="p-autoComplete-lbl">{{c.description}}</span>
+                                                            </div>
+                                                        </ng-template>
+
+                                                    </p-autoComplete>
+                                                </ng-template>
+                                            </p-column>
+                                        </p-dataTable>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="card">
                 <div class="card-header" data-background-color="red">
                     <div class="ctr">
-                        <h4 class="tablehead" style="width: 50%">Group</h4>
-                        <div style="width: 50%">
+                        <h4 class="tablehead" class="headerLeft">Group</h4>
+                        <div class="headerRight">
                             <div class="btn-group pull-right">
                                 <button type="button" class="btn-group btn btn-sm btn-info"
                                         (click)="deleteSelectedRecs(group_tag)">
@@ -344,6 +348,7 @@
                                                             (onSelect)="onSelectAC($event, 'group_desc', 'nat_group', group_tbl)"
                                                             field="desc"
                                                             size="35"
+                                                            placeholder="description"
                                                             [minLength]="1">
                                                 <ng-template let-c pTemplate="item">
                                                     <div class="ui-helper-clearfix"
@@ -367,6 +372,7 @@
                                                             (onFocus)="onFocusEnter($event, subgroup_tbl['nat_subgroup'])"
                                                             (onSelect)="onSelectAC($event, 'subgroup_desc', 'nat_subgroup', subgroup_tbl)"
                                                             field="desc"
+                                                            placeholder="subgroup"
                                                             size="35"
                                                             [minLength]="1">
                                                 <ng-template let-c pTemplate="item">
@@ -390,6 +396,7 @@
                                                             (onFocus)="onFocusEnter($event, district_desc['nat_region'])"
                                                             (onSelect)="onSelectAC($event, 'region_desc', 'nat_region', district_desc)"
                                                             field="desc"
+                                                            placeholder="region"
                                                             size="35"
                                                             [minLength]="1">
                                                 <ng-template let-c pTemplate="item">
@@ -412,6 +419,7 @@
                                                             (onFocus)="onFocusEnter($event, district_desc['nat_region'])"
                                                             (onSelect)="onSelectAC($event, 'region_desc', 'nat_district', district_desc)"
                                                             field="desc"
+                                                            placeholder="district"
                                                             size="35"
                                                             [minLength]="1">
                                                 <ng-template let-c pTemplate="item">
@@ -456,5 +464,7 @@
                 </div>
             </div>
         </div>
+
+
     </div>
 </div>

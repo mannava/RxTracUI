@@ -43,6 +43,12 @@
     flex-direction: row;
 }
 
+.headerLeft{
+    width: 30%;
+}
+.headerRight{
+    width: 70%;
+}
 .delFontClr {
     color: #fb6999;
 }
