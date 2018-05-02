@@ -128,24 +128,9 @@ export class MapsComponent implements OnInit {
 
     }
 
-    onEditInit(e, type) {
-        console.log(e);
-    }
-
-    OnEdit(e, type) {
-    }
-
-    OnEditComplete(e, type) {
-    }
-
     onFocusEnter(e, field) {
-        //console.log('focusentry', e.target, field);
         const target = e.target || e.srcElement || e.currentTarget;
         target.value = field;
-    }
-
-    OnEditCancel(e, type) {
-        //console.log('edit cancel ', e, type);
     }
 
     onSelectAC(acObj, childObj, attr, tableRow) {
@@ -406,14 +391,8 @@ export class MapsComponent implements OnInit {
                         this.isDataAvailable = false;
                     }
                 }
-                /* if (data && data.status === 'failure') {
-
-                 } else {
-                     this.isDataAvailable = true;
-                 }*/
 
             });
-            //this.isDataAvailable = !this.isDataAvailable ;
         }
     }
 }
