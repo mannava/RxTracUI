@@ -20,6 +20,19 @@
     text-shadow: 0px 1px 0px rgba(255, 255, 255, .6), 0px -1px 0px rgba(0, 0, 0, .1);
 }
 
+.p-autoComplete-desc{
+    width: 52px;
+    font-size: 11px;
+    display: inline-block;
+    margin: 5px 0 2px 5px
+}
+.p-autoComplete-lbl {
+    font-size: 11px;
+    margin: 10px 10px 0 0
+}
+.p-autoComplete-ctr {
+    border-bottom: 1px solid #D5D5D5;
+}
 /*
 .ctr{
     width: 100%;

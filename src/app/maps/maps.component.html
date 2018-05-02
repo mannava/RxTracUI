@@ -21,9 +21,9 @@
 
                                             [minLength]="1">
                                 <ng-template let-cust pTemplate="item">
-                                    <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{cust.desc}}</span>
-                                        <span style="font-size:11px;margin:10px 10px 0 0">{{cust.label}}</span>
+                                    <div class="ui-helper-clearfix" class="p-autoComplete-ctr">
+                                        <span class="p-autoComplete-desc">{{cust.desc}}</span>
+                                        <span class="p-autoComplete-lbl">{{cust.label}}</span>
                                     </div>
                                 </ng-template>
 
@@ -44,9 +44,9 @@
                                             placeholder="Chain"
                                             [minLength]="1">
                                 <ng-template let-chain pTemplate="item">
-                                    <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{chain.desc}}</span>
-                                        <span style="font-size:11px;margin:10px 10px 0 0">{{chain.label}}</span>
+                                    <div class="ui-helper-clearfix" class="p-autoComplete-ctr">
+                                        <span class="p-autoComplete-desc">{{chain.desc}}</span>
+                                        <span class="p-autoComplete-lbl">{{chain.label}}</span>
                                     </div>
                                 </ng-template>
 
@@ -65,9 +65,9 @@
                                             placeholder="Group"
                                             [minLength]="1">
                                 <ng-template let-grp pTemplate="item">
-                                    <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{grp.desc}}</span>
-                                        <span style="font-size:11px;margin:10px 10px 0 0">{{grp.label}}</span>
+                                    <div class="ui-helper-clearfix" class="p-autoComplete-ctr">
+                                        <span class="p-autoComplete-desc">{{grp.desc}}</span>
+                                        <span class="p-autoComplete-lbl">{{grp.label}}</span>
                                     </div>
                                 </ng-template>
 
@@ -121,7 +121,7 @@
 
                                 <div class="row">
 
-                                    <p-dataTable [value]="tableJSON['customers']" [rows]="10" [paginator]="true"
+                                    <p-dataTable [value]="tableJSON[customers_tag]" [rows]="10" [paginator]="true"
 
                                                  #dt class="tabledata"
                                                  [responsive]="true" reorderableColumns="true" [editable]="true"
@@ -144,9 +144,9 @@
                                                                 [minLength]="1">
                                                     <ng-template let-c pTemplate="item">
                                                         <div class="ui-helper-clearfix"
-                                                             style="border-bottom:1px solid #D5D5D5">
-                                                            <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.desc}}</span>
-                                                            <span style="font-size:11px;margin:10px 10px 0 0">{{c.label}}</span>
+                                                             class="p-autoComplete-ctr">
+                                                            <span class="p-autoComplete-desc">{{c.desc}}</span>
+                                                            <span class="p-autoComplete-lbl">{{c.label}}</span>
                                                         </div>
                                                     </ng-template>
 
@@ -168,9 +168,9 @@
                                                                 [minLength]="1">
                                                     <ng-template let-c pTemplate="item">
                                                         <div class="ui-helper-clearfix"
-                                                             style="border-bottom:1px solid #D5D5D5">
-                                                            <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.profile}}</span>
-                                                            <span style="font-size:11px;margin:10px 10px 0 0">{{c.description}}</span>
+                                                             class="p-autoComplete-ctr">
+                                                            <span class="p-autoComplete-desc">{{c.profile}}</span>
+                                                            <span class="p-autoComplete-lbl">{{c.description}}</span>
                                                         </div>
                                                     </ng-template>
 
@@ -223,7 +223,7 @@
 
                                 <div class="row">
 
-                                    <p-dataTable [value]="tableJSON['chains']" [rows]="10" [paginator]="true"
+                                    <p-dataTable [value]="tableJSON[chains_tag]" [rows]="10" [paginator]="true"
                                                  #dt class="tabledata"
                                                  [responsive]="true" reorderableColumns="true" [editable]="true"
                                                  (onRowSelect)="onRowSelection($event, chain_tag)"
@@ -247,9 +247,9 @@
                                                                 [minLength]="1">
                                                     <ng-template let-c pTemplate="item">
                                                         <div class="ui-helper-clearfix"
-                                                             style="border-bottom:1px solid #D5D5D5">
-                                                            <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.desc}}</span>
-                                                            <span style="font-size:11px;margin:10px 10px 0 0">{{c.label}}</span>
+                                                             class="p-autoComplete-ctr">
+                                                            <span class="p-autoComplete-desc">{{c.desc}}</span>
+                                                            <span class="p-autoComplete-lbl">{{c.label}}</span>
                                                         </div>
                                                     </ng-template>
 
@@ -271,9 +271,9 @@
                                                                 [minLength]="1">
                                                     <ng-template let-c pTemplate="item">
                                                         <div class="ui-helper-clearfix"
-                                                             style="border-bottom:1px solid #D5D5D5">
-                                                            <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.profile}}</span>
-                                                            <span style="font-size:11px;margin:10px 10px 0 0">{{c.description}}</span>
+                                                             class="p-autoComplete-ctr">
+                                                            <span class="p-autoComplete-desc">{{c.profile}}</span>
+                                                            <span class="p-autoComplete-lbl">{{c.description}}</span>
                                                         </div>
                                                     </ng-template>
 
@@ -324,7 +324,7 @@
 
                             <div class="row">
 
-                                <p-dataTable [value]="tableJSON['groups']" [rows]="10" [paginator]="true"
+                                <p-dataTable [value]="tableJSON[groups_tag]" [rows]="10" [paginator]="true"
                                              #dt class="tabledata"
                                              [responsive]="true" reorderableColumns="true" [editable]="true"
                                              (onRowSelect)="onRowSelection($event, group_tag)"
@@ -347,9 +347,9 @@
                                                             [minLength]="1">
                                                 <ng-template let-c pTemplate="item">
                                                     <div class="ui-helper-clearfix"
-                                                         style="border-bottom:1px solid #D5D5D5">
-                                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.desc}}</span>
-                                                        <span style="font-size:11px;margin:10px 10px 0 0">{{c.label}}</span>
+                                                         class="p-autoComplete-ctr">
+                                                        <span class="p-autoComplete-desc">{{c.desc}}</span>
+                                                        <span class="p-autoComplete-lbl">{{c.label}}</span>
                                                     </div>
                                                 </ng-template>
 
@@ -371,9 +371,9 @@
                                                             [minLength]="1">
                                                 <ng-template let-c pTemplate="item">
                                                     <div class="ui-helper-clearfix"
-                                                         style="border-bottom:1px solid #D5D5D5">
-                                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.desc}}</span>
-                                                        <span style="font-size:11px;margin:10px 10px 0 0">{{c.label}}</span>
+                                                         class="p-autoComplete-ctr">
+                                                        <span class="p-autoComplete-desc">{{c.desc}}</span>
+                                                        <span class="p-autoComplete-lbl">{{c.label}}</span>
                                                     </div>
                                                 </ng-template>
 
@@ -394,9 +394,9 @@
                                                             [minLength]="1">
                                                 <ng-template let-c pTemplate="item">
                                                     <div class="ui-helper-clearfix"
-                                                         style="border-bottom:1px solid #D5D5D5">
-                                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.desc}}</span>
-                                                        <span style="font-size:11px;margin:10px 10px 0 0">{{c.label}}</span>
+                                                         class="p-autoComplete-ctr">
+                                                        <span class="p-autoComplete-desc">{{c.desc}}</span>
+                                                        <span class="p-autoComplete-lbl">{{c.label}}</span>
                                                     </div>
                                                 </ng-template>
 
@@ -416,9 +416,9 @@
                                                             [minLength]="1">
                                                 <ng-template let-c pTemplate="item">
                                                     <div class="ui-helper-clearfix"
-                                                         style="border-bottom:1px solid #D5D5D5">
-                                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.desc}}</span>
-                                                        <span style="font-size:11px;margin:10px 10px 0 0">{{c.label}}</span>
+                                                         class="p-autoComplete-ctr">
+                                                        <span class="p-autoComplete-desc">{{c.desc}}</span>
+                                                        <span class="p-autoComplete-lbl">{{c.label}}</span>
                                                     </div>
                                                 </ng-template>
 
@@ -439,9 +439,9 @@
                                                             [minLength]="1">
                                                 <ng-template let-c pTemplate="item">
                                                     <div class="ui-helper-clearfix"
-                                                         style="border-bottom:1px solid #D5D5D5">
-                                                        <span style="width:52px;font-size:11px;display:inline-block;margin:5px 0 2px 5px">{{c.profile}}</span>
-                                                        <span style="font-size:11px;margin:10px 10px 0 0">{{c.description}}</span>
+                                                         class="p-autoComplete-ctr">
+                                                        <span class="p-autoComplete-desc">{{c.profile}}</span>
+                                                        <span class="p-autoComplete-lbl">{{c.description}}</span>
                                                     </div>
                                                 </ng-template>
 

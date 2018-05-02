@@ -27,7 +27,9 @@ export class MapsComponent implements OnInit {
     public customer_tag = 'customer';
     public chain_tag = 'chain';
     public group_tag = 'group';
-
+    public customers_tag = 'customers';
+    public chains_tag = 'chains';
+    public groups_tag = 'groups';
 
     constructor(private profileService: ProfileService, private notificationsService: NotificationsService, private confirmationService: ConfirmationService) {
     }
@@ -90,13 +92,13 @@ export class MapsComponent implements OnInit {
 
                 } else {
                     switch (type) {
-                        case 'customer':
+                        case this.customer_tag:
                             this.filteredCustomersISM = data['results'];
                             break;
-                        case 'chain':
+                        case this.chain_tag:
                             this.filteredChainsISM = data['results'];
                             break;
-                        case 'group':
+                        case this.group_tag:
                             this.filteredGroupsISM = data['results'];
                             break;
                         default:
@@ -109,17 +111,17 @@ export class MapsComponent implements OnInit {
 
     ngOnInit() {
         /*this.cust_cols = [
-            {field: 'customer', header: 'Customer'},
+            {field: this.customer_tag, header: this.customer_tag},
             {field: 'profile', header: 'Profile'}
         ];
 
         this.chain_cols = [
-            {field: 'nat_chain', header: 'Chain'},
+            {field: 'nat_chain', header: this.chain_tag},
             {field: 'profile', header: 'Profile'}
         ];
 
         this.group_cols = [
-            {field: 'nat_group', header: 'Group'},
+            {field: 'nat_group', header: this.group_tag},
             {field: 'nat_subgroup', header: 'Sub Group'},
             {field: 'nat_region', header: 'Region'},
             {field: 'nat_district', header: 'District'},
@@ -149,7 +151,7 @@ export class MapsComponent implements OnInit {
 
     addNew(type) {
         switch (type) {
-            case 'customer':
+            case this.customer_tag:
                 const cust_obj = {
                     'customer': '',
                     'customer_name': '',
@@ -158,14 +160,14 @@ export class MapsComponent implements OnInit {
                     'editable_prime': true
 
                 };
-                const firstCust = this.tableJSON['customers'][0];
+                const firstCust = this.tableJSON[this.customers_tag][0];
                 if (!firstCust) {
-                    this.tableJSON['customers'].unshift(cust_obj);
-                    this.tableJSON['customers'] = [...this.tableJSON['customers']];
+                    this.tableJSON[this.customers_tag].unshift(cust_obj);
+                    this.tableJSON[this.customers_tag] = [...this.tableJSON[this.customers_tag]];
                 } else {
                     if (firstCust.customer.length > 1) {
-                        this.tableJSON['customers'].unshift(cust_obj);
-                        this.tableJSON['customers'] = [...this.tableJSON['customers']];
+                        this.tableJSON[this.customers_tag].unshift(cust_obj);
+                        this.tableJSON[this.customers_tag] = [...this.tableJSON[this.customers_tag]];
                     }
                     this.notificationsService.error(
                         'Error',
@@ -180,7 +182,7 @@ export class MapsComponent implements OnInit {
                     );
                 }
                 break;
-            case 'chain':
+            case this.chain_tag:
                 const chain_obj = {
                     'nat_chain': '',
                     'description': '',
@@ -189,14 +191,14 @@ export class MapsComponent implements OnInit {
                     'profile_name': '',
                     'editable_prime': true
                 };
-                const firstChain = this.tableJSON['chains'][0];
+                const firstChain = this.tableJSON[this.chains_tag][0];
                 if (!firstChain) {
-                    this.tableJSON['chains'].unshift(chain_obj);
-                    this.tableJSON['chains'] = [...this.tableJSON['chains']];
+                    this.tableJSON[this.chains_tag].unshift(chain_obj);
+                    this.tableJSON[this.chains_tag] = [...this.tableJSON[this.chains_tag]];
                 } else {
                     if (firstChain.nat_chain.length > 1) {
-                        this.tableJSON['chains'].unshift(chain_obj);
-                        this.tableJSON['chains'] = [...this.tableJSON['chains']];
+                        this.tableJSON[this.chains_tag].unshift(chain_obj);
+                        this.tableJSON[this.chains_tag] = [...this.tableJSON[this.chains_tag]];
                     } else {
                         this.notificationsService.error(
                             'Error',
@@ -212,7 +214,7 @@ export class MapsComponent implements OnInit {
                     }
                 }
                 break;
-            case 'group':
+            case this.group_tag:
                 const group_obj = {
                     'nat_group': '',
                     'nat_group_description': '',
@@ -225,14 +227,14 @@ export class MapsComponent implements OnInit {
                     'profile_name': '',
                     'editable_prime': true
                 };
-                const firstGroup = this.tableJSON['groups'][0];
+                const firstGroup = this.tableJSON[this.groups_tag][0];
                 if (!firstGroup) {
-                    this.tableJSON['groups'].unshift(group_obj);
-                    this.tableJSON['groups'] = [...this.tableJSON['groups']];
+                    this.tableJSON[this.groups_tag].unshift(group_obj);
+                    this.tableJSON[this.groups_tag] = [...this.tableJSON[this.groups_tag]];
                 } else {
                     if (firstGroup.nat_group.length > 1) {
-                        this.tableJSON['groups'].unshift(group_obj);
-                        this.tableJSON['groups'] = [...this.tableJSON['groups']];
+                        this.tableJSON[this.groups_tag].unshift(group_obj);
+                        this.tableJSON[this.groups_tag] = [...this.tableJSON[this.groups_tag]];
                     }
                     this.notificationsService.error(
                         'Error',
@@ -351,22 +353,22 @@ export class MapsComponent implements OnInit {
                     this.tableJSON = data['results'];
                     if (this.tableJSON) {
                         this.isDataAvailable = true;
-                        if (this.tableJSON['customers'].length > 1) {
-                            this.tableJSON['customers'].forEach(function (item) {
+                        if (this.tableJSON[this.customers_tag].length > 1) {
+                            this.tableJSON[this.customers_tag].forEach(function (item) {
                                 item['cust_desc'] = item.customer + ' - ' + item.desc;
                                 item['profile_desc'] = item.profile + ' - ' + item.profile_name;
                                 item['editable_prime'] = false;
                             });
                         }
-                        if (this.tableJSON['chains'].length > 0) {
-                            this.tableJSON['chains'].forEach(function (item) {
+                        if (this.tableJSON[this.chains_tag].length > 0) {
+                            this.tableJSON[this.chains_tag].forEach(function (item) {
                                 item['chain_desc'] = item.nat_chain + ' - ' + item.description;
                                 item['profile_desc'] = item.profile + ' - ' + item.profile_name;
                                 item['editable_prime'] = false;
                             });
                         }
-                        if (this.tableJSON['groups'].length > 0) {
-                            this.tableJSON['groups'].forEach(function (item) {
+                        if (this.tableJSON[this.groups_tag].length > 0) {
+                            this.tableJSON[this.groups_tag].forEach(function (item) {
                                 item['group_desc'] = item.nat_group + ' - ' + item.nat_group_description;
                                 item['subgroup_desc'] = item.nat_subgroup + ' - ' + item.nat_subgroup_description;
                                 item['region_desc'] = item.nat_region + ' - ' + item.nat_region_description;
