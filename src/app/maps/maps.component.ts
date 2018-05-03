@@ -287,14 +287,6 @@ export class MapsComponent implements OnInit {
 
     }
 
-    getFontClr(flag) {
-        return flag ? 'red' : '#023147';
-    }
-
-    getFontWt(flag) {
-        return flag ? '500' : '600';
-    }
-
     onRowClick(e, type) {
         this.isEditable_prime = e.data.editable_prime;
     }
