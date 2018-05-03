@@ -124,13 +124,13 @@
 
                                         <p-dataTable [value]="tableJSON[customers_tag]" [rows]="10" [paginator]="true"
 
-                                                     #dt class="tabledata"
+                                                     #dt 
                                                      [responsive]="true" reorderableColumns="true" [editable]="true"
                                                      (onRowSelect)="onRowSelection($event, customer_tag)"
                                                      (onRowClick)="onRowClick($event, customer_tag)"
                                                      (onRowUnselect)="onRowUnselect($event, customer_tag)">
                                             <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                                            <p-column field="cust_desc" header="Customer" class="tabledata"
+                                            <p-column field="cust_desc" header="Customer" 
                                                       [editable]="isEditable_prime">
 
                                                 <ng-template pTemplate="editor" let-col let-cust_tbl="rowData">
@@ -155,7 +155,7 @@
                                                 </ng-template>
                                             </p-column>
 
-                                            <p-column field="profile_desc" header="Profile" class="tabledata"
+                                            <p-column field="profile_desc" header="Profile" 
                                                       [editable]="true">
                                                 <ng-template pTemplate="editor" let-col let-pro_tbl="rowData">
                                                     <p-autoComplete [(ngModel)]="pro_tbl[col.field]"
@@ -226,42 +226,42 @@
                                     <div class="row">
 
                                         <p-dataTable [value]="tableJSON[chains_tag]" [rows]="10" [paginator]="true"
-                                                     #dt class="tabledata"
+                                                     #dt 
                                                      [responsive]="true" reorderableColumns="true" [editable]="true"
                                                      (onRowSelect)="onRowSelection($event, chain_tag)"
                                                      (onRowClick)="onRowClick($event, chain_tag)"
                                                      (onRowUnselect)="onRowUnselect($event, chain_tag)">
                                             <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
 
-                                            <p-column field="chain_desc" header="Chain" class="tabledata"
-                                                      [editable]="isEditable_prime">
-                                                <!--<ng-template let-col let-chain="rowData" pTemplate="editor">
-                                                    <p-dropdown [(ngModel)]="col.desc" [options]="chain[col.desc]" [autoWidth]="false" [style]="{'width':'100%'}" required="true"  appendTo="body"></p-dropdown>
-                                                </ng-template>-->
-                                                <ng-template pTemplate="editor" let-col let-chain_tbl="rowData"
-                                                             let-i="rowIndex">
-                                                    <p-autoComplete [(ngModel)]="chain_tbl[col.field]"
-                                                                    [suggestions]="filteredChainsISM"
-                                                                    (completeMethod)="filterISM($event, chain_tag)"
-                                                                    (onFocus)="onFocusEnter($event, chain_tbl['nat_chain'])"
-                                                                    (onSelect)="onSelectAC($event, 'chain_desc', 'nat_chain', chain_tbl)"
-                                                                    placeholder="252"
-                                                                    field="desc"
-                                                                    size="35"
-                                                                    [minLength]="1">
-                                                        <ng-template let-c pTemplate="item">
-                                                            <div class="ui-helper-clearfix"
-                                                                 class="p-autoComplete-ctr">
-                                                                <span class="p-autoComplete-desc">{{c.desc}}</span>
-                                                                <span class="p-autoComplete-lbl">{{c.label}}</span>
-                                                            </div>
-                                                        </ng-template>
+                                            <p-column field="chain_desc" header="Chain"
+                                                      [editable]="isEditable_prime"  [style]="{'font-weight': getFontWt(isEditable_prime)}">
+                                            <!--<ng-template let-col let-chain="rowData" pTemplate="editor">
+                                                <p-dropdown [(ngModel)]="col.desc" [options]="chain[col.desc]" [autoWidth]="false" [style]="{'width':'100%'}" required="true"  appendTo="body"></p-dropdown>
+                                            </ng-template>-->
+                                            <ng-template pTemplate="editor" let-col let-chain_tbl="rowData"
+                                                         let-i="rowIndex">
+                                                <p-autoComplete [(ngModel)]="chain_tbl[col.field]"
+                                                                [suggestions]="filteredChainsISM"
+                                                                (completeMethod)="filterISM($event, chain_tag)"
+                                                                (onFocus)="onFocusEnter($event, chain_tbl['nat_chain'])"
+                                                                (onSelect)="onSelectAC($event, 'chain_desc', 'nat_chain', chain_tbl)"
+                                                                placeholder="252"
+                                                                field="desc"
+                                                                size="35"
+                                                                [minLength]="1">
+                                                    <ng-template let-c pTemplate="item">
+                                                        <div class="ui-helper-clearfix"
+                                                             class="p-autoComplete-ctr">
+                                                            <span class="p-autoComplete-desc">{{c.desc}}</span>
+                                                            <span class="p-autoComplete-lbl">{{c.label}}</span>
+                                                        </div>
+                                                    </ng-template>
 
-                                                    </p-autoComplete>
-                                                </ng-template>
+                                                </p-autoComplete>
+                                            </ng-template>
                                             </p-column>
 
-                                            <p-column field="profile_desc" header="Profile" class="tabledata"
+                                            <p-column field="profile_desc" header="Profile" 
                                                       [editable]="true">
                                                 <ng-template pTemplate="editor" let-col let-pro_tbl="rowData">
                                                     <p-autoComplete [(ngModel)]="pro_tbl[col.field]"
@@ -329,14 +329,14 @@
                             <div class="row">
 
                                 <p-dataTable [value]="tableJSON[groups_tag]" [rows]="10" [paginator]="true"
-                                             #dt class="tabledata"
+                                             #dt 
                                              [responsive]="true" reorderableColumns="true" [editable]="true"
                                              (onRowSelect)="onRowSelection($event, group_tag)"
                                              (onRowClick)="onRowClick($event, group_tag)"
                                              (onRowUnselect)="onRowUnselect($event, group_tag)">
 
                                     <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-                                    <p-column field="group_desc" header="Group" class="tabledata"
+                                    <p-column field="group_desc" header="Group" 
                                               [editable]="isEditable_prime">
 
 
@@ -362,7 +362,7 @@
                                         </ng-template>
                                     </p-column>
 
-                                    <p-column field="subgroup_desc" header="SubGroup" class="tabledata"
+                                    <p-column field="subgroup_desc" header="SubGroup" 
                                               [editable]="isEditable_prime">
 
                                         <ng-template pTemplate="editor" let-col let-subgroup_tbl="rowData">
@@ -387,7 +387,7 @@
                                         </ng-template>
                                     </p-column>
 
-                                    <p-column field="region_desc" header="Region" class="tabledata"
+                                    <p-column field="region_desc" header="Region" 
                                               [editable]="isEditable_prime">
                                         <ng-template pTemplate="editor" let-col let-district_desc="rowData">
                                             <p-autoComplete [(ngModel)]="district_desc[col.field]"
@@ -410,7 +410,7 @@
                                             </p-autoComplete>
                                         </ng-template>
                                     </p-column>
-                                    <p-column field="district_desc" header="District" class="tabledata"
+                                    <p-column field="district_desc" header="District" 
                                               [editable]="isEditable_prime">
                                         <ng-template pTemplate="editor" let-col let-district_desc="rowData">
                                             <p-autoComplete [(ngModel)]="district_desc[col.field]"
@@ -433,7 +433,7 @@
                                             </p-autoComplete>
                                         </ng-template>
                                     </p-column>
-                                    <p-column field="profile_desc" header="Profile" class="tabledata"
+                                    <p-column field="profile_desc" header="Profile" 
                                               [editable]="true">
                                         <ng-template pTemplate="editor" let-col let-pro_tbl="rowData">
                                             <p-autoComplete [(ngModel)]="pro_tbl[col.field]"

@@ -26,13 +26,16 @@
     display: inline-block;
     margin: 5px 0 2px 5px
 }
+
 .p-autoComplete-lbl {
     font-size: 11px;
     margin: 10px 10px 0 0
 }
+
 .p-autoComplete-ctr {
     border-bottom: 1px solid #D5D5D5;
 }
+
 /*
 .ctr{
     width: 100%;
@@ -43,12 +46,14 @@
     flex-direction: row;
 }
 
-.headerLeft{
+.headerLeft {
     width: 30%;
 }
-.headerRight{
+
+.headerRight {
     width: 70%;
 }
+
 .delFontClr {
     color: #fb6999;
 }
@@ -71,4 +76,8 @@
 .txtentry {
     width: 233px;
     height: 30px;
+}
+
+.ui-column-title{
+    font-weight: 400;
 }

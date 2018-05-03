@@ -1,14 +1,14 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ProfileService} from './profile.servce';
 import {NotificationsService} from 'angular2-notifications';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 
 
 @Component({
     selector: 'app-maps',
     templateUrl: './maps.component.html',
-    styleUrls: ['./maps.component.css']
+    styleUrls: ['./maps.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class MapsComponent implements OnInit {
     @ViewChild('dt', {read: ElementRef}) dt: ElementRef;
@@ -285,6 +285,14 @@ export class MapsComponent implements OnInit {
             this.currentObj[type] = [];
         }
 
+    }
+
+    getFontClr(flag) {
+        return flag ? 'red' : '#023147';
+    }
+
+    getFontWt(flag) {
+        return flag ? '500' : '600';
     }
 
     onRowClick(e, type) {
