@@ -20,7 +20,7 @@
     text-shadow: 0px 1px 0px rgba(255, 255, 255, .6), 0px -1px 0px rgba(0, 0, 0, .1);
 }
 
-.p-autoComplete-desc{
+.p-autoComplete-desc {
     width: 52px;
     font-size: 11px;
     display: inline-block;
@@ -78,6 +78,10 @@
     height: 30px;
 }
 
-.ui-column-title{
+.ui-column-title {
     font-weight: normal;
+}
+
+.simple-notification-wrapper {
+    width: 400px !important;
 }

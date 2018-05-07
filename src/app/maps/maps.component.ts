@@ -8,6 +8,7 @@ import {ConfirmationService} from 'primeng/api';
     selector: 'app-maps',
     templateUrl: './maps.component.html',
     styleUrls: ['./maps.component.css'],
+    providers: [ConfirmationService],
     encapsulation: ViewEncapsulation.None
 })
 export class MapsComponent implements OnInit {
@@ -21,7 +22,7 @@ export class MapsComponent implements OnInit {
     public filteredGroupsISM: any;
     public filteredProfile: any;
     public isDataAvailable: any = false;
-    public currentObj: object = {};
+
     public isEditable_prime: Boolean = false;
     public tableJSON: Object = {};
     public customer_tag = 'customer';
@@ -30,6 +31,7 @@ export class MapsComponent implements OnInit {
     public customers_tag = 'customers';
     public chains_tag = 'chains';
     public groups_tag = 'groups';
+    public selectedItems: any = {};
 
     constructor(private profileService: ProfileService, private notificationsService: NotificationsService, private confirmationService: ConfirmationService) {
     }
@@ -42,17 +44,7 @@ export class MapsComponent implements OnInit {
             this.profileService.getProfile(query).subscribe(data => {
                 if (data && data['responseCode'] === 500) {
                     comp.style = 'border-color:red;color:red';
-                    this.notificationsService.error(
-                        'Error',
-                        'Does not match with any profile.',
-                        {
-                            timeOut: 2000,
-                            pauseOnHover: true,
-                            clickToClose: false,
-                            maxLength: 0,
-                            maxStack: 1
-                        }
-                    );
+                    this.showNotification('Error', 'Does not match with any profile.');
                     this.filteredCustomersISM = [];
                     this.filteredChainsISM = [];
                     this.filteredGroupsISM = [];
@@ -75,17 +67,7 @@ export class MapsComponent implements OnInit {
             this.profileService.getCustData(query, type, level, group).subscribe(data => {
                 if (data && data['responseCode'] === 500) {
                     comp.style = 'border-color:red;color:red';
-                    this.notificationsService.error(
-                        'Error',
-                        'Does not match with any ' + type,
-                        {
-                            timeOut: 2000,
-                            pauseOnHover: true,
-                            clickToClose: false,
-                            maxLength: 0,
-                            maxStack: 1
-                        }
-                    );
+                    this.showNotification('Error', 'Does not match with any ' + type);
                     this.filteredCustomersISM = [];
                     this.filteredChainsISM = [];
                     this.filteredGroupsISM = [];
@@ -110,24 +92,6 @@ export class MapsComponent implements OnInit {
 
 
     ngOnInit() {
-        /*this.cust_cols = [
-            {field: this.customer_tag, header: this.customer_tag},
-            {field: 'profile', header: 'Profile'}
-        ];
-
-        this.chain_cols = [
-            {field: 'nat_chain', header: this.chain_tag},
-            {field: 'profile', header: 'Profile'}
-        ];
-
-        this.group_cols = [
-            {field: 'nat_group', header: this.group_tag},
-            {field: 'nat_subgroup', header: 'Sub Group'},
-            {field: 'nat_region', header: 'Region'},
-            {field: 'nat_district', header: 'District'},
-            {field: 'profile', header: 'Profile'}
-        ];*/
-
     }
 
     onFocusEnter(e, field) {
@@ -157,6 +121,7 @@ export class MapsComponent implements OnInit {
                     'customer_name': '',
                     'profile': '',
                     'profile_name': '',
+                    'cust_desc': '',
                     'editable_prime': true
 
                 };
@@ -168,18 +133,9 @@ export class MapsComponent implements OnInit {
                     if (firstCust.customer.length > 1) {
                         this.tableJSON[this.customers_tag].unshift(cust_obj);
                         this.tableJSON[this.customers_tag] = [...this.tableJSON[this.customers_tag]];
+                    } else {
+                        this.showNotification('Error at ' + type + ' table addition', 'More than one blank row is not allowed.');
                     }
-                    this.notificationsService.error(
-                        'Error',
-                        'Should not allowed more than one empty row.',
-                        {
-                            timeOut: 2000,
-                            pauseOnHover: true,
-                            clickToClose: false,
-                            maxLength: 0,
-                            maxStack: 1
-                        }
-                    );
                 }
                 break;
             case this.chain_tag:
@@ -200,17 +156,7 @@ export class MapsComponent implements OnInit {
                         this.tableJSON[this.chains_tag].unshift(chain_obj);
                         this.tableJSON[this.chains_tag] = [...this.tableJSON[this.chains_tag]];
                     } else {
-                        this.notificationsService.error(
-                            'Error',
-                            'Should not allowed more than one empty row.',
-                            {
-                                timeOut: 2000,
-                                pauseOnHover: true,
-                                clickToClose: false,
-                                maxLength: 0,
-                                maxStack: 1
-                            }
-                        );
+                        this.showNotification('Error at ' + type + ' table addition', 'More than one blank row is not allowed.');
                     }
                 }
                 break;
@@ -235,18 +181,9 @@ export class MapsComponent implements OnInit {
                     if (firstGroup.nat_group.length > 1) {
                         this.tableJSON[this.groups_tag].unshift(group_obj);
                         this.tableJSON[this.groups_tag] = [...this.tableJSON[this.groups_tag]];
+                    } else {
+                        this.showNotification('Error at ' + type + ' table addition', 'More than one blank row is not allowed.');
                     }
-                    this.notificationsService.error(
-                        'Error',
-                        'Should not allowed more than one empty row.',
-                        {
-                            timeOut: 2000,
-                            pauseOnHover: true,
-                            clickToClose: false,
-                            maxLength: 0,
-                            maxStack: 1
-                        }
-                    );
                 }
                 break;
             default:
@@ -255,36 +192,30 @@ export class MapsComponent implements OnInit {
 
     }
 
-    deleteSelectedRecs(type) {
-        if (this.currentObj && this.currentObj[type]) {
-            this.confirmationService.confirm({
-                message: 'Are you sure that you want to perform this action?',
-                accept: () => {
-                    //Actual logic to perform a confirmation
-                }
-            });
+    deleteSelectedRecs(type, rec) {
+        if (this.selectedItems[type] && this.selectedItems[type].length > 0) {
+            if (confirm('Confirm OK to delete')) {
+                const self = this.selectedItems[type];
+                const tbl = this.tableJSON[type];
+                this.tableJSON[type].forEach(function (item, idx) {
+                    if (self.indexOf(item[rec])) {
+                        tbl.splice(idx, 1);
+                    }
+                });
+                this.tableJSON[type] = tbl;
+            }
         } else {
-            this.notificationsService.info(
-                ' Important Note ',
-                'Should select at least one ' + type,
-                {
-                    timeOut: 2000,
-                    pauseOnHover: true,
-                    clickToClose: false,
-                    maxLength: 0,
-                    maxStack: 1
-                }
-            );
+            this.showNotification(' Important Note ', 'Should select at least one ' + type);
         }
     }
 
-    onRowSelection(e, type) {
-        if (this.currentObj[type]) {
-            this.currentObj[type].push(e.data);
+    onRowSelection(e, type, rec) {
+        if (this.selectedItems[type]) {
+            this.selectedItems[type].push(e.data[rec]);
         } else {
-            this.currentObj[type] = [];
+            this.selectedItems[type] = [];
+            this.selectedItems[type].push(e.data[rec]);
         }
-
     }
 
     onRowClick(e, type) {
@@ -296,9 +227,13 @@ export class MapsComponent implements OnInit {
     }
 
     saveTable(type) {
-        this.notificationsService.success(
-            type,
-            'Saved successfully.',
+        this.showNotification(type, 'Saved successfully.');
+    }
+
+    showNotification(title, content, type = 'error') {
+        this.notificationsService.error(
+            title,
+            content,
             {
                 timeOut: 2000,
                 pauseOnHover: true,
@@ -311,17 +246,7 @@ export class MapsComponent implements OnInit {
 
     recordSearch() {
         if (!this.customer && !this.chain && !this.group) {
-            this.notificationsService.error(
-                'Error',
-                'Enter content to perform search',
-                {
-                    timeOut: 2000,
-                    pauseOnHover: true,
-                    clickToClose: false,
-                    maxLength: 0,
-                    maxStack: 1
-                }
-            );
+            this.showNotification('Error', 'Enter content to perform search');
 
         } else {
             let customer, chain, group;
@@ -334,17 +259,7 @@ export class MapsComponent implements OnInit {
 
             this.profileService.searchQuery(customer, chain, group).subscribe(data => {
                 if (data && data['responseCode'] === 500) {
-                    this.notificationsService.error(
-                        'Server Error',
-                        data['message'],
-                        {
-                            timeOut: 2000,
-                            pauseOnHover: true,
-                            clickToClose: false,
-                            maxLength: 0,
-                            maxStack: 1
-                        }
-                    );
+                    this.showNotification('Server Error', data['message']);
                     this.filteredCustomersISM = [];
                     this.filteredChainsISM = [];
                     this.filteredGroupsISM = [];
@@ -379,17 +294,7 @@ export class MapsComponent implements OnInit {
                         }
 
                     } else {
-                        this.notificationsService.error(
-                            'Server Error',
-                            'same',
-                            {
-                                timeOut: 2000,
-                                pauseOnHover: true,
-                                clickToClose: false,
-                                maxLength: 0,
-                                maxStack: 1
-                            }
-                        );
+                        this.showNotification('Server Error', '');
                         this.isDataAvailable = false;
                     }
                 }

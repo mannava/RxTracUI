@@ -94,7 +94,7 @@
                                 <div class="headerRight">
                                     <div class="btn-group pull-right">
                                         <button type="button" class="btn-group btn btn-sm btn-info"
-                                                (click)="deleteSelectedRecs(customer_tag)">
+                                                (click)="deleteSelectedRecs(customers_tag, customer_tag)">
                                             <i class="fa fas fa-trash fa-2x"></i>
                                         </button>
                                         <button type="button" class="btn-group btn btn-sm btn-info"
@@ -126,7 +126,7 @@
 
                                                      #dt
                                                      [responsive]="true" reorderableColumns="true" [editable]="true"
-                                                     (onRowSelect)="onRowSelection($event, customer_tag)"
+                                                     (onRowSelect)="onRowSelection($event, customers_tag, customer_tag)"
                                                      (onRowClick)="onRowClick($event, customer_tag)"
                                                      (onRowUnselect)="onRowUnselect($event, customer_tag)">
                                             <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
@@ -138,7 +138,7 @@
                                                     <p-autoComplete [(ngModel)]="cust_tbl[col.field]"
                                                                     [suggestions]="filteredCustomersISM"
                                                                     (completeMethod)="filterISM($event, customer_tag)"
-                                                                    (onFocus)="onFocusEnter($event, cust_tbl['nat_customer'])"
+                                                                    (onFocus)="onFocusEnter($event, cust_tbl['customer'])"
                                                                     (onSelect)="onSelectAC($event, 'cust_desc', 'nat_customer', cust_tbl)"
                                                                     placeholder="Customer"
                                                                     field="desc"
@@ -198,7 +198,7 @@
                                 <div class="headerRight">
                                     <div class="btn-group pull-right">
                                         <button type="button" class="btn-group btn btn-sm btn-info"
-                                                (click)="deleteSelectedRecs(chain_tag)">
+                                                (click)="deleteSelectedRecs(chains_tag,chain_tag)">
                                             <i class="fa fas fa-trash fa-2x"></i>
                                         </button>
                                         <button type="button" class="btn-group btn btn-sm btn-info"
@@ -229,7 +229,7 @@
                                         <p-dataTable [value]="tableJSON[chains_tag]" [rows]="10" [paginator]="true"
                                                      #dt
                                                      [responsive]="true" reorderableColumns="true" [editable]="true"
-                                                     (onRowSelect)="onRowSelection($event, chain_tag)"
+                                                     (onRowSelect)="onRowSelection($event, chains_tag, chain_tag)"
                                                      (onRowClick)="onRowClick($event, chain_tag)"
                                                      (onRowUnselect)="onRowUnselect($event, chain_tag)">
                                             <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
@@ -302,7 +302,7 @@
                         <div class="headerRight">
                             <div class="btn-group pull-right">
                                 <button type="button" class="btn-group btn btn-sm btn-info"
-                                        (click)="deleteSelectedRecs(group_tag)">
+                                        (click)="deleteSelectedRecs(groups_tag, group_tag)">
                                     <i class="fa fas fa-trash fa-2x"></i>
                                 </button>
                                 <button type="button" class="btn-group btn btn-sm btn-info"
@@ -333,7 +333,7 @@
                                 <p-dataTable [value]="tableJSON[groups_tag]" [rows]="10" [paginator]="true"
                                              #dt
                                              [responsive]="true" reorderableColumns="true" [editable]="true"
-                                             (onRowSelect)="onRowSelection($event, group_tag)"
+                                             (onRowSelect)="onRowSelection($event, groups_tag, group_tag)"
                                              (onRowClick)="onRowClick($event, group_tag)"
                                              (onRowUnselect)="onRowUnselect($event, group_tag)">
 
