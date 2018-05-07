@@ -128,7 +128,7 @@
                                                      [responsive]="true" reorderableColumns="true" [editable]="true"
                                                      (onRowSelect)="onRowSelection($event, customers_tag, customer_tag)"
                                                      (onRowClick)="onRowClick($event, customer_tag)"
-                                                     (onRowUnselect)="onRowUnselect($event, customer_tag)">
+                                                     (onRowUnselect)="onRowUnselect($event, customers_tag, customer_tag)">
                                             <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
                                             <p-column field="cust_desc" header="Customer"
                                                       [editable]="isEditable_prime"
@@ -231,7 +231,7 @@
                                                      [responsive]="true" reorderableColumns="true" [editable]="true"
                                                      (onRowSelect)="onRowSelection($event, chains_tag, chain_tag)"
                                                      (onRowClick)="onRowClick($event, chain_tag)"
-                                                     (onRowUnselect)="onRowUnselect($event, chain_tag)">
+                                                     (onRowUnselect)="onRowUnselect($event, chains_tag, chain_tag)">
                                             <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
 
                                             <p-column field="chain_desc" header="Chain"
@@ -335,7 +335,7 @@
                                              [responsive]="true" reorderableColumns="true" [editable]="true"
                                              (onRowSelect)="onRowSelection($event, groups_tag, group_tag)"
                                              (onRowClick)="onRowClick($event, group_tag)"
-                                             (onRowUnselect)="onRowUnselect($event, group_tag)">
+                                             (onRowUnselect)="onRowUnselect($event, groups_tag, group_tag)">
 
                                     <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
                                     <p-column field="group_desc" header="Group"

@@ -198,11 +198,13 @@ export class MapsComponent implements OnInit {
                 const self = this.selectedItems[type];
                 const tbl = this.tableJSON[type];
                 this.tableJSON[type].forEach(function (item, idx) {
-                    if (self.indexOf(item[rec])) {
+                    if (self.indexOf(item[rec]) !== -1) {
                         tbl.splice(idx, 1);
                     }
                 });
                 this.tableJSON[type] = tbl;
+                this.tableJSON[type] = [...this.tableJSON[type]];
+                this.selectedItems[type] = [];
             }
         } else {
             this.showNotification(' Important Note ', 'Should select at least one ' + type);
@@ -222,8 +224,8 @@ export class MapsComponent implements OnInit {
         this.isEditable_prime = e.data.editable_prime;
     }
 
-    onRowUnselect(e, type) {
-
+    onRowUnselect(e, type, rec) {
+        this.selectedItems[type].splice(this.selectedItems[type].indexOf(e.data[rec]), 1);
     }
 
     saveTable(type) {
