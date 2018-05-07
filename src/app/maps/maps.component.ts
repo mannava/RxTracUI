@@ -355,7 +355,7 @@ export class MapsComponent implements OnInit {
                         this.isDataAvailable = true;
                         if (this.tableJSON[this.customers_tag].length > 1) {
                             this.tableJSON[this.customers_tag].forEach(function (item) {
-                                item['cust_desc'] = item.customer + ' - ' + item.desc;
+                                item['cust_desc'] = item.customer + ' - ' + item.customer_name;
                                 item['profile_desc'] = item.profile + ' - ' + item.profile_name;
                                 item['editable_prime'] = false;
                             });
