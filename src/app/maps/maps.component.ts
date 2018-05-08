@@ -229,21 +229,64 @@ export class MapsComponent implements OnInit {
     }
 
     saveTable(type) {
-        this.showNotification(type, 'Saved successfully.');
+        this.showNotification(type, 'Saved successfully.', 'success');
     }
 
     showNotification(title, content, type = 'error') {
-        this.notificationsService.error(
-            title,
-            content,
-            {
-                timeOut: 2000,
-                pauseOnHover: true,
-                clickToClose: false,
-                maxLength: 0,
-                maxStack: 1
-            }
-        );
+
+        switch (type) {
+            case 'warn':
+                this.notificationsService.warn(
+                    title,
+                    content,
+                    {
+                        timeOut: 2000,
+                        pauseOnHover: true,
+                        clickToClose: false,
+                        maxLength: 0,
+                        maxStack: 1
+                    }
+                );
+                break;
+            case 'error':
+                this.notificationsService.error(
+                    title,
+                    content,
+                    {
+                        timeOut: 2000,
+                        pauseOnHover: true,
+                        clickToClose: false,
+                        maxLength: 0,
+                        maxStack: 1
+                    }
+                );
+                break;
+            case 'info':
+                this.notificationsService.info(
+                    title,
+                    content,
+                    {
+                        timeOut: 2000,
+                        pauseOnHover: true,
+                        clickToClose: false,
+                        maxLength: 0,
+                        maxStack: 1
+                    }
+                );
+                break;
+            default:
+                this.notificationsService.success(
+                    title,
+                    content,
+                    {
+                        timeOut: 2000,
+                        pauseOnHover: true,
+                        clickToClose: false,
+                        maxLength: 0,
+                        maxStack: 1
+                    }
+                );
+        }
     }
 
     recordSearch() {

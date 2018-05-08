@@ -122,9 +122,7 @@
 
                                     <div class="row">
 
-                                        <p-dataTable [value]="tableJSON[customers_tag]" [rows]="10" [paginator]="true"
-
-                                                     #dt
+                                        <p-dataTable [value]="tableJSON[customers_tag]" [rows]="10" [paginator]="true" #dt
                                                      [responsive]="true" reorderableColumns="true" [editable]="true"
                                                      (onRowSelect)="onRowSelection($event, customers_tag, customer_tag)"
                                                      (onRowClick)="onRowClick($event, customer_tag)"
@@ -138,7 +136,7 @@
                                                     <p-autoComplete [(ngModel)]="cust_tbl[col.field]"
                                                                     [suggestions]="filteredCustomersISM"
                                                                     (completeMethod)="filterISM($event, customer_tag)"
-                                                                    (onFocus)="onFocusEnter($event, cust_tbl['customer'])"
+                                                                    (onFocus)="onFocusEnter($event, cust_tbl['nat_customer'])"
                                                                     (onSelect)="onSelectAC($event, 'cust_desc', 'nat_customer', cust_tbl)"
                                                                     placeholder="Customer"
                                                                     field="desc"
