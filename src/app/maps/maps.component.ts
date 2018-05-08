@@ -95,6 +95,9 @@ export class MapsComponent implements OnInit {
     }
 
     onFocusEnter(e, field) {
+        if (!field) {
+            field = '';
+        }
         const target = e.target || e.srcElement || e.currentTarget;
         target.value = field;
     }
@@ -130,7 +133,7 @@ export class MapsComponent implements OnInit {
                     this.tableJSON[this.customers_tag].unshift(cust_obj);
                     this.tableJSON[this.customers_tag] = [...this.tableJSON[this.customers_tag]];
                 } else {
-                    if (firstCust.customer.length > 1) {
+                    if (firstCust.nat_customer.length > 1) {
                         this.tableJSON[this.customers_tag].unshift(cust_obj);
                         this.tableJSON[this.customers_tag] = [...this.tableJSON[this.customers_tag]];
                     } else {
