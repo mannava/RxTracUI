@@ -11,7 +11,9 @@ import {ConfirmationService} from 'primeng/api';
     encapsulation: ViewEncapsulation.None
 })
 export class MapsComponent implements OnInit {
-    @ViewChild('dt', {read: ElementRef}) dt: ElementRef;
+    @ViewChild('custdt', {read: ElementRef}) custdt: ElementRef;
+    @ViewChild('chaindt', {read: ElementRef}) custdt: ElementRef;
+    @ViewChild('groupdt', {read: ElementRef}) custdt: ElementRef;
     public customer: any;
     public chain: any;
     public group: any;
@@ -31,6 +33,7 @@ export class MapsComponent implements OnInit {
     public chains_tag = 'chains';
     public groups_tag = 'groups';
     public selectedItems: any = {};
+    public dt: any;
 
     constructor(private profileService: ProfileService, private notificationsService: NotificationsService, private confirmationService: ConfirmationService) {
     }
@@ -113,13 +116,13 @@ export class MapsComponent implements OnInit {
             tableRow[attr] = acObj.desc;
             tableRow['description'] = acObj.label;
             tableRow[childObj] = acObj.desc + ' - ' + acObj.label;
-            this.dt.nativeElement.click();
+            this.custdt.nativeElement.click();
         } else {
             this.showNotification('Duplicate row', tableRow[attr] + ' already selected.');
             tableRow[attr] = '';
             tableRow['description'] = '';
             tableRow[childObj] = '';
-            this.dt.nativeElement.click();
+            this.custdt.nativeElement.click();
         }
 
     }
@@ -128,18 +131,20 @@ export class MapsComponent implements OnInit {
         tableRow[attr] = acObj.profile;
         tableRow['description'] = acObj.description;
         tableRow[childObj] = acObj.profile + ' - ' + acObj.description;
-        this.dt.nativeElement.click();
+        this.custdt.nativeElement.click();
     }
 
     addNew(type) {
         switch (type) {
             case this.customer_tag:
+                this.dt = this.custdt;
                 const cust_obj = {
                     'customer': '',
                     'customer_name': '',
                     'profile': '',
                     'profile_name': '',
                     'cust_desc': '',
+                    'nat_customer': '',
                     'editable_prime': true
 
                 };
@@ -157,6 +162,7 @@ export class MapsComponent implements OnInit {
                 }
                 break;
             case this.chain_tag:
+                this.dt = this.chaindt;
                 const chain_obj = {
                     'nat_chain': '',
                     'description': '',
@@ -179,6 +185,7 @@ export class MapsComponent implements OnInit {
                 }
                 break;
             case this.group_tag:
+                this.dt = this.groupdt;
                 const group_obj = {
                     'nat_group': '',
                     'nat_group_description': '',
@@ -207,25 +214,33 @@ export class MapsComponent implements OnInit {
             default:
         }
 
-
+        (function (elem) {
+            setTimeout(function () {
+                elem.getElementsByClassName('ui-datatable-even')[0].children[1].click();
+            }, 200);
+        })(this.dt.nativeElement);
     }
 
     deleteSelectedRecs(type, rec) {
         if (this.selectedItems[type] && this.selectedItems[type].length > 0) {
-            if (confirm('Confirm OK to delete')) {
+            if (confirm('Confirm OK to delete ?')) {
                 const self = this.selectedItems[type];
                 const tbl = this.tableJSON[type];
-                this.tableJSON[type].forEach(function (item, idx) {
-                    if (self.indexOf(item[rec]) !== -1) {
-                        tbl.splice(idx, 1);
-                    }
+                this.selectedItems[type].forEach(function (s_item) {
+                    tbl.forEach(function (t_item, t_idx) {
+                        if (s_item === t_item[rec]) {
+                            tbl.splice(t_idx, 1);
+                        }
+                    });
                 });
+
+
                 this.tableJSON[type] = tbl;
                 this.tableJSON[type] = [...this.tableJSON[type]];
                 this.selectedItems[type] = [];
             }
         } else {
-            this.showNotification(' Important Note ', 'Should select at least one ' + type);
+            this.showNotification(' Important Note ', 'Should select at least one ');
         }
     }
 

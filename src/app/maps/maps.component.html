@@ -94,7 +94,7 @@
                                 <div class="headerRight">
                                     <div class="btn-group pull-right">
                                         <button type="button" class="btn-group btn btn-sm btn-info"
-                                                (click)="deleteSelectedRecs(customers_tag, customer_tag)">
+                                                (click)="deleteSelectedRecs(customers_tag, 'nat_customer')">
                                             <i class="fa fas fa-trash fa-2x"></i>
                                         </button>
                                         <button type="button" class="btn-group btn btn-sm btn-info"
@@ -122,9 +122,9 @@
 
                                     <div class="row">
 
-                                        <p-dataTable [value]="tableJSON[customers_tag]" [rows]="10" [paginator]="true" #dt
+                                        <p-dataTable [value]="tableJSON[customers_tag]" [rows]="10" [paginator]="true" #custdt
                                                      [responsive]="true" reorderableColumns="true" [editable]="true"
-                                                     (onRowSelect)="onRowSelection($event, customers_tag, customer_tag)"
+                                                     (onRowSelect)="onRowSelection($event, customers_tag, 'nat_customer')"
                                                      (onRowClick)="onRowClick($event, customer_tag)"
                                                      (onRowUnselect)="onRowUnselect($event, customers_tag, customer_tag)">
                                             <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
@@ -196,7 +196,7 @@
                                 <div class="headerRight">
                                     <div class="btn-group pull-right">
                                         <button type="button" class="btn-group btn btn-sm btn-info"
-                                                (click)="deleteSelectedRecs(chains_tag,chain_tag)">
+                                                (click)="deleteSelectedRecs(chains_tag,'nat_chain')">
                                             <i class="fa fas fa-trash fa-2x"></i>
                                         </button>
                                         <button type="button" class="btn-group btn btn-sm btn-info"
@@ -225,7 +225,7 @@
                                     <div class="row">
 
                                         <p-dataTable [value]="tableJSON[chains_tag]" [rows]="10" [paginator]="true"
-                                                     #dt
+                                                     #chaindt
                                                      [responsive]="true" reorderableColumns="true" [editable]="true"
                                                      (onRowSelect)="onRowSelection($event, chains_tag, chain_tag)"
                                                      (onRowClick)="onRowClick($event, chain_tag)"
@@ -300,7 +300,7 @@
                         <div class="headerRight">
                             <div class="btn-group pull-right">
                                 <button type="button" class="btn-group btn btn-sm btn-info"
-                                        (click)="deleteSelectedRecs(groups_tag, group_tag)">
+                                        (click)="deleteSelectedRecs(groups_tag, 'nat_group')">
                                     <i class="fa fas fa-trash fa-2x"></i>
                                 </button>
                                 <button type="button" class="btn-group btn btn-sm btn-info"
@@ -329,7 +329,7 @@
                             <div class="row">
 
                                 <p-dataTable [value]="tableJSON[groups_tag]" [rows]="10" [paginator]="true"
-                                             #dt
+                                             #groupdt
                                              [responsive]="true" reorderableColumns="true" [editable]="true"
                                              (onRowSelect)="onRowSelection($event, groups_tag, group_tag)"
                                              (onRowClick)="onRowClick($event, group_tag)"
