@@ -3,7 +3,6 @@ import {ProfileService} from './profile.servce';
 import {NotificationsService} from 'angular2-notifications';
 import {ConfirmationService} from 'primeng/api';
 
-
 @Component({
     selector: 'app-maps',
     templateUrl: './maps.component.html',
@@ -95,18 +94,34 @@ export class MapsComponent implements OnInit {
     }
 
     onFocusEnter(e, field) {
-        if (!field) {
+        if (!field || field === '[object, Object]') {
             field = '';
         }
         const target = e.target || e.srcElement || e.currentTarget;
         target.value = field;
     }
 
-    onSelectAC(acObj, childObj, attr, tableRow) {
-        tableRow[attr] = acObj.desc;
-        tableRow['description'] = acObj.label;
-        tableRow[childObj] = acObj.desc + ' - ' + acObj.label;
-        this.dt.nativeElement.click();
+    onSelectAC(acObj, childObj, attr, tableRow, tag = this.groups_tag) {
+        const cnt = 0;
+        this.tableJSON[tag].forEach(function (item) {
+            if (item[attr] === acObj['desc']) {
+                cnt++;
+            }
+        });
+
+        if (cnt === 0) {
+            tableRow[attr] = acObj.desc;
+            tableRow['description'] = acObj.label;
+            tableRow[childObj] = acObj.desc + ' - ' + acObj.label;
+            this.dt.nativeElement.click();
+        } else {
+            this.showNotification('Duplicate row', tableRow[attr] + ' already selected.');
+            tableRow[attr] = '';
+            tableRow['description'] = '';
+            tableRow[childObj] = '';
+            this.dt.nativeElement.click();
+        }
+
     }
 
     onSelectProfile(acObj, childObj, attr, tableRow) {
