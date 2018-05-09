@@ -1,19 +1,16 @@
 import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ProfileService} from './profile.servce';
 import {NotificationsService} from 'angular2-notifications';
-import {ConfirmationService} from 'primeng/api';
-
 @Component({
     selector: 'app-maps',
     templateUrl: './maps.component.html',
     styleUrls: ['./maps.component.css'],
-    providers: [ConfirmationService],
     encapsulation: ViewEncapsulation.None
 })
 export class MapsComponent implements OnInit {
     @ViewChild('custdt', {read: ElementRef}) custdt: ElementRef;
-    @ViewChild('chaindt', {read: ElementRef}) custdt: ElementRef;
-    @ViewChild('groupdt', {read: ElementRef}) custdt: ElementRef;
+    @ViewChild('chaindt', {read: ElementRef}) chaindt: ElementRef;
+    @ViewChild('groupdt', {read: ElementRef}) groupdt: ElementRef;
     public customer: any;
     public chain: any;
     public group: any;
@@ -35,7 +32,7 @@ export class MapsComponent implements OnInit {
     public selectedItems: any = {};
     public dt: any;
 
-    constructor(private profileService: ProfileService, private notificationsService: NotificationsService, private confirmationService: ConfirmationService) {
+    constructor(private profileService: ProfileService, private notificationsService: NotificationsService) {
     }
 
     filterProfile(event) {
@@ -65,7 +62,7 @@ export class MapsComponent implements OnInit {
         const comp = event.originalEvent.target;
         comp.style = 'border-color:none;color:none';
         const query = event.query;
-        if (query && query.length > 2) {
+        if (query && query.length > 1) {
             this.profileService.getCustData(query, type, level, group).subscribe(data => {
                 if (data && data['responseCode'] === 500) {
                     comp.style = 'border-color:red;color:red';
@@ -105,7 +102,7 @@ export class MapsComponent implements OnInit {
     }
 
     onSelectAC(acObj, childObj, attr, tableRow, tag = this.groups_tag) {
-        const cnt = 0;
+        let cnt = 0;
         this.tableJSON[tag].forEach(function (item) {
             if (item[attr] === acObj['desc']) {
                 cnt++;
@@ -346,7 +343,7 @@ export class MapsComponent implements OnInit {
                     this.tableJSON = data['results'];
                     if (this.tableJSON) {
                         this.isDataAvailable = true;
-                        if (this.tableJSON[this.customers_tag].length > 1) {
+                        if (this.tableJSON[this.customers_tag].length > 0) {
                             this.tableJSON[this.customers_tag].forEach(function (item) {
                                 item['cust_desc'] = item.customer + ' - ' + item.customer_name;
                                 item['profile_desc'] = item.profile + ' - ' + item.profile_name;
