@@ -150,7 +150,7 @@ export class MapsComponent implements OnInit {
                     this.tableJSON[this.customers_tag].unshift(cust_obj);
                     this.tableJSON[this.customers_tag] = [...this.tableJSON[this.customers_tag]];
                 } else {
-                    if (firstCust.nat_customer.length > 1) {
+                    if (firstCust.nat_customer && firstCust.nat_customer.length > 1 || firstCust.customer.length > 1) {
                         this.tableJSON[this.customers_tag].unshift(cust_obj);
                         this.tableJSON[this.customers_tag] = [...this.tableJSON[this.customers_tag]];
                     } else {
