@@ -13,7 +13,6 @@ import {UserProfileComponent} from './user-profile/user-profile.component';
 import {TableListComponent} from './table-list/table-list.component';
 import {TypographyComponent} from './typography/typography.component';
 import {IconsComponent} from './icons/icons.component';
-import {MapsComponent} from './maps/maps.component';
 import {NotificationsComponent} from './notifications/notifications.component';
 import {UpgradeComponent} from './upgrade/upgrade.component';
 import {HttpClientModule} from '@angular/common/http';
@@ -25,10 +24,9 @@ import {QueryBuilderModule} from 'angular2-query-builder';
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ReviewService} from './typography/typography.service';
-import {ProfileService} from './maps/profile.servce';
 import {TableModule} from 'primeng/table';
-import {DialogModule} from "primeng/dialog";
-import {ConfirmationService} from "primeng/api";
+import {DialogModule} from 'primeng/dialog';
+import {ConfirmationService} from 'primeng/api';
 
 @NgModule({
     declarations: [
@@ -38,7 +36,6 @@ import {ConfirmationService} from "primeng/api";
         TableListComponent,
         TypographyComponent,
         IconsComponent,
-        MapsComponent,
         NotificationsComponent,
         UpgradeComponent
     ],
@@ -62,7 +59,7 @@ import {ConfirmationService} from "primeng/api";
 
     ],
 
-    providers: [DashboardService, ReviewService, ProfileService, ConfirmationService],
+    providers: [DashboardService, ReviewService, ConfirmationService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
